@@ -1,0 +1,530 @@
+/* ==========================================================================
+   site.css — layout and components for mauricioc24.github.io
+
+   Loads AFTER /brand/brand-tokens.css, which is the base stylesheet.
+   Never redefine brand colors here; use the tokens (var(--...)).
+   Read brand/BRAND.md before any visual change.
+
+   Motion rules (Emil Kowalski skills in .claude/skills):
+   - name exact properties, never `transition: all`
+   - brand easing tokens, under 300ms (the hero spray is the only long one)
+   - hover effects only inside (hover: hover) and (pointer: fine)
+   - navigation has no animation; reduced motion keeps color/opacity only
+   ========================================================================== */
+
+/* ---------- 1. Base ---------- */
+:root {
+  --gutter: clamp(16px, 5vw, 32px);
+  --section: clamp(64px, 9vw, 112px);
+  --shadow-hover: 0 0 0 1px rgb(34 41 33 / 0.12), 0 2px 4px rgb(27 3 2 / 0.06), 0 10px 24px rgb(27 3 2 / 0.07);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+/* Pages filled from projects.json reserve a full screen, so the footer starts
+   below the fold and doesn't jump when the content arrives (layout shift). */
+main.has-data { min-height: 100svh; }
+
+h1, h2, h3, p, dl, dd, ul, ol, figure { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+img { max-width: 100%; height: auto; }
+code { font-size: 0.9em; }
+a, button, .btn { touch-action: manipulation; }
+button, .btn { -webkit-user-select: none; user-select: none; }
+[hidden] { display: none !important; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: var(--gutter); top: 12px; z-index: 10;
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  background: var(--chullo-coffee); color: var(--chullo-ivory);
+  font-size: var(--text-sm); text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
+
+/* ---------- 2. Layout ---------- */
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.section { padding-top: var(--section); }
+.section-tight { padding-top: clamp(32px, 5vw, 56px); }
+
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 8px 24px; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.section-head h2 { font-size: var(--text-xl); font-weight: 600; }
+
+.arrow-link { font-size: var(--text-sm); font-weight: 500; white-space: nowrap; }
+
+.label {
+  font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1.6;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
+}
+h2.eyebrow { font-weight: 400; line-height: 1.6; }
+p.eyebrow, h2.eyebrow { max-width: none; }
+
+/* inner-page heading (Projects, About, Quest Log) */
+.page-head { padding-top: clamp(32px, 6vw, 80px); }
+.page-head h1 {
+  font-size: clamp(2.25rem, 1.5rem + 2.8vw, 3.5rem);
+  font-weight: 650;
+  margin-block: 12px 18px;
+}
+.page-head .eyebrow + h1 { margin-top: 16px; }
+.lead { font-size: var(--text-lg); line-height: 1.5; max-width: 52ch; }
+
+/* ---------- 3. Header (navigation: no animation, BRAND §6) ---------- */
+.site-header { padding-block: 22px; }
+.site-header .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 6px 28px; flex-wrap: wrap;
+}
+.site-name {
+  font-weight: 600; font-size: var(--text-sm); letter-spacing: -0.01em;
+  color: var(--text); text-decoration: none;
+  transition: none;
+}
+.site-nav ul { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.site-nav a {
+  display: inline-block; padding-block: 8px;
+  font-size: var(--text-sm); color: var(--text-muted);
+  text-decoration: none; transition: none;
+}
+.site-nav a[aria-current] {
+  color: var(--text);
+  text-decoration-line: underline;
+  text-decoration-color: var(--accent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .site-name:hover, .site-nav a:hover { color: var(--text); }
+}
+
+/* ---------- 4. Hero (Day) ---------- */
+.hero { padding-top: clamp(40px, 8vw, 104px); }
+.hero h1 {
+  font-size: clamp(2.25rem, 1.1rem + 4.9vw, 4.25rem);
+  font-weight: 650;
+  line-height: 1.04;
+  margin-block: 22px 26px;
+}
+.hero-name { display: block; }
+.hero .subtitle { font-size: var(--text-lg); line-height: 1.45; max-width: 46ch; }
+.hero .subhead { color: var(--text-muted); margin-top: 10px; max-width: 52ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn-hint {
+  font: 500 10px/1 var(--font-mono); letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* The spray paints once per visit. A tiny <head> script on the home page adds
+   .spray-seen after the first load, so it shows already painted after that. */
+.spray-seen .spray.reveal::before { animation: none; }
+
+/* ---------- 5. Project cards ---------- */
+.card-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) { .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.project-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: 14px;
+  padding: clamp(20px, 3vw, 28px);
+  background: var(--bg-raised);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  transition: transform 200ms var(--ease-out), box-shadow 150ms ease;
+}
+.card-title { font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+.card-title a { color: var(--text); text-decoration: none; }
+/* the whole card is clickable through the title link (one link per card) */
+.card-title a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.card-title a:focus-visible { outline: none; }
+.card-title a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 3px; }
+.project-card .tagline { color: var(--text-muted); font-size: var(--text-sm); margin-top: 2px; }
+.project-card .summary { font-size: var(--text-sm); color: var(--text-muted); }
+.project-card .result > p:not(.label) { font-size: var(--text-sm); margin-top: 4px; }
+.project-card .more {
+  margin-top: auto; padding-top: 4px;
+  font-size: var(--text-sm); font-weight: 500; color: var(--accent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+}
+
+/* featured card: two columns on wide screens */
+.project-card.is-featured { grid-column: 1 / -1; }
+.card-main { display: contents; }
+.card-side { display: flex; flex-direction: column; gap: 14px; }
+@media (min-width: 820px) {
+  .project-card.is-featured {
+    display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    column-gap: 48px; align-items: stretch;
+  }
+  .project-card.is-featured .card-main { display: flex; flex-direction: column; gap: 14px; }
+  .project-card.is-featured .card-side { padding-left: 32px; box-shadow: -1px 0 0 var(--ring); }
+}
+
+.status {
+  display: inline-block;
+  font: 500 var(--text-xs)/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  padding: 5px 8px; border-radius: 999px;
+  color: var(--text); background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: 500 11px/1 var(--font-mono);
+  padding: 6px 8px; border-radius: 999px;
+  color: var(--text-muted);
+  box-shadow: inset 0 0 0 1px var(--ring);
+  white-space: nowrap;
+}
+
+/* metrics: the "data voice" (Geist Mono, tabular numbers) */
+.metrics {
+  display: grid; gap: 14px 20px; margin-top: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 176px), 1fr));
+}
+.is-featured .metrics { grid-template-columns: minmax(0, 1fr); }
+.metric { display: flex; flex-direction: column; gap: 2px; }
+.metric .v {
+  font: 600 1.125rem/1.25 var(--font-mono);
+  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+.metric-part { white-space: nowrap; }
+.metric .l { font: var(--text-xs)/1.4 var(--font-mono); color: var(--text-muted); }
+.metric-arrow { color: var(--text-muted); font-weight: 400; }
+
+.also { margin-top: 20px; font-size: var(--text-sm); color: var(--text-muted); }
+
+.coming-soon {
+  margin-top: 16px;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px;
+  padding: 20px clamp(20px, 3vw, 28px);
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+.coming-soon p:not(.label) { font-size: var(--text-sm); color: var(--text-muted); flex: 1 1 32ch; }
+
+/* ---------- 6. About summary, facts, skills, lists ---------- */
+.split { display: grid; gap: 40px; }
+@media (min-width: 860px) { .split { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 64px; } }
+.split h2 { font-size: var(--text-xl); font-weight: 600; margin-block: 12px 16px; max-width: 24ch; }
+.split p + p { margin-top: 12px; }
+.split .arrow-link { display: inline-block; margin-top: 16px; }
+
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 12px 24px; align-content: start; }
+.facts dt { font: var(--text-xs)/1.9 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.facts dd { font-size: var(--text-sm); line-height: 1.6; }
+@media (max-width: 520px) {
+  .facts { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .facts dd { margin-bottom: 12px; }
+}
+
+.skills > div {
+  display: grid; gap: 4px 24px;
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: 14px;
+  box-shadow: 0 1px 0 var(--ring);
+}
+.skills > div:first-child { box-shadow: 0 -1px 0 var(--ring), 0 1px 0 var(--ring); }
+@media (min-width: 640px) { .skills > div { grid-template-columns: 180px minmax(0, 1fr); } }
+.skills dt { font: var(--text-xs)/1.9 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.skills dd { font-size: var(--text-sm); }
+
+/* rows with a date or status on the right (Now, Experience, Education) */
+.rows > li {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 4px 24px; flex-wrap: wrap;
+  padding-block: 14px;
+  box-shadow: 0 1px 0 var(--ring);
+  font-size: var(--text-sm);
+}
+.rows > li:first-child { box-shadow: 0 -1px 0 var(--ring), 0 1px 0 var(--ring); }
+.rows .what { flex: 1 1 36ch; }
+.rows .what strong { font-weight: 600; }
+.rows .what span { color: var(--text-muted); }
+.rows .when {
+  font: var(--text-xs)/1.6 var(--font-mono); color: var(--text-muted);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.now-cta { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+
+.subhead-label { margin-block: 28px 10px; }
+.plain-list { padding-left: 1.1em; font-size: var(--text-sm); }
+.plain-list li + li { margin-top: 6px; }
+
+/* About: the llama sticker with the one-line color story (BRAND §4) */
+.color-story { display: grid; gap: 28px; align-items: center; }
+@media (min-width: 641px) { .color-story { grid-template-columns: 180px minmax(0, 1fr); gap: 36px; } }
+.color-story .sticker { width: 140px; }
+@media (min-width: 641px) { .color-story .sticker { width: 180px; } }
+.color-story .story { font-size: var(--text-lg); line-height: 1.5; margin-top: 10px; }
+
+/* ---------- 7. Case study pages ---------- */
+.back-link { display: inline-block; margin-top: clamp(16px, 3vw, 32px); font-size: var(--text-sm); }
+.case-head { padding-top: 20px; }
+.case-head h1 {
+  font-size: clamp(2.125rem, 1.4rem + 2.8vw, 3.25rem);
+  font-weight: 650;
+  margin-block: 16px 6px;
+  max-width: 28ch;
+}
+.case-tagline { font-size: var(--text-lg); color: var(--text-muted); }
+.case-meta { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 12px 24px; margin-top: 28px; align-items: baseline; }
+.case-meta dt { font: var(--text-xs)/1.9 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.case-meta dd { font-size: var(--text-sm); }
+@media (max-width: 520px) {
+  .case-meta { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .case-meta dd { margin-bottom: 12px; }
+}
+
+.metrics-band { display: grid; gap: 12px; margin-top: 32px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) { .metrics-band { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.metrics-band .metric {
+  padding: 18px 20px;
+  background: var(--bg-raised);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+}
+.metrics-band .metric .v { font-size: var(--text-xl); }
+
+.case-body { margin-top: clamp(32px, 5vw, 56px); }
+.case-section {
+  display: grid; gap: 8px 40px;
+  padding-block: 24px;
+  box-shadow: 0 -1px 0 var(--ring);
+}
+@media (min-width: 720px) { .case-section { grid-template-columns: 180px minmax(0, 1fr); } }
+.case-section h2 {
+  font: var(--text-xs)/1.9 var(--font-mono);
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
+  padding-top: 2px;
+}
+.case-content > * + * { margin-top: 12px; }
+.result-list { padding-left: 1.1em; }
+.result-list li + li { margin-top: 8px; }
+.result-list li::marker { color: var(--chart-highlight); }
+.link-list { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.case-figure { margin-block: 8px 24px; }
+.case-figure img { border-radius: var(--radius-md); box-shadow: var(--shadow); }
+
+/* simple flow diagram (Day: grey context + one inferno highlight, BRAND §5) */
+.flow { padding-block: 24px; box-shadow: 0 -1px 0 var(--ring); }
+.flow figcaption { margin-bottom: 18px; }
+.flow-steps { display: grid; gap: 32px; }
+@media (min-width: 720px) {
+  .flow-steps { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 40px; }
+}
+.flow-step {
+  position: relative;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+  box-shadow: var(--shadow);
+}
+.flow-step.is-highlight { box-shadow: inset 0 0 0 1.5px var(--chart-highlight), var(--shadow); }
+.flow-step + .flow-step::before {
+  content: "↓"; content: "↓" / "";
+  position: absolute; left: 50%; top: -28px; transform: translateX(-50%);
+  font: 500 var(--text-md)/1 var(--font-mono); color: var(--chart-context);
+}
+@media (min-width: 720px) {
+  .flow-step + .flow-step::before {
+    content: "→"; content: "→" / "";
+    left: -30px; top: 50%; transform: translateY(-50%);
+  }
+}
+.flow-label { font-weight: 600; font-size: var(--text-sm); }
+.flow-detail { font-size: var(--text-sm); color: var(--text-muted); }
+.flow-status {
+  margin-top: 4px;
+  font: 500 11px/1 var(--font-mono);
+  padding: 5px 8px; border-radius: 999px;
+  color: var(--text-muted); box-shadow: inset 0 0 0 1px var(--ring);
+}
+.flow-step.is-highlight .flow-status { color: var(--chart-highlight); box-shadow: inset 0 0 0 1px currentColor; }
+
+.case-nav {
+  display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(40px, 6vw, 72px);
+}
+.case-nav a {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 16px 18px; border-radius: var(--radius-md);
+  color: var(--text); text-decoration: none;
+  box-shadow: inset 0 0 0 1px var(--ring);
+  font-size: var(--text-sm); font-weight: 500;
+  transition: box-shadow 150ms ease;
+}
+.case-nav .label { font-weight: 400; }
+.case-nav-next { text-align: right; align-items: flex-end; }
+@media (hover: hover) and (pointer: fine) {
+  .case-nav a:hover { box-shadow: inset 0 0 0 1px currentColor; color: var(--text); }
+}
+
+.load-error { margin-top: 24px; color: var(--text-muted); }
+
+/* ---------- 8. Quest Log ---------- */
+.quest-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 24px; }
+.quest-meter { display: grid; grid-auto-flow: column; grid-auto-columns: 40px; gap: 6px; }
+.quest-meter .seg { height: 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--ring); }
+.quest-meter .seg.is-done { background: var(--chart-highlight); box-shadow: none; }
+.quest-meter .seg.is-in-progress { box-shadow: inset 0 0 0 1.5px var(--chart-highlight); }
+
+.quest {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 6px 16px;
+  align-items: baseline;
+  padding-block: 22px;
+  box-shadow: 0 1px 0 var(--ring);
+}
+.quest:first-child { box-shadow: 0 -1px 0 var(--ring), 0 1px 0 var(--ring); }
+@media (min-width: 640px) { .quest { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 6px 20px; } }
+.quest-num {
+  font: 600 var(--text-lg)/1.2 var(--font-mono);
+  font-variant-numeric: tabular-nums; color: var(--text-muted);
+}
+.quest.is-in-progress .quest-num,
+.quest.is-done .quest-num { color: var(--chart-highlight); }
+.quest-title { font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+.quest.is-locked .quest-title { color: var(--text-muted); }
+.quest-meta { margin-top: 4px; font-size: var(--text-sm); color: var(--text-muted); }
+.quest-boss { margin-top: 10px; font-size: var(--text-sm); }
+.quest-boss .label { margin-right: 8px; }
+.quest-status {
+  grid-column: 2;
+  justify-self: start;
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 var(--text-xs)/1 var(--font-mono);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 6px 10px; border-radius: 999px;
+  color: var(--text-muted); box-shadow: inset 0 0 0 1px var(--ring);
+  white-space: nowrap;
+}
+@media (min-width: 640px) { .quest-status { grid-column: 3; grid-row: 1; justify-self: end; } }
+.quest-status svg { width: 12px; height: 12px; flex: none; }
+.quest.is-in-progress .quest-status { color: var(--text); }
+.quest.is-done .quest-status { color: var(--chart-highlight); }
+.quest-next { margin-top: 28px; font-size: var(--text-sm); color: var(--text-muted); }
+
+/* ---------- 9. 404 ---------- */
+.not-found { padding-block: clamp(40px, 8vw, 96px); }
+.not-found .wrap { display: grid; gap: 32px; justify-items: start; }
+@media (min-width: 720px) {
+  .not-found .wrap { grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 56px; }
+}
+.not-found .sticker { width: 200px; }
+.not-found h1 {
+  font-family: "Geist Pixel", var(--font-mono);
+  font-size: clamp(4rem, 2.5rem + 6vw, 7rem);
+  font-weight: 400; line-height: 1; letter-spacing: 0;
+}
+.not-found p { margin-block: 14px 28px; }
+
+/* The 404 llama nods once: a spring with bounce 0.2, sampled into linear()
+   (BRAND §6 delight budget), kept under 300ms. Ends on the sticker's resting
+   angle, so nothing jumps when the animation finishes. */
+@media (prefers-reduced-motion: no-preference) {
+  .llama-nod {
+    animation: llama-nod 280ms 200ms backwards
+      linear(0, 0.070 7%, 0.311 17%, 0.565 27%, 0.763 37%, 0.893 47%, 0.966 57%, 1.001 67%, 1.014 77%, 1.015 87%, 1);
+  }
+}
+@keyframes llama-nod {
+  from { transform: rotate(-12deg); }
+  to   { transform: rotate(-4deg); }
+}
+
+/* ---------- 10. Night footer ---------- */
+.site-footer { margin-top: var(--section); padding-block: clamp(48px, 7vw, 80px) 28px; }
+.footer-grid { display: grid; gap: 40px; }
+@media (min-width: 760px) { .footer-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
+.footer-title {
+  font-size: var(--text-xl); font-weight: 600; letter-spacing: var(--tracking-tight);
+  line-height: 1.2; margin-block: 12px 28px; max-width: 26ch;
+}
+.contact-list > div {
+  display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 16px;
+  align-items: baseline; padding-block: 6px;
+}
+.contact-list dt { font: var(--text-xs)/1.9 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.contact-list dd { display: flex; align-items: baseline; gap: 6px 10px; flex-wrap: wrap; min-width: 0; }
+.contact-list a { overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .contact-list > div { grid-template-columns: minmax(0, 1fr); gap: 0; padding-block: 8px; }
+}
+
+.copy-btn {
+  font: 500 var(--text-xs)/1 var(--font-mono);
+  padding: 6px 9px; border: 0; border-radius: 999px; cursor: pointer;
+  color: var(--text); background: transparent;
+  box-shadow: inset 0 0 0 1px var(--ring);
+  transition: transform var(--dur-press) var(--ease-out), box-shadow var(--dur-hover) ease;
+}
+.copy-btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .copy-btn:hover { box-shadow: inset 0 0 0 1px currentColor; } }
+
+.footer-steps { margin-top: 36px; }
+.sign-off { display: flex; align-items: center; gap: 14px; }
+.sign-off img { width: 96px; height: auto; flex: none; }
+.sign-off span { font: var(--text-xs)/1.5 var(--font-mono); color: var(--text-muted); }
+@media (min-width: 760px) { .sign-off span { text-align: right; } }
+.footer-base {
+  margin-top: 48px; padding-top: 20px;
+  box-shadow: 0 -1px 0 var(--ring);
+  display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap;
+  font: var(--text-xs)/1.6 var(--font-mono); color: var(--text-muted);
+}
+
+/* ---------- 11. Toast ("Email copied", BRAND §6 delight budget) ----------
+   Transitions, not keyframes, so a second copy retargets smoothly.
+   Enter 250ms, exit faster (200ms), both on the brand ease-out curve. */
+.toast {
+  position: fixed; z-index: 20;
+  left: 0; right: 0; bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  width: max-content; max-width: calc(100% - 32px); margin-inline: auto;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border-radius: 999px;
+  background: var(--chicha-black); color: var(--chullo-ivory);
+  font-size: var(--text-sm);
+  box-shadow: 0 0 0 1px rgb(251 255 246 / 0.12), 0 8px 24px rgb(1 0 1 / 0.24);
+  opacity: 0; transform: translateY(100%);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+  pointer-events: none;
+}
+.toast[data-visible] {
+  opacity: 1; transform: translateY(0);
+  transition-duration: 250ms;
+}
+
+/* ---------- 12. Reduced motion: keep color/opacity, drop movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .project-card, .copy-btn { transition: box-shadow 150ms ease; }
+  .project-card:hover { transform: none; }
+  .copy-btn:active { transform: none; }
+  .toast, .toast[data-visible] { transform: none; transition: opacity 200ms ease; }
+}
