@@ -3,9 +3,10 @@
 > Claude: use only the facts in this file. Anything marked [FILL] is a placeholder I still need to confirm — show it as a visible TODO, never invent numbers.
 
 ## Identity
-- **Name:** Mauricio Calderon
+- **Name:** Mauricio Calderón Barrientos (always this spelling, with the accent)
 - **Location:** Burlington, Ontario, Canada (open to Toronto–Hamilton area, hybrid/on-site)
-- **Headline:** Data & AI Automation Analyst — 8+ years turning business processes into automated, data-driven workflows
+- **Hero big line:** Mauricio Calderón Barrientos makes data **useful** (spray highlight on "useful", see brand/BRAND.md)
+- **Hero subtitle:** Data & AI Automation Analyst — 8+ years turning business processes into automated, data-driven workflows
 - **Sub-headline:** I build dashboards, pipelines and AI assistants that save teams hours and drive better decisions.
 - **Target roles:** Data / BI Analyst · AI & Automation Specialist · Junior AI/ML Engineer
 - **Industries I'm aiming at:** Retail & logistics · Public sector · Tech
@@ -83,6 +84,7 @@ Show status per stage: done / in progress / locked.
 - **Resume PDF:** [FILL — add resume.pdf to the repo]
 
 ## Rules for the site
+- Visual design follows brand/BRAND.md (Day hero, white/ivory dominant, Emil Kowalski polish).
 - English only (for now). Recruiter-first: who I am, what I do, and proof within 10 seconds.
 - No confidential employer data, client names or real figures from Sura — rounded/anonymized only.
 - No photo for now [or FILL: add headshot.jpg].

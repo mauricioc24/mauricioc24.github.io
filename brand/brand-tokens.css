@@ -1,0 +1,250 @@
+/* ==========================================================================
+   brand-tokens.css — Mauricio's brand layer for mauricioc24.github.io
+   Source palette: ME/brand/brand_tokens.json (La IAma llama, Oct 29 2026)
+   Read brand/BRAND.md before changing anything here.
+   Emil Kowalski skills govern motion & polish; this file governs identity.
+   ========================================================================== */
+
+/* ---------- 1. Raw palette (official hex values, do not edit) ---------- */
+:root {
+  /* chicha_digital — neon, for NIGHT surfaces */
+  --chicha-fuchsia:   #FE17DC;
+  --chicha-lime:      #12FF01;
+  --chicha-tangerine: #FE773E;
+  --chicha-lemon:     #FBE407;
+  --chicha-black:     #010001;
+
+  /* chullo_traditional — textile reds, for DAY surfaces */
+  --chullo-coffee:    #1B0302;
+  --chullo-blood:     #8D1306;
+  --chullo-inferno:   #AA0F0C;
+  --chullo-charcoal:  #222921;
+  --chullo-ivory:     #FBFFF6;
+
+  /* Derived web shades (not in the official kit; picked for contrast) */
+  --day-raised:   #F3F6EC;  /* card on ivory */
+  --day-muted:    #5A5F57;  /* secondary text, 6.46:1 on ivory */
+  --night-raised: #121112;  /* card on black */
+  --night-muted:  #A6A8A3;  /* secondary text, 8.74:1 on black */
+
+  /* ---------- 2. Type ---------- */
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --tracking-tight: -0.02em;   /* large headings (Emil cheatsheet) */
+  --measure: 65ch;             /* max line length for body text */
+
+  --text-xs:  0.75rem;
+  --text-sm:  0.875rem;
+  --text-md:  1rem;
+  --text-lg:  1.25rem;
+  --text-xl:  clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2.25rem, 1.6rem + 3vw, 4rem);
+
+  /* ---------- 3. Motion (Emil Kowalski values) ---------- */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);    /* enter / exit / press */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);   /* things moving on screen */
+  --dur-press:  160ms;   /* button :active */
+  --dur-hover:  150ms;   /* color / underline */
+  --dur-small:  200ms;   /* tooltips, small popovers */
+  --dur-hero:   650ms;   /* ONE-TIME hero spray reveal only (delight budget) */
+
+  /* ---------- 4. Shape ---------- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+/* ---------- 5. Surfaces: semantic tokens flip per surface ----------
+   DAY   = ivory + chullo reds  (default; where recruiters read)
+   NIGHT = black + chicha neon  (hero band, chart cards, footer)      */
+:root,
+.surface-day {
+  --bg:        var(--chullo-ivory);
+  --bg-raised: var(--day-raised);
+  --text:      var(--chullo-coffee);     /* 19.6:1 */
+  --text-muted: var(--day-muted);        /*  6.5:1 */
+  --accent:    var(--chullo-blood);      /*  9.3:1 — links, primary button */
+  --accent-hover: var(--chullo-inferno); /*  7.5:1 */
+  --motif:     var(--chullo-blood);      /* zigzag rule color */
+  --ring:      rgb(34 41 33 / 0.10);     /* hairline instead of solid borders */
+  --shadow:    0 0 0 1px rgb(34 41 33 / 0.08), 0 1px 2px rgb(27 3 2 / 0.06), 0 4px 12px rgb(27 3 2 / 0.05);
+  --chart-context: #83887F;              /* grey context series */
+  --chart-highlight: var(--chullo-inferno);
+  color-scheme: light;
+}
+
+.surface-night {
+  --bg:        var(--chicha-black);
+  --bg-raised: var(--night-raised);
+  --text:      var(--chullo-ivory);      /* 20.7:1 */
+  --text-muted: var(--night-muted);      /*  8.7:1 */
+  --accent:    var(--chicha-fuchsia);    /*  6.4:1 */
+  --accent-hover: var(--chicha-lemon);   /* 16.2:1 */
+  --motif:     var(--chicha-fuchsia);
+  --ring:      rgb(251 255 246 / 0.12);
+  --shadow:    0 0 0 1px rgb(251 255 246 / 0.10);
+  --chart-context: #6B6D69;
+  --chart-highlight: var(--chicha-fuchsia);
+  color-scheme: dark;
+}
+
+.surface-day,
+.surface-night {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- 6. Base typography ---------- */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { letter-spacing: var(--tracking-tight); line-height: 1.1; text-wrap: balance; }
+p { max-width: var(--measure); text-wrap: pretty; }
+.muted { color: var(--text-muted); }
+
+/* the "data voice": numbers, metrics, labels, code */
+.mono, code, kbd { font-family: var(--font-mono); }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: inline-flex; align-items: center; gap: 0.6em;
+}
+
+/* ---------- 7. Links & buttons (Emil polish rules) ---------- */
+a {
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transition: color var(--dur-hover) ease, text-decoration-color var(--dur-hover) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  a:hover { color: var(--accent-hover); text-decoration-color: currentColor; }
+}
+a:focus-visible, button:focus-visible, .btn:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font: 500 var(--text-sm)/1 var(--font-sans);
+  padding: 0.8em 1.15em;
+  border-radius: var(--radius-sm);
+  border: 0; cursor: pointer; text-decoration: none;
+  transition: transform var(--dur-press) var(--ease-out),
+              background-color var(--dur-hover) ease, color var(--dur-hover) ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--accent); color: var(--bg); }
+.surface-night .btn-primary { color: var(--chicha-black); }
+.btn-ghost { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px var(--ring); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { background: var(--accent-hover); color: var(--bg); }
+  .surface-night .btn-primary:hover { color: var(--chicha-black); }
+  .btn-ghost:hover { box-shadow: inset 0 0 0 1px currentColor; }
+}
+
+/* ---------- 8. Cards ---------- */
+.card {
+  background: var(--bg-raised);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);       /* semi-transparent ring, not a solid border */
+  padding: 1.5rem;
+}
+.night-card {                       /* chicha card that can sit on a day page */
+  --bg: var(--chicha-black); --bg-raised: var(--night-raised);
+  --text: var(--chullo-ivory); --text-muted: var(--night-muted);
+  --accent: var(--chicha-fuchsia); --accent-hover: var(--chicha-lemon);
+  --motif: var(--chicha-fuchsia); --ring: rgb(251 255 246 / 0.12);
+  --chart-context: #6B6D69; --chart-highlight: var(--chicha-fuchsia);
+  background: var(--chicha-black); color: var(--chullo-ivory);
+  border-radius: var(--radius-md); padding: 1.5rem;
+}
+
+/* ==========================================================================
+   9. ART MOTIFS — taken from the llama logo. Budget: see BRAND.md §4.
+   ========================================================================== */
+
+/* 9a. Chullo zigzag rule — section divider (the hat pattern = a line chart) */
+.zigzag-rule {
+  height: 10px; border: 0; margin: 3rem 0;
+  background: var(--motif);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10'%3E%3Cpolyline points='0,9 5,1 10,9 15,1 20,9' fill='none' stroke='black' stroke-width='2' stroke-linejoin='miter'/%3E%3C/svg%3E") repeat-x left center / 20px 10px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10'%3E%3Cpolyline points='0,9 5,1 10,9 15,1 20,9' fill='none' stroke='black' stroke-width='2' stroke-linejoin='miter'/%3E%3C/svg%3E") repeat-x left center / 20px 10px;
+}
+.zigzag-rule.short { width: 120px; }
+
+/* 9b. Neon stripe tag — the sunglasses lenses. Always on a black pill. */
+.stripe-tag {
+  display: inline-block; flex: none;
+  width: 30px; height: 14px; border-radius: 4px;
+  background:
+    linear-gradient(115deg,
+      transparent 0 14%,
+      var(--chicha-fuchsia) 14% 32%,
+      var(--chicha-lime) 32% 50%,
+      var(--chicha-tangerine) 50% 68%,
+      var(--chicha-lemon) 68% 86%,
+      transparent 86%),
+    var(--chicha-black);
+  box-shadow: 0 0 0 1px rgb(251 255 246 / 0.15);
+}
+
+/* 9c. Color steps — the compact 4-block band from the LinkedIn templates */
+.color-steps { display: inline-flex; gap: 0; }
+.color-steps i { display: block; width: 18px; height: 6px; }
+.color-steps i:nth-child(1) { background: var(--chicha-fuchsia); }
+.color-steps i:nth-child(2) { background: var(--chicha-lime); }
+.color-steps i:nth-child(3) { background: var(--chicha-tangerine); }
+.color-steps i:nth-child(4) { background: var(--chicha-lemon); }
+
+/* 9d. Spray highlight — ONE word per page, hero only. Text on it is black. */
+.spray {
+  position: relative; isolation: isolate;
+  color: var(--chicha-black);
+  padding: 0 0.12em; margin: 0 0.14em;   /* clearance for the stroke's overhang */
+  white-space: nowrap;
+}
+.spray::before {
+  content: ""; position: absolute; z-index: -1;
+  inset: 0.08em -0.18em -0.22em -0.18em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='none'%3E%3Cg fill='%23FE17DC'%3E%3Cpath d='M10 30 C70 16 210 12 388 20 L394 28 C384 38 396 54 388 66 C392 72 384 78 390 84 C300 90 170 92 16 96 L8 88 C16 74 4 62 12 50 C6 42 14 36 10 30 Z'/%3E%3Cpath d='M92 92 L92 108 Q96 116 100 108 L100 92 Z'/%3E%3Cpath d='M236 90 L236 114 Q240 120 244 114 L244 90 Z'/%3E%3Cpath d='M330 88 L330 102 Q333 108 336 102 L336 88 Z'/%3E%3Ccircle cx='398' cy='12' r='2.5'/%3E%3Ccircle cx='4' cy='104' r='2'/%3E%3Ccircle cx='380' cy='104' r='1.6'/%3E%3C/g%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transform: rotate(-1.2deg);
+  clip-path: inset(0 0 0 0);
+}
+/* one-time reveal on first paint: paints left → right, then never again */
+@media (prefers-reduced-motion: no-preference) {
+  .spray.reveal::before {
+    animation: spray-in var(--dur-hero) var(--ease-out) 250ms both;
+  }
+}
+@keyframes spray-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+/* 9e. Sticker — for the llama or your photo. Never recolor, stretch or add paint. */
+.sticker {
+  display: inline-block;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 6px 14px rgb(1 0 1 / 0.18));
+  transition: transform var(--dur-small) var(--ease-out);
+}
+.sticker img { display: block; width: 100%; height: auto; }
+@media (hover: hover) and (pointer: fine) {
+  .sticker:hover { transform: rotate(-2deg) translateY(-2px); }
+}
+
+/* ---------- 10. Reduced motion: fewer & gentler, not zero ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn:active { transform: none; }
+  .sticker, .sticker:hover { transition: none; }
+}
