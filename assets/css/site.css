@@ -267,6 +267,7 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .rows .what { flex: 1 1 36ch; }
 .rows .what strong { font-weight: 600; }
 .rows .what span { color: var(--text-muted); }
+.rows .what .detail { display: block; margin-top: 6px; max-width: 72ch; }
 .rows .when {
   font: var(--text-xs)/1.6 var(--font-mono); color: var(--text-muted);
   font-variant-numeric: tabular-nums; white-space: nowrap;
