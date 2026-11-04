@@ -20,6 +20,7 @@ Portfolio for **Mauricio Calderón Barrientos** (always this spelling, with the 
 - Each case study is `projects/<slug>.html`: a small page with its own `<title>` and description (for link previews), whose content comes from the `projects.json` entry with the same `slug`.
 - The header and footer are copied into all 10 HTML pages. Change all of them together. The footer omits the llama sign-off on `about/index.html` and `404.html` (one llama per screen).
 - Use root-absolute paths (`/assets/…`, `/projects/…`), because `404.html` can be served at any URL depth.
+- The featured card shows a small version of its project's `"visual"` flow (each step's `"short"` label if it has one). Edit the steps in `projects.json` and both diagrams update.
 
 ## Adding a project
 

@@ -8,7 +8,7 @@ Everything below is **hidden on the public site** until you fill it in. Recruite
 
 | # | What's missing | Where it will appear | Where to type it |
 |---|---|---|---|
-| 1 | **Teams chatbot: the problem.** What pain did the bot solve? (For example, how people got answers before it existed.) The résumé only says it handled "employee process questions". | A "Problem" section at the top of the chatbot case study | `projects.json` → `teams-chatbot` → `"problem"` |
+| 1 | **Teams chatbot: the problem.** One sentence on what pain the bot solved (for example, how people got answers before it existed). The résumé only says it handled "employee process questions". Still waiting: the Nov 4 request arrived with the placeholder "[your one sentence]" unfilled. | A "Problem" section at the top of the chatbot case study | `projects.json` → `teams-chatbot` → `"problem"` |
 | 2 | **Teams chatbot: usage numbers.** Time saved, number of users, or requests per month. | A second line under "Result" | `projects.json` → `teams-chatbot` → second item in `"results"` |
 | 3 | **Collections dashboard mockup.** An anonymized image with no real figures beyond the ones in your résumé. | A picture in the collections case study | Put the image in `assets/img/`, then set `projects.json` → `collections-analytics` → `"visual"` → `"src"` (for example `"/assets/img/collections-mockup.png"`) |
 | 4 | **WhatsApp pipeline: repo link**, with the sample data anonymized | "Links" section of that case study | `projects.json` → `whatsapp-demand-signals` → `"links"` → `"href"` |
@@ -32,4 +32,4 @@ Everything below is **hidden on the public site** until you fill it in. Recruite
 ## Optional polish (visible now, but worth a look)
 
 - **About page color story.** It uses the wording suggested in `brand/BRAND.md`. Rewrite it in your own voice when you have a minute: it's in `about/index.html`, inside "Why these colors".
-- **Résumé facts not on the site yet** (left out on purpose until you decide): DAX, Power Query, data modelling, SQL Server and Access in Skills; German (intermediate) in Languages; your certificates (Advanced Excel, Power BI & Dashboards, ESAN Executive Program in BI, Google Cloud GenAI paths). Add them to `CONTENT.md` first if you want them shown.
+- **Résumé facts not on the site yet:** your certificates (Advanced Excel, Power BI & Dashboards, ESAN Executive Program in BI, Google Cloud GenAI paths). Add them to `CONTENT.md` first if you want them shown. (The BI skill keywords, German and the self-service app were added on Nov 4, 2026.)
