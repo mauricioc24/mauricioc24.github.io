@@ -1,0 +1,90 @@
+# Site checks: runs on every pull request (and by hand from the Actions tab).
+#
+#  1. Lighthouse on all 10 pages. Accessibility, best practices and SEO must
+#     score 90+ or the check fails. Performance below 90 only warns, because
+#     shared CI machines vary in speed. Full reports are attached to the run.
+#  2. Broken links: every link and image in the HTML must resolve, and every
+#     project in projects.json must have its case-study page.
+#
+# Settings: .github/lighthouserc.json. Plain-English notes: LEARNINGS.md.
+
+name: Site checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    name: Lighthouse (all pages)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Run Lighthouse CI
+        run: npx --yes @lhci/cli@0.16.0 autorun --config=.github/lighthouserc.json
+
+      - name: Attach the Lighthouse reports to this run
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/reports/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  links:
+    name: Broken links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check that projects.json and the case-study pages match
+        run: |
+          node --input-type=module -e "
+            import fs from 'node:fs';
+            const data = JSON.parse(fs.readFileSync('projects.json', 'utf8'));
+            const slugs = data.projects.map((p) => p.slug);
+            const pages = fs.readdirSync('projects').filter((f) => f.endsWith('.html') && f !== 'index.html');
+            let problems = 0;
+            for (const slug of slugs) {
+              const file = 'projects/' + slug + '.html';
+              if (!fs.existsSync(file)) { console.log('Missing page for project \"' + slug + '\": ' + file); problems++; continue; }
+              if (!fs.readFileSync(file, 'utf8').includes('data-case-study=\"' + slug + '\"')) { console.log(file + ' does not say data-case-study=\"' + slug + '\"'); problems++; }
+            }
+            for (const page of pages) {
+              if (!slugs.includes(page.replace(/\.html$/, ''))) { console.log('projects/' + page + ' has no entry in projects.json'); problems++; }
+            }
+            console.log(problems ? problems + ' problem(s)' : 'projects.json and pages match (' + slugs.length + ' projects)');
+            process.exit(problems ? 1 : 0);
+          "
+
+      - name: Check links in every page
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          # Skipped on purpose:
+          #  - mauricioc24.github.io: the live site, which won't have new pages until this PR is merged
+          #  - linkedin.com: blocks automated checkers, so it always looks broken
+          #  - fonts.googleapis.com / fonts.gstatic.com: <link> hints, not pages
+          args: >-
+            --no-progress
+            --root-dir "${{ github.workspace }}"
+            --accept "100..=103,200..=299,429"
+            --exclude "^https?://mauricioc24\.github\.io"
+            --exclude "linkedin\.com"
+            --exclude "fonts\.(googleapis|gstatic)\.com"
+            "./**/*.html"

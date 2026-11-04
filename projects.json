@@ -1,0 +1,125 @@
+{
+  "_readme": "Project and Quest Log data for the site. Facts come only from CONTENT.md. Anything that contains [FILL is hidden on the public site and listed in TODO.md; replace the whole [FILL ...] text with the real value to make it appear. `backticks` render as code.",
+
+  "projects": [
+    {
+      "slug": "teams-chatbot",
+      "title": "Teams chatbot",
+      "tagline": "Innovation contest winner",
+      "context": "Sura Peru",
+      "when": "During my Analyst III role, April 2023 – September 2025",
+      "home": true,
+      "featured": true,
+      "summary": "A rule-based Microsoft Teams chatbot that answered employee process questions, built with Power Virtual Agents and Power Automate.",
+      "problem": "[FILL — the pain point behind employee process questions, e.g., how people got answers before the bot (the résumé doesn't say)]",
+      "built": "A rule-based Microsoft Teams chatbot that answered employee process questions, built and deployed with Power Virtual Agents + Power Automate.",
+      "tools": ["Microsoft Teams", "Power Virtual Agents", "Power Automate"],
+      "results": [
+        { "metric": "First place", "label": "company innovation contest", "text": "Won first place in the company's innovation contest." },
+        { "text": "[FILL — time saved / users / requests per month, rounded]" }
+      ],
+      "linksNote": "No code: it's company property. The diagram shows the setup without any confidential data.",
+      "links": [],
+      "visual": {
+        "type": "flow",
+        "title": "How it fits together",
+        "steps": [
+          { "label": "Microsoft Teams", "detail": "An employee asks a process question" },
+          { "label": "Rule-based chatbot", "detail": "Power Virtual Agents + Power Automate", "highlight": true },
+          { "label": "Answer in Teams", "detail": "The bot replies in the same chat" }
+        ]
+      }
+    },
+    {
+      "slug": "collections-analytics",
+      "title": "Collections analytics & automation",
+      "context": "Sura Peru",
+      "when": "December 2016 – September 2025 (Analyst I → Analyst III, Collection Intelligence/Contribution Recovery)",
+      "home": true,
+      "summary": "Power BI dashboards, SQL data pipelines (DB2, BigQuery), Excel/VBA and Power Automate workflows for collections analytics at Sura Peru.",
+      "problem": "Each debt report took ~30 minutes to produce, the late-payment rate was 27%, and the panel of 5 external collection providers I supervised included redundant ones.",
+      "built": "Power BI dashboards, SQL data pipelines (DB2, BigQuery), Excel/VBA and Power Automate workflows.",
+      "tools": ["Power BI", "SQL (DB2, BigQuery)", "Python/pandas", "Excel/VBA", "Power Automate"],
+      "results": [
+        { "metric": "27% → 24%", "label": "late-payment rate", "text": "Lowered the late-payment rate from 27% to 24% by pairing the scoring model with targeted campaigns." },
+        { "metric": "~40%", "label": "lower operating costs", "text": "Cut operating costs ~40% by using scoring and performance data to consolidate the redundant external providers I supervised (from a panel of 5)." },
+        { "metric": "~30 min → ~2 min", "label": "per debt report", "text": "Cut debt-report generation from ~30 minutes to ~2 minutes per report with Excel VBA and Access macros, enabling batch generation." },
+        { "metric": "~45%", "label": "less manual processing", "text": "Reduced manual processing ~45% across the team by building automations and standardized, parameter-driven reports (including self-service report tools for the legal team)." }
+      ],
+      "linksNote": "No code: it's company property.",
+      "links": [],
+      "visual": {
+        "type": "image",
+        "src": "[FILL — anonymized dashboard mockup image, no real figures beyond the résumé]",
+        "alt": "Anonymized dashboard mockup"
+      }
+    },
+    {
+      "slug": "whatsapp-demand-signals",
+      "title": "WhatsApp demand-signal pipeline",
+      "context": "Personal project",
+      "status": "In progress",
+      "home": true,
+      "summary": "Turning Latin American community group chats into structured demand signals for small retailers in Ontario.",
+      "problem": "Small retailers serving Latin American communities in Ontario guess what to stock; demand is visible in community group chats but unstructured.",
+      "built": "A locale-aware parser (`wa_parse.py`) that handles Spanish-locale Android WhatsApp exports and their encoding quirks; now adding structured LLM extraction per message (product, category, brand, intent, urgency) with the Anthropic API.",
+      "tools": ["Python", "Anthropic API", "Structured outputs"],
+      "results": [
+        { "text": "Parser built and validated; extraction stage in progress." }
+      ],
+      "links": [
+        { "label": "Code on GitHub", "href": "[FILL — repo link, with sample data anonymized]" }
+      ],
+      "visual": {
+        "type": "flow",
+        "title": "Pipeline",
+        "steps": [
+          { "label": "WhatsApp exports", "detail": "Spanish-locale Android chat exports" },
+          { "label": "`wa_parse.py`", "detail": "Locale-aware parser that handles encoding quirks", "status": "Built and validated" },
+          { "label": "LLM extraction", "detail": "Anthropic API, structured outputs: product, category, brand, intent, urgency", "status": "In progress", "highlight": true }
+        ]
+      }
+    },
+    {
+      "slug": "vanna-ai-security",
+      "title": "Vanna AI security analysis",
+      "context": "Security write-up",
+      "summary": "A CVE-referenced write-up on known Vanna AI vulnerabilities: their impact and mitigations.",
+      "problem": "Text-to-SQL AI tools can expose databases to prompt-injection and code-execution risks.",
+      "built": "A security write-up analyzing known Vanna AI vulnerabilities (CVE-referenced), their impact and mitigations.",
+      "tools": ["Security research", "CVE analysis", "Technical writing"],
+      "results": [
+        { "text": "Portfolio document." }
+      ],
+      "links": [
+        { "label": "Read the write-up", "href": "[FILL — PDF or page]" }
+      ]
+    },
+    {
+      "slug": "nyc-airbnb-summary",
+      "title": "NYC Airbnb Data Summary Tool",
+      "context": "Course team project · CPSC-620",
+      "summary": "A team project to summarize and clean the NYC Airbnb dataset with an Agile workflow. I owned the data-cleaning user story.",
+      "problem": "Course group project — summarize and clean the NYC Airbnb dataset using an Agile workflow.",
+      "role": "Owned the data-cleaning user story (US-02); worked through sprints, pull requests and peer code review on GitHub.",
+      "tools": ["Python", "pandas", "GitHub (PRs, reviews)", "Agile/Scrum"],
+      "results": [],
+      "links": [
+        { "label": "Team repo on GitHub", "href": "[FILL — repo link, only if the team agrees]" }
+      ]
+    }
+  ],
+
+  "comingSoon": "New projects added as each learning stage of the AI Quest Log finishes (finance-style first, then retail / logistics / public-sector data).",
+
+  "questLog": {
+    "period": "Oct 2026 – Jun 2027",
+    "stages": [
+      { "stage": 1, "title": "Machine Learning Specialization, Course 1", "provider": "DeepLearning.AI / Stanford", "status": "in-progress", "boss": "[FILL]" },
+      { "stage": 2, "title": "Machine Learning Specialization, Course 2", "provider": "DeepLearning.AI / Stanford", "status": "locked", "boss": "[FILL]" },
+      { "stage": 3, "title": "Machine Learning Specialization, Course 3", "provider": "DeepLearning.AI / Stanford", "status": "locked", "boss": "[FILL]" },
+      { "stage": 4, "title": "PL-300 Power BI exam", "provider": "Microsoft", "when": "Feb–Mar 2027", "status": "locked", "boss": "[FILL]" },
+      { "stage": 5, "title": "Agentic AI course", "status": "locked", "boss": "[FILL]" }
+    ]
+  }
+}
