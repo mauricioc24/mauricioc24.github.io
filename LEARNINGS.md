@@ -138,3 +138,8 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 This session's cloud environment couldn't reach jwilber.me, so a small personal environment named `mauricioc24.github.io` was created (you approved it) that adds only `www.jwilber.me` and `jwilber.me`. It changes nothing on the website itself. You can see or remove it in the environment menu of a Claude Code session.
 
 In the third pass, the same network blocked the official sites of your schools and certificate providers (unfc.ca, ulima.edu.pe, cibertec.edu.pe, dmc.pe, ue.edu.pe, deeplearning.ai, cloudskillsboost.google, udemy.com, python.org and others), so their logo files couldn't be downloaded. As you asked, nothing was worked around: those names stay as text, and TODO.md says where each logo can come from.
+
+## Nov 5, 2026: school and certificate logos from favicons
+- Full logos (crest plus long name) turn into smudges at 14px, and auto-traced SVGs from online converters aren't official files. So schools and certificate issuers use their own **favicon**, the small icon each organization designed for tiny sizes. It's converted to the one grey: dark parts solid, light parts see-through, empty margins trimmed, shape unchanged. Sources are in `assets/img/logos/SOURCES.md`.
+- Wordmark-style icons (DMC) keep the 14px height at their natural width with `.logo-wide`.
+- The Cambridge Innovation Center Peru negotiation course was removed at Mauricio's request.

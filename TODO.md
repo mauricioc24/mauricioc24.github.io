@@ -37,16 +37,8 @@ The site shows a small grey logo next to a school, certificate issuer or tool on
 
 | Name | Where it appears | Why it's text | Where the official logo can come from |
 |---|---|---|---|
-| University of Niagara Falls Canada | Studying now, Education | This session's network blocked unfc.ca | unfc.ca (brand or media page) |
-| University of Lima | Education | Network blocked ulima.edu.pe | ulima.edu.pe |
-| DeepLearning.AI | Studying now, Education, Certificates | Not in Simple Icons; network blocked deeplearning.ai | deeplearning.ai |
-| Data Management Corp. Peru | Certificates | Network blocked dmc.pe | dmc.pe |
-| ESAN University | Certificates | Network blocked ue.edu.pe | ue.edu.pe |
-| Cibertec Technology Institute | Certificates | Network blocked cibertec.edu.pe | cibertec.edu.pe |
-| Cambridge Innovation Center Peru | Certificates | Not in Simple Icons, and I couldn't look up its official site | Its own site or press kit |
 | Microsoft (PL-300) | Studying now, Education | Microsoft's trademark guidelines don't allow its logo without a licence | Leave as text. After you pass PL-300, you can show the official certification badge |
 | Power BI, Excel, Access, SQL Server, Power Automate, Copilot Studio, Teams | Skills | Microsoft's icon terms only cover architecture diagrams, training and documentation | Leave as text |
-| Tableau | Skills | Not in Simple Icons; network blocked tableau.com | Tableau's press kit |
 | DB2 (IBM) | Skills | Not in Simple Icons; network blocked ibm.com | IBM's brand site |
 | pandas | Skills | pandas' rules: at least 55px on the web, in full colour or white only, so not small and grey | Leave as text |
 | Git & GitHub | Skills | Kept as text, like the other "ways of working" | — |
@@ -61,6 +53,10 @@ They come from Simple Icons and are shown in one grey. I couldn't open the brand
 - Google BigQuery and Google Cloud: https://about.google/brand-resource-center
 - Udemy: https://support.udemy.com/hc/en-us/articles/8926753692567-Trademark-Usage-Guidelines
 - Anthropic: the press kit on anthropic.com (its download was blocked too)
+
+### Check these seven logos too (added Nov 5, 2026)
+
+They come from each organization's own favicon and are shown in one grey. If any of these organizations says its logo can't be recoloured, use its original colours or remove it: University of Niagara Falls Canada, Universidad de Lima, Cibertec, DeepLearning.AI, DMC Institute, Universidad ESAN, Tableau. Sources are listed in `assets/img/logos/SOURCES.md`.
 
 ## When a planned project ships
 

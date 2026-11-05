@@ -113,7 +113,6 @@ On the site: "La IAma is my AI channel in Spanish. I explain AI in simple words 
 - Cibertec Technology Institute: Advanced Excel (48 hours), my Excel specialist certificate
 - Data Management Corp. Peru: Power BI & Dashboards (24 hours)
 - ESAN University: Executive Program in BI (24 hours)
-- Cambridge Innovation Center Peru: Negotiation Techniques (12 hours)
 - Google Cloud Skills Boost: Generative AI learning paths (Intro to Generative AI; Build and Modernize Applications with GenAI; Gemini for Google Cloud), hands-on labs, 2026
 
 ## Contact

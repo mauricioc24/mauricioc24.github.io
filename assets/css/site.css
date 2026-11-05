@@ -375,6 +375,7 @@ h3.subhead-label { font-weight: 400; letter-spacing: 0.08em; }
    Official files or Simple Icons only; never redrawn, stretched or recoloured
    beyond the single grey. */
 .logo { display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; }
+.logo.logo-wide { width: 22px; } /* wordmark-style icons (DMC): same 14px height, natural width */
 .plain-list { padding-left: 1.1em; font-size: var(--text-sm); }
 .plain-list li + li { margin-top: 6px; }
 
