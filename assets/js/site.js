@@ -1,18 +1,17 @@
 /* ==========================================================================
-   site.js — renders /projects.json into the pages and adds the few
-   interactions (copy email + toast). Plain JavaScript, no libraries.
+   site.js: renders /projects.json into the pages and adds the few
+   interactions (project filters, copy email + toast). Plain JavaScript,
+   no libraries.
 
    The one rule: any value in projects.json that contains "[FILL" is still
    missing, so it is hidden from the public site. TODO.md lists them.
 
    Pages ask for content with data attributes:
-     data-projects="home|all"   project cards        (Home, Projects)
-     data-also                  "Also: ..." links    (Home)
-     data-coming-soon           coming-soon note     (Projects, Quest Log)
-     data-case-study="slug"     one case study       (projects/<slug>.html)
-     data-quest-log             the five stages      (Quest Log)
-     data-quest-progress        progress meter       (Quest Log)
-     data-quest-summary         "Stage 1 of 5 ..."   (Home)
+     data-showcase="home|past|planned"  project entries (Home, Projects)
+     data-filters                       filter chips      (Projects)
+     data-matrix                        skills by project (Projects)
+     data-case-study="slug"             one case study    (projects/<slug>.html)
+     data-channels                      La IAma links     (Home)
    ========================================================================== */
 (() => {
   'use strict';
@@ -37,6 +36,20 @@
       node.append(child instanceof Node ? child : String(child));
     }
     return node;
+  }
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  function svg(viewBox, parts) {
+    const root = document.createElementNS(SVG_NS, 'svg');
+    root.setAttribute('viewBox', viewBox);
+    root.setAttribute('aria-hidden', 'true');
+    root.setAttribute('focusable', 'false');
+    for (const [tag, attrs] of parts) {
+      const el = document.createElementNS(SVG_NS, tag);
+      for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+      root.append(el);
+    }
+    return root;
   }
 
   // Text where `backticks` become <code>.
@@ -69,18 +82,21 @@
     return fragment;
   }
 
-  const stripeTag = () => h('span', { class: 'stripe-tag', 'aria-hidden': 'true' });
-  const projectUrl = (project) => `/projects/${project.slug}.html`;
+  const caseUrl = (project) => `/projects/${project.slug}.html`;
   const visibleResults = (project) => (project.results || []).filter((r) => present(r.text));
   const visibleMetrics = (project) => visibleResults(project).filter((r) => present(r.metric) && present(r.label));
   const visibleTools = (project) => (project.tools || []).filter(present);
+  const visibleLinks = (project) => (project.links || []).filter((l) => present(l.href) && present(l.label));
 
-  function eyebrow(project) {
-    return h('p', { class: 'eyebrow' },
-      project.featured && stripeTag(),
-      project.featured ? `Featured · ${project.context}` : project.context,
-      present(project.status) && h('span', { class: 'status' }, project.status)
-    );
+  function typeLabel(project, planned) {
+    if (planned) return ['Planned', project.target].filter(present).join(' · ');
+    return [project.type, project.status].filter(present).join(' · ');
+  }
+
+  function chipList(tools) {
+    if (!tools.length) return null;
+    return h('ul', { class: 'chips', role: 'list', 'aria-label': 'Tools' },
+      tools.map((tool) => h('li', { class: 'chip' }, tool)));
   }
 
   function metricList(metrics, extraClass) {
@@ -92,82 +108,167 @@
     );
   }
 
-  function chipList(tools) {
-    if (!tools.length) return null;
-    return h('ul', { class: 'chips', role: 'list', 'aria-label': 'Tools' },
-      tools.map((tool) => h('li', { class: 'chip' }, tool)));
+  // One line on how AI was used and checked. Only the parts that are filled in.
+  function aiLine(project, className) {
+    const ai = project.ai || {};
+    const parts = [ai.used, ai.checked].filter(present);
+    if (!present(ai.used)) return null;
+    return h('p', { class: className }, h('span', { class: 'label' }, 'AI use'), ' ', parts.join(' '));
   }
 
-  /* ---------- project cards (Home, Projects) ---------- */
+  /* ---------- thumbnails: only real content (BRAND §5, CONTENT.md) ---------- */
 
-  // A small version of the case-study diagram for the featured card. It reads
-  // the same flow steps, using each step's short label when it has one.
-  // BRAND §5: grey context, one inferno highlight, every step labeled.
-  function miniFlow(v) {
-    if (!v || v.type !== 'flow') return null;
-    const steps = (v.steps || []).filter((s) => present(s.label));
+  // The small diagram: same steps as the case study, short labels when given.
+  function miniFlow(visual) {
+    if (!visual || visual.type !== 'flow') return null;
+    const steps = (visual.steps || []).filter((s) => present(s.label));
     if (steps.length < 2 || steps.length > 4) return null;
-    return h('figure', { class: 'flow-mini' },
-      h('figcaption', { class: 'label' }, v.title || 'How it works'),
-      h('ol', { role: 'list' },
-        steps.map((s) => h('li', { class: s.highlight ? 'is-highlight' : null }, rich(present(s.short) ? s.short : s.label)))
+    return h('ol', { class: 'flow-mini', role: 'list', 'aria-label': visual.title || 'How it works' },
+      steps.map((s) => h('li', { class: s.highlight ? 'is-highlight' : null }, rich(present(s.short) ? s.short : s.label)))
+    );
+  }
+
+  function thumbContent(project, planned) {
+    const thumb = project.thumb || {};
+    if (thumb.kind === 'metrics') {
+      const metrics = visibleMetrics(project).slice(0, 2);
+      if (metrics.length) {
+        return h('div', { class: 'thumb-metrics' },
+          metrics.map((m, i) => h('p', { class: i === 0 ? 'thumb-metric is-main' : 'thumb-metric' },
+            h('span', { class: 'v' }, metricValue(m.metric)),
+            h('span', { class: 'l' }, m.label)
+          ))
+        );
+      }
+    }
+    if (thumb.kind === 'flow') {
+      const flow = miniFlow(project.visual);
+      if (flow) return flow;
+    }
+    return h('div', { class: 'thumb-type' },
+      h('span', { class: `thumb-word${thumb.mono ? ' is-mono' : ''}` }, present(thumb.text) ? thumb.text : project.title)
+    );
+  }
+
+  /* ---------- showcase entries (Home "Selected work", Projects) ---------- */
+
+  function entry(project, planned, headingTag) {
+    const url = planned ? null : caseUrl(project);
+    const links = [];
+    if (url) {
+      links.push(h('a', { class: 'pill-link', href: url }, 'Case study', h('span', { class: 'visually-hidden' }, `: ${project.title}`)));
+    }
+    for (const l of planned ? [] : visibleLinks(project)) {
+      links.push(h('a', { class: 'pill-link', href: l.href }, l.label, h('span', { class: 'visually-hidden' }, `: ${project.title}`)));
+    }
+
+    const thumbInner = thumbContent(project, planned);
+    // The thumbnail repeats the title link for the mouse; keyboard and screen
+    // readers use the title link, so the thumbnail is skipped by them.
+    const thumb = url
+      ? h('a', { class: 'entry-thumb', href: url, tabindex: '-1', 'aria-hidden': 'true' }, thumbInner)
+      : h('div', { class: 'entry-thumb', 'aria-hidden': 'true' }, thumbInner);
+
+    const roles = (project.roles || []).filter(present);
+    const type = planned ? 'Planned' : project.type;
+
+    return h('li', { class: 'entry', 'data-type': type },
+      h('article', { class: 'entry-body' },
+        thumb,
+        h('p', { class: 'entry-type label' }, typeLabel(project, planned)),
+        h(headingTag, { class: 'entry-title' }, url ? h('a', { href: url }, project.title) : project.title),
+        present(project.summary) && h('p', { class: 'entry-desc' }, rich(project.summary)),
+        planned && present(project.details) && h('p', { class: 'entry-desc' }, project.details),
+        roles.length > 0 && h('p', { class: 'entry-roles' }, h('span', { class: 'label' }, 'Roles'), ' ', roles.join(', ')),
+        chipList(visibleTools(project)),
+        planned && present(project.measure) && h('p', { class: 'entry-roles' }, h('span', { class: 'label' }, 'Measure'), ' ', project.measure),
+        aiLine(project, 'entry-ai'),
+        links.length > 0 && h('p', { class: 'entry-links' }, links)
       )
     );
   }
 
-  function projectCard(project, headingTag) {
-    const metrics = visibleMetrics(project);
-    const results = visibleResults(project);
-
-    const title = h(headingTag, { class: 'card-title' }, h('a', { href: projectUrl(project) }, project.title));
-    const heading = h('div', null, title, present(project.tagline) && h('p', { class: 'tagline' }, project.tagline));
-    const summary = present(project.summary) && h('p', { class: 'summary' }, rich(project.summary));
-    const chips = chipList(visibleTools(project));
-    const more = h('span', { class: 'more', 'aria-hidden': 'true' }, 'Read the case study →');
-
-    let result = null;
-    if (metrics.length) {
-      result = h('div', { class: 'result' }, h('p', { class: 'label' }, 'Result'), metricList(metrics));
-    } else if (results.length) {
-      result = h('div', { class: 'result' }, h('p', { class: 'label' }, 'Result'), h('p', null, rich(results[0].text)));
-    }
-
-    const card = h('article', { class: `project-card${project.featured ? ' is-featured' : ''}` });
-    if (project.featured) {
-      card.append(
-        h('div', { class: 'card-main' }, eyebrow(project), heading, summary, chips),
-        h('div', { class: 'card-side' }, result, miniFlow(project.visual), more)
-      );
-    } else {
-      card.append(...[eyebrow(project), heading, summary, result, chips, more].filter(Boolean));
-    }
-    return card;
-  }
-
-  function renderCards(root, data) {
-    const scope = root.dataset.projects;
+  function renderShowcase(root, data) {
+    const which = root.dataset.showcase;
     const headingTag = root.dataset.heading || 'h3';
-    const projects = data.projects.filter((p) => scope !== 'home' || p.home);
-    root.replaceChildren(...projects.map((p) => projectCard(p, headingTag)));
+    let items;
+    if (which === 'planned') items = (data.planned || []).map((p) => entry(p, true, headingTag));
+    else {
+      const list = which === 'home' ? data.projects.filter((p) => p.home) : data.projects;
+      items = list.map((p) => entry(p, false, headingTag));
+    }
+    root.replaceChildren(...items);
   }
 
-  function renderAlso(root, data) {
-    const others = data.projects.filter((p) => !p.home);
-    if (!others.length) return;
-    const links = [];
-    others.forEach((p, i) => {
-      if (i > 0) links.push(' · ');
-      links.push(h('a', { href: projectUrl(p) }, p.title));
+  /* ---------- filter chips (Projects). No animation: BRAND §6 ---------- */
+
+  function renderFilters(root, data) {
+    const types = ['All', ...new Set(data.projects.map((p) => p.type))];
+    if ((data.planned || []).length) types.push('Planned');
+    const status = document.querySelector('[data-filter-status]');
+    const buttons = types.map((t) => h('button', { class: 'filter-chip', type: 'button', 'aria-pressed': t === 'All' ? 'true' : 'false', 'data-filter': t }, t));
+    root.replaceChildren(h('span', { class: 'label', id: 'filter-label' }, 'Show'), ...buttons);
+    root.setAttribute('role', 'group');
+    root.setAttribute('aria-labelledby', 'filter-label');
+    root.hidden = false;
+
+    root.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-filter]');
+      if (!button) return;
+      const chosen = button.dataset.filter;
+      for (const b of buttons) b.setAttribute('aria-pressed', String(b === button));
+      let shown = 0;
+      document.querySelectorAll('[data-showcase] .entry').forEach((li) => {
+        const match = chosen === 'All' || li.dataset.type === chosen;
+        li.hidden = !match;
+        if (match) shown += 1;
+      });
+      document.querySelectorAll('[data-filter-section]').forEach((section) => {
+        section.hidden = !section.querySelector('.entry:not([hidden])');
+      });
+      if (status) status.textContent = `Showing ${shown} ${shown === 1 ? 'project' : 'projects'}`;
     });
-    root.replaceChildren('Also: ', ...links);
-    root.hidden = false;
   }
 
-  function renderComingSoon(root, data) {
-    if (!present(data.comingSoon)) return;
-    const text = root.querySelector('[data-coming-soon-text]') || root;
-    text.textContent = data.comingSoon;
-    root.hidden = false;
+  /* ---------- skills by project (Projects) ---------- */
+
+  const SKILLS = [
+    ['SQL', /\bSQL\b/],
+    ['Power BI', /Power BI/],
+    ['DAX', /\bDAX\b/],
+    ['Power Query', /Power Query/],
+    ['Power Automate', /Power Automate/],
+    ['Copilot Studio', /Copilot Studio/],
+    ['Python', /Python/],
+    ['Excel', /Excel/],
+    ['Tableau', /Tableau/],
+    ['AI / LLMs', /Anthropic API|Structured outputs|AI agent|AI commentary|LLM/],
+  ];
+
+  function renderMatrix(root, data) {
+    const rows = [
+      ...data.projects.map((p) => ({ title: p.title, planned: false, tools: visibleTools(p) })),
+      ...(data.planned || []).map((p) => ({ title: p.title, planned: true, tools: visibleTools(p) })),
+    ].map((r) => ({ ...r, hits: SKILLS.map(([, re]) => r.tools.some((t) => re.test(t))) }))
+      .filter((r) => r.hits.some(Boolean));
+    const used = SKILLS.map((_, i) => rows.some((r) => r.hits[i]));
+    const cols = SKILLS.filter((_, i) => used[i]);
+
+    const table = h('table', { class: 'matrix' },
+      h('caption', { class: 'visually-hidden' }, 'Tools used in each project'),
+      h('thead', null, h('tr', null,
+        h('th', { scope: 'col' }, 'Project'),
+        cols.map(([name]) => h('th', { scope: 'col' }, name))
+      )),
+      h('tbody', null, rows.map((r) => h('tr', { class: r.planned ? 'is-planned' : null },
+        h('th', { scope: 'row' }, r.title, r.planned && h('span', { class: 'matrix-planned' }, ' Planned')),
+        r.hits.filter((_, i) => used[i]).map((hit) => h('td', null,
+          hit && h('span', { class: 'matrix-dot', 'aria-hidden': 'true' }),
+          hit && h('span', { class: 'visually-hidden' }, 'Yes')
+        ))
+      )))
+    );
+    root.replaceChildren(table);
   }
 
   /* ---------- case study (projects/<slug>.html) ---------- */
@@ -212,15 +313,16 @@
     const results = visibleResults(project);
     const metrics = visibleMetrics(project);
     const tools = visibleTools(project);
-    const links = (project.links || []).filter((l) => present(l.href) && present(l.label));
+    const links = visibleLinks(project);
+    const roles = (project.roles || []).filter(present);
 
     const meta = [];
     if (present(project.when)) meta.push(h('dt', null, 'When'), h('dd', null, project.when));
+    if (roles.length) meta.push(h('dt', null, 'Roles'), h('dd', null, roles.join(', ')));
     if (tools.length) meta.push(h('dt', null, 'Tools'), h('dd', null, chipList(tools)));
 
-    // The card summary isn't repeated here: the sections below tell the story.
     const head = h('header', { class: 'case-head' },
-      eyebrow(project),
+      h('p', { class: 'eyebrow' }, [project.type, project.context, project.status].filter(present).join(' · ')),
       h('h1', null, project.title),
       present(project.tagline) && h('p', { class: 'case-tagline' }, project.tagline),
       meta.length > 0 && h('dl', { class: 'case-meta' }, meta)
@@ -236,9 +338,11 @@
     if (results.length > 1) {
       body.append(section('Result', h('ul', { class: 'result-list' }, results.map((r) => h('li', null, rich(r.text))))));
     }
+    const ai = project.ai || {};
+    if (present(ai.used)) body.append(section('AI use', h('p', null, [ai.used, ai.checked].filter(present).join(' '))));
     if (links.length || present(project.linksNote)) {
       body.append(section('Links',
-        links.length > 0 && h('p', { class: 'link-list' }, links.map((l) => h('a', { href: l.href }, l.label))),
+        links.length > 0 && h('p', { class: 'link-list' }, links.map((l) => h('a', { class: 'pill-link', href: l.href }, l.label))),
         present(project.linksNote) && h('p', { class: 'muted' }, project.linksNote)
       ));
     }
@@ -247,94 +351,58 @@
     const prev = data.projects[(index - 1 + count) % count];
     const next = data.projects[(index + 1) % count];
     const nav = h('nav', { class: 'case-nav', 'aria-label': 'More projects' },
-      h('a', { class: 'case-nav-prev', href: projectUrl(prev) }, h('span', { class: 'label' }, '← Previous'), prev.title),
-      h('a', { class: 'case-nav-next', href: projectUrl(next) }, h('span', { class: 'label' }, 'Next →'), next.title)
+      h('a', { class: 'case-nav-prev', href: caseUrl(prev) }, h('span', { class: 'label' }, 'Previous project'), prev.title),
+      h('a', { class: 'case-nav-next', href: caseUrl(next) }, h('span', { class: 'label' }, 'Next project'), next.title)
     );
 
     const band = metrics.length > 0 ? metricList(metrics, 'metrics-band') : null;
     root.replaceChildren(...[head, band, body, nav].filter(Boolean));
   }
 
-  /* ---------- Quest Log ---------- */
+  /* ---------- La IAma channel links (Home) ---------- */
 
-  const QUEST_STATUS = { done: 'Done', 'in-progress': 'In progress', locked: 'Locked' };
-  const SVG_NS = 'http://www.w3.org/2000/svg';
+  // Simple monochrome icons, drawn with plain shapes (no brand-coloured logos).
+  const ICONS = {
+    instagram: () => svg('0 0 24 24', [
+      ['rect', { x: '3', y: '3', width: '18', height: '18', rx: '5', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8' }],
+      ['circle', { cx: '12', cy: '12', r: '4', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8' }],
+      ['circle', { cx: '17.3', cy: '6.7', r: '1.2', fill: 'currentColor' }],
+    ]),
+    tiktok: () => svg('0 0 24 24', [
+      ['path', { d: 'M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round' }],
+      ['path', { d: 'M14 3c.4 2.6 2.2 4.4 5 4.6', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round' }],
+    ]),
+    youtube: () => svg('0 0 24 24', [
+      ['rect', { x: '2.5', y: '5.5', width: '19', height: '13', rx: '3.5', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8' }],
+      ['path', { d: 'M10 9.2v5.6l4.8-2.8z', fill: 'currentColor' }],
+    ]),
+    linkedin: () => svg('0 0 24 24', [
+      ['rect', { x: '3', y: '3', width: '18', height: '18', rx: '3', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8' }],
+      ['path', { d: 'M8 10.5v6M8 7.5v.01M11.5 16.5v-3.5a2 2 0 0 1 4 0v3.5M11.5 10.5v6', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round' }],
+    ]),
+  };
 
-  function icon(paths) {
-    const svg = document.createElementNS(SVG_NS, 'svg');
-    svg.setAttribute('viewBox', '0 0 16 16');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '1.5');
-    svg.setAttribute('stroke-linecap', 'round');
-    svg.setAttribute('stroke-linejoin', 'round');
-    for (const d of paths) {
-      const path = document.createElementNS(SVG_NS, 'path');
-      path.setAttribute('d', d);
-      svg.append(path);
-    }
-    return svg;
-  }
-  const lockIcon = () => icon(['M4.5 7.5h7v6h-7z', 'M6 7.5V5.5a2 2 0 0 1 4 0v2']);
-  const checkIcon = () => icon(['M3.5 8.5l3 3 6-7']);
-
-  function bossNode(boss) {
-    if (present(boss) && typeof boss === 'string') return boss;
-    if (boss && typeof boss === 'object' && present(boss.title)) {
-      return present(boss.href) ? h('a', { href: boss.href }, boss.title) : boss.title;
-    }
-    return null;
-  }
-
-  function renderQuestLog(root, data) {
-    root.replaceChildren(...data.questLog.stages.map((stage) => {
-      const boss = bossNode(stage.boss);
-      const meta = [stage.provider, stage.when].filter(present).join(' · ');
-      const badge = stage.status === 'in-progress' ? stripeTag()
-        : stage.status === 'done' ? checkIcon()
-        : lockIcon();
-      return h('li', { class: `quest is-${stage.status}` },
-        h('span', { class: 'quest-num', 'aria-hidden': 'true' }, String(stage.stage).padStart(2, '0')),
-        h('div', { class: 'quest-body' },
-          h('h2', { class: 'quest-title' }, h('span', { class: 'visually-hidden' }, `Stage ${stage.stage}: `), stage.title),
-          meta && h('p', { class: 'quest-meta' }, meta),
-          boss && h('p', { class: 'quest-boss' }, h('span', { class: 'label' }, 'Boss project'), boss)
-        ),
-        h('p', { class: 'quest-status' }, badge, QUEST_STATUS[stage.status] || stage.status)
-      );
-    }));
-  }
-
-  function renderQuestProgress(root, data) {
-    const stages = data.questLog.stages;
-    const done = stages.filter((s) => s.status === 'done').length;
-    const current = stages.find((s) => s.status === 'in-progress');
-    root.replaceChildren(
-      h('div', { class: 'quest-meter', 'aria-hidden': 'true' }, stages.map((s) => h('span', { class: `seg is-${s.status}` }))),
-      h('p', { class: 'label' }, `${done} of ${stages.length} bosses defeated${current ? ` · now on stage ${current.stage}` : ''}`)
-    );
-  }
-
-  function renderQuestSummary(root, data) {
-    const stages = data.questLog.stages;
-    const current = stages.find((s) => s.status === 'in-progress');
-    const done = stages.filter((s) => s.status === 'done').length;
-    root.textContent = current
-      ? `Stage ${current.stage} of ${stages.length} in progress`
-      : `${done} of ${stages.length} stages done`;
+  function renderChannels(root, data) {
+    const channels = ((data.laIama || {}).channels || []).filter((c) => present(c.href) && present(c.label));
+    if (!channels.length) return;
+    root.replaceChildren(...channels.map((c) => h('li', null,
+      h('a', { class: 'channel-link', href: c.href, target: '_blank', rel: 'noopener' },
+        ICONS[c.icon] ? ICONS[c.icon]() : null,
+        c.label,
+        h('span', { class: 'visually-hidden' }, ' (opens in a new tab)')
+      )
+    )));
+    root.hidden = false;
   }
 
   /* ---------- load the data once, then render whatever this page asks for ---------- */
 
   const RENDERERS = [
-    ['[data-projects]', renderCards],
-    ['[data-also]', renderAlso],
-    ['[data-coming-soon]', renderComingSoon],
+    ['[data-showcase]', renderShowcase],
+    ['[data-filters]', renderFilters],
+    ['[data-matrix]', renderMatrix],
     ['[data-case-study]', renderCaseStudy],
-    ['[data-quest-log]', renderQuestLog],
-    ['[data-quest-progress]', renderQuestProgress],
-    ['[data-quest-summary]', renderQuestSummary],
+    ['[data-channels]', renderChannels],
   ];
 
   function boot() {
@@ -355,7 +423,7 @@
         .catch((error) => {
           console.error('Could not load projects.json:', error);
           for (const [node] of jobs) {
-            if (!node.matches('[data-projects], [data-case-study], [data-quest-log]')) continue;
+            if (!node.matches('[data-showcase], [data-case-study]')) continue;
             node.removeAttribute('aria-busy');
             node.replaceChildren(h('p', { class: 'load-error' },
               'The project details didn’t load. Please refresh the page, or download my résumé from the footer.'));
@@ -365,17 +433,42 @@
     setUpCopy();
   }
 
-  /* ---------- copy email + "Email copied" toast ---------- */
+  /* ---------- copy email + "Email copied" toast ----------
+     Sonner's patterns, without the library: one toast updated in place
+     (never stacked), 4 seconds on screen, the timer pauses while the tab is
+     hidden or the toast is hovered, a click dismisses it, and it enters and
+     leaves through the same edge with transitions (see site.css). */
 
+  const TOAST_MS = 4000;
   let toastNode = null;
-  let toastTimer = 0;
+  let timer = 0;
+  let remaining = TOAST_MS;
+  let startedAt = 0;
+
+  function hideToast() {
+    clearTimeout(timer);
+    toastNode.removeAttribute('data-visible');
+  }
+  function pauseToast() {
+    if (!toastNode.hasAttribute('data-visible')) return;
+    clearTimeout(timer);
+    remaining -= Date.now() - startedAt;
+  }
+  function resumeToast() {
+    if (!toastNode.hasAttribute('data-visible')) return;
+    startedAt = Date.now();
+    clearTimeout(timer);
+    timer = setTimeout(hideToast, Math.max(remaining, 600));
+  }
 
   function toast(message) {
-    toastNode.replaceChildren(stripeTag(), message);
+    toastNode.replaceChildren(message);
+    remaining = TOAST_MS;
     // next frame, so the enter transition runs even right after creation
-    requestAnimationFrame(() => toastNode.setAttribute('data-visible', ''));
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toastNode.removeAttribute('data-visible'), 2200);
+    requestAnimationFrame(() => {
+      toastNode.setAttribute('data-visible', '');
+      if (document.visibilityState === 'visible') resumeToast();
+    });
   }
 
   function legacyCopy(text) {
@@ -394,6 +487,10 @@
     // The live region exists before anything is announced, so screen readers pick it up.
     toastNode = h('div', { class: 'toast', role: 'status', 'aria-live': 'polite' });
     document.body.append(toastNode);
+    toastNode.addEventListener('pointerenter', pauseToast);
+    toastNode.addEventListener('pointerleave', resumeToast);
+    toastNode.addEventListener('click', hideToast);
+    document.addEventListener('visibilitychange', () => (document.hidden ? pauseToast() : resumeToast()));
 
     document.addEventListener('click', async (event) => {
       const button = event.target.closest('[data-copy]');

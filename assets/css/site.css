@@ -1,15 +1,18 @@
 /* ==========================================================================
-   site.css — layout and components for mauricioc24.github.io
+   site.css: layout and components for mauricioc24.github.io
 
    Loads AFTER /brand/brand-tokens.css, which is the base stylesheet.
    Never redefine brand colors here; use the tokens (var(--...)).
    Read brand/BRAND.md before any visual change.
 
+   Calm portfolio (BRAND.md, Nov 5 2026): the llama, neon and paint live only
+   inside the La IAma box on the home page (.la-iama) and on the 404 page.
+
    Motion rules (Emil Kowalski skills in .claude/skills):
    - name exact properties, never `transition: all`
-   - brand easing tokens, under 300ms (the hero spray is the only long one)
+   - brand easing tokens, 200ms or less here
    - hover effects only inside (hover: hover) and (pointer: fine)
-   - navigation has no animation; reduced motion keeps color/opacity only
+   - navigation and filters have no animation; reduced motion keeps color only
    ========================================================================== */
 
 /* ---------- 1. Base ---------- */
@@ -17,6 +20,8 @@
   --gutter: clamp(16px, 5vw, 32px);
   --section: clamp(64px, 9vw, 112px);
   --shadow-hover: 0 0 0 1px rgb(34 41 33 / 0.12), 0 2px 4px rgb(27 3 2 / 0.06), 0 10px 24px rgb(27 3 2 / 0.07);
+  /* connector between diagram steps: a drawn chevron, not an arrow character */
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 16'%3E%3Cpath d='M2.5 2.5l5 5.5-5 5.5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -75,24 +80,24 @@ button, .btn { -webkit-user-select: none; user-select: none; }
   margin-bottom: 28px;
 }
 .section-head h2 { font-size: var(--text-xl); font-weight: 600; }
+.section-note { font-size: var(--text-sm); color: var(--text-muted); margin: -16px 0 28px; }
 
-.arrow-link { font-size: var(--text-sm); font-weight: 500; white-space: nowrap; }
+.text-link { font-size: var(--text-sm); font-weight: 500; }
 
 .label {
   font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1.6;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
 }
-h2.eyebrow { font-weight: 400; line-height: 1.6; }
+h2.label, h2.eyebrow { font-weight: 400; line-height: 1.6; }
 p.eyebrow, h2.eyebrow { max-width: none; }
 
-/* inner-page heading (Projects, About, Quest Log) */
+/* inner-page heading (Projects, About) */
 .page-head { padding-top: clamp(32px, 6vw, 80px); }
 .page-head h1 {
   font-size: clamp(2.25rem, 1.5rem + 2.8vw, 3.5rem);
   font-weight: 650;
   margin-block: 12px 18px;
 }
-.page-head .eyebrow + h1 { margin-top: 16px; }
 .lead { font-size: var(--text-lg); line-height: 1.5; max-width: 52ch; }
 
 /* ---------- 3. Header (navigation: no animation, BRAND §6) ---------- */
@@ -137,61 +142,78 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   font: 500 10px/1 var(--font-mono); letter-spacing: 0.06em;
   color: var(--text-muted);
 }
+.tools-line {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px;
+  margin-top: 28px; max-width: none;
+  font-family: var(--font-mono); font-size: var(--text-sm);
+}
 
-/* The spray paints once per visit. A tiny <head> script on the home page adds
-   .spray-seen after the first load, so it shows already painted after that. */
-.spray-seen .spray.reveal::before { animation: none; }
-
-/* ---------- 5. Project cards ---------- */
-.card-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 720px) { .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-
-.project-card {
-  position: relative;
-  display: flex; flex-direction: column; gap: 14px;
-  padding: clamp(20px, 3vw, 28px);
+/* results right under the hero: lead with numbers (real résumé figures) */
+.results { padding-top: clamp(40px, 6vw, 64px); }
+.results-band { margin-top: 12px; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) { .results-band { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.results-band .metric {
+  padding: 16px 18px;
   background: var(--bg-raised);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow);
-  transition: transform 200ms var(--ease-out), box-shadow 150ms ease;
 }
-.card-title { font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
-.card-title a { color: var(--text); text-decoration: none; }
-/* the whole card is clickable through the title link (one link per card) */
-.card-title a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
-.card-title a:focus-visible { outline: none; }
-.card-title a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 3px; }
-.project-card .tagline { color: var(--text-muted); font-size: var(--text-sm); margin-top: 2px; }
-.project-card .summary { font-size: var(--text-sm); color: var(--text-muted); }
-.project-card .result > p:not(.label) { font-size: var(--text-sm); margin-top: 4px; }
-.project-card .more {
-  margin-top: auto; padding-top: 4px;
-  font-size: var(--text-sm); font-weight: 500; color: var(--accent);
+.results-band .metric .v { font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.625rem); }
+.results .text-link { display: inline-block; margin-top: 14px; }
+
+/* ---------- 5. Metrics: the "data voice" (Geist Mono, tabular numbers) ---------- */
+.metrics { display: grid; gap: 14px 20px; }
+.metric { display: flex; flex-direction: column; gap: 2px; }
+.metric .v {
+  font: 600 1.125rem/1.25 var(--font-mono);
+  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+.metric .l { font: var(--text-xs)/1.4 var(--font-mono); color: var(--text-muted); }
+.metric-part { white-space: nowrap; }
+.metric-arrow { color: var(--text-muted); font-weight: 400; }
+
+/* ---------- 6. Project showcase (Home "Selected work", Projects) ----------
+   Studied from jwilber.me: a grid of entries, each with a thumbnail, title,
+   one line and small text links; hovering an entry lifts its thumbnail.
+   Here: thumbnails only from real content, a 2px lift (BRAND §6), 200ms
+   ease-out, mouse only; keyboard users get a focus ring and no motion. */
+.showcase { display: grid; gap: 44px 28px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 600px) { .showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 920px) { .showcase { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.entry-body { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+.entry-thumb {
+  position: relative; display: block;
+  aspect-ratio: 1.75 / 1; margin-bottom: 8px; overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+  box-shadow: var(--shadow);
+  color: var(--text); text-decoration: none;
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
-  .project-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .entry:hover .entry-thumb { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 }
-
-/* featured card: two columns on wide screens */
-.project-card.is-featured { grid-column: 1 / -1; }
-.card-main { display: contents; }
-.card-side { display: flex; flex-direction: column; gap: 14px; }
-@media (min-width: 820px) {
-  .project-card.is-featured {
-    display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    column-gap: 48px; align-items: stretch;
-  }
-  .project-card.is-featured .card-main { display: flex; flex-direction: column; gap: 14px; }
-  .project-card.is-featured .card-side { padding-left: 32px; box-shadow: -1px 0 0 var(--ring); }
+.entry-title { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+.entry-title a { color: var(--text); text-decoration-color: transparent; }
+@media (hover: hover) and (pointer: fine) {
+  .entry-title a:hover { color: var(--text); text-decoration-color: currentColor; }
 }
+.entry-desc { font-size: var(--text-sm); color: var(--text-muted); }
+.entry-roles, .entry-ai { font-size: var(--text-sm); }
+.entry-roles .label, .entry-ai .label { margin-right: 4px; }
+.entry-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 6px; }
 
-.status {
+.pill-link {
   display: inline-block;
-  font: 500 var(--text-xs)/1 var(--font-mono);
-  letter-spacing: 0.04em;
-  padding: 5px 8px; border-radius: 999px;
-  color: var(--text); background: var(--bg);
+  font: 500 11px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 8px 10px; border-radius: var(--radius-sm);
+  color: var(--text); text-decoration: none;
   box-shadow: inset 0 0 0 1px var(--ring);
+  transition: box-shadow 150ms ease, color 150ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pill-link:hover { color: var(--accent); box-shadow: inset 0 0 0 1px currentColor; }
 }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -203,30 +225,31 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   white-space: nowrap;
 }
 
-/* metrics: the "data voice" (Geist Mono, tabular numbers) */
-.metrics {
-  display: grid; gap: 14px 20px; margin-top: 8px;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 176px), 1fr));
+/* thumbnails: real metrics, the real diagram, or a typographic card */
+.thumb-metrics, .thumb-type {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: 16px 20px 18px;
 }
-.is-featured .metrics { grid-template-columns: minmax(0, 1fr); }
-.metric { display: flex; flex-direction: column; gap: 2px; }
-.metric .v {
-  font: 600 1.125rem/1.25 var(--font-mono);
-  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+.thumb-metrics { justify-content: flex-end; gap: 10px; }
+.thumb-metric { display: flex; flex-direction: column; gap: 2px; max-width: none; }
+.thumb-metric .v { font: 600 1rem/1.2 var(--font-mono); font-variant-numeric: tabular-nums; }
+.thumb-metric.is-main .v { font-size: clamp(1.5rem, 1.15rem + 1.1vw, 1.875rem); letter-spacing: -0.02em; }
+.thumb-metric .l { font: var(--text-xs)/1.4 var(--font-mono); color: var(--text-muted); }
+.thumb-type { justify-content: flex-end; }
+.thumb-word {
+  font-weight: 700; font-size: clamp(1.75rem, 1.25rem + 1.6vw, 2.375rem);
+  letter-spacing: -0.035em; line-height: 0.98;
 }
-.metric-part { white-space: nowrap; }
-.metric .l { font: var(--text-xs)/1.4 var(--font-mono); color: var(--text-muted); }
-.metric-arrow { color: var(--text-muted); font-weight: 400; }
+.thumb-word.is-mono { font-family: var(--font-mono); font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.375rem, 1.1rem + 1.2vw, 1.875rem); }
 
-/* featured card: a small version of the case-study diagram (BRAND §5:
-   grey context, one inferno highlight, every step labeled; static, no motion) */
-.flow-mini { margin-top: 4px; }
-.flow-mini figcaption { margin-bottom: 8px; }
-.flow-mini ol { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 20px; }
+/* the small flow diagram (BRAND §5: grey steps, one inferno highlight, all labeled) */
+.flow-mini { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 20px; }
+.entry-thumb .flow-mini { position: absolute; inset: 0; padding: 0 18px; align-content: center; }
 .flow-mini li {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  min-height: 40px; padding: 8px 6px;
+  min-height: 44px; padding: 8px 6px;
   text-align: center;
   font-size: var(--text-xs); font-weight: 500; line-height: 1.3;
   border-radius: var(--radius-sm);
@@ -234,29 +257,62 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   box-shadow: inset 0 0 0 1px var(--ring);
 }
 .flow-mini li.is-highlight { box-shadow: inset 0 0 0 1.5px var(--chart-highlight); }
-.flow-mini li + li::before {
-  content: "→"; content: "→" / "";
-  position: absolute; left: -10px; top: 50%; transform: translate(-50%, -50%);
-  font: 500 var(--text-sm)/1 var(--font-mono); color: var(--chart-context);
+.flow-mini li + li::before,
+.flow-step + .flow-step::before {
+  content: ""; position: absolute;
+  width: 8px; height: 12px;
+  background: var(--chart-context);
+  -webkit-mask: var(--chevron) center / contain no-repeat;
+          mask: var(--chevron) center / contain no-repeat;
 }
+.flow-mini li + li::before { left: -10px; top: 50%; transform: translate(-50%, -50%); }
 
-.also { margin-top: 20px; font-size: var(--text-sm); color: var(--text-muted); }
-
-.coming-soon {
-  margin-top: 16px;
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px;
-  padding: 20px clamp(20px, 3vw, 28px);
-  border-radius: var(--radius-md);
+/* ---------- 7. Filters and the skills matrix (Projects) ---------- */
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 36px; }
+.filters .label { margin-right: 4px; }
+.filter-chip {
+  font: 500 var(--text-sm)/1 var(--font-sans);
+  padding: 10px 14px; border: 0; border-radius: 999px; cursor: pointer;
+  color: var(--text); background: transparent;
   box-shadow: inset 0 0 0 1px var(--ring);
 }
-.coming-soon p:not(.label) { font-size: var(--text-sm); color: var(--text-muted); flex: 1 1 32ch; }
+.filter-chip[aria-pressed="true"] { color: var(--chullo-ivory); background: var(--chullo-coffee); box-shadow: none; }
+@media (hover: hover) and (pointer: fine) {
+  .filter-chip[aria-pressed="false"]:hover { box-shadow: inset 0 0 0 1px currentColor; }
+}
+.filter-section + .filter-section { padding-top: var(--section); }
 
-/* ---------- 6. About summary, facts, skills, lists ---------- */
+.matrix-wrap {
+  /* relative: the hidden "Yes" labels in the cells are absolutely positioned;
+     without this they escape the scroll box and widen the whole page */
+  position: relative;
+  margin-top: 4px; overflow-x: auto;
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+  box-shadow: var(--shadow);
+}
+.matrix { width: 100%; min-width: 680px; border-collapse: collapse; font-size: var(--text-sm); }
+.matrix th, .matrix td { padding: 11px 12px; text-align: center; box-shadow: inset 0 -1px 0 var(--ring); }
+.matrix tbody tr:last-child th, .matrix tbody tr:last-child td { box-shadow: none; }
+.matrix thead th {
+  font: var(--text-xs)/1.4 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-muted); white-space: nowrap; vertical-align: bottom;
+}
+.matrix tbody th { text-align: left; font-weight: 500; min-width: 230px; }
+@media (max-width: 600px) { .matrix tbody th { min-width: 150px; } }
+.matrix thead th:first-child { text-align: left; }
+.matrix thead th:first-child, .matrix tbody th { position: sticky; left: 0; background: var(--bg-raised); }
+.matrix-dot { display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: var(--chart-highlight); }
+.matrix .is-planned .matrix-dot { background: transparent; box-shadow: inset 0 0 0 2px var(--chart-highlight); }
+.matrix-planned { font: 500 10px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+.matrix-key { margin-top: 12px; font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); }
+
+/* ---------- 8. About summary, facts, skills, lists ---------- */
 .split { display: grid; gap: 40px; }
 @media (min-width: 860px) { .split { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 64px; } }
 .split h2 { font-size: var(--text-xl); font-weight: 600; margin-block: 12px 16px; max-width: 24ch; }
 .split p + p { margin-top: 12px; }
-.split .arrow-link { display: inline-block; margin-top: 16px; }
+.split .text-link { display: inline-block; margin-top: 16px; }
 
 .facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 12px 24px; align-content: start; }
 .facts dt { font: var(--text-xs)/1.9 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
@@ -289,25 +345,42 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .rows .what { flex: 1 1 36ch; }
 .rows .what strong { font-weight: 600; }
 .rows .what span { color: var(--text-muted); }
+.rows .what .org { display: block; }
 .rows .what .detail { display: block; margin-top: 6px; max-width: 72ch; }
 .rows .when {
   font: var(--text-xs)/1.6 var(--font-mono); color: var(--text-muted);
   font-variant-numeric: tabular-nums; white-space: nowrap;
 }
-.now-cta { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
 
 .subhead-label { margin-block: 28px 10px; }
 .plain-list { padding-left: 1.1em; font-size: var(--text-sm); }
 .plain-list li + li { margin-top: 6px; }
 
-/* About: the llama sticker with the one-line color story (BRAND §4) */
-.color-story { display: grid; gap: 28px; align-items: center; }
-@media (min-width: 641px) { .color-story { grid-template-columns: 180px minmax(0, 1fr); gap: 36px; } }
-.color-story .sticker { width: 140px; }
-@media (min-width: 641px) { .color-story .sticker { width: 180px; } }
-.color-story .story { font-size: var(--text-lg); line-height: 1.5; margin-top: 10px; }
+/* ---------- 9. The La IAma box: the ONLY place for the llama, neon and paint ----------
+   (BRAND.md, Nov 5 2026). Styled like a Day card; the spray sits on one word. */
+.la-iama { display: grid; gap: 24px; align-items: center; margin-bottom: 32px; }
+@media (min-width: 641px) { .la-iama { grid-template-columns: 160px minmax(0, 1fr); gap: 36px; } }
+.la-iama .sticker { width: 128px; }
+@media (min-width: 641px) { .la-iama .sticker { width: 160px; } }
+.la-iama h3 { font-size: var(--text-xl); font-weight: 650; letter-spacing: var(--tracking-tight); }
+.la-iama p { margin-top: 12px; }
+.channel-list { display: grid; grid-template-columns: repeat(2, max-content); gap: 10px; margin-top: 18px; }
+@media (min-width: 520px) { .channel-list { grid-template-columns: repeat(4, max-content); } }
+.channel-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 14px 10px 12px; border-radius: 999px;
+  font-size: var(--text-sm); font-weight: 500;
+  color: var(--text); text-decoration: none;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--ring);
+  transition: box-shadow 150ms ease;
+}
+.channel-link svg { width: 16px; height: 16px; flex: none; }
+@media (hover: hover) and (pointer: fine) {
+  .channel-link:hover { color: var(--text); box-shadow: inset 0 0 0 1px currentColor; }
+}
 
-/* ---------- 7. Case study pages ---------- */
+/* ---------- 10. Case study pages ---------- */
 .back-link { display: inline-block; margin-top: clamp(16px, 3vw, 32px); font-size: var(--text-sm); }
 .case-head { padding-top: 20px; }
 .case-head h1 {
@@ -351,11 +424,11 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .result-list { padding-left: 1.1em; }
 .result-list li + li { margin-top: 8px; }
 .result-list li::marker { color: var(--chart-highlight); }
-.link-list { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.link-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .case-figure { margin-block: 8px 24px; }
 .case-figure img { border-radius: var(--radius-md); box-shadow: var(--shadow); }
 
-/* simple flow diagram (Day: grey context + one inferno highlight, BRAND §5) */
+/* case-study flow diagram (Day: grey context + one inferno highlight, BRAND §5) */
 .flow { padding-block: 24px; box-shadow: 0 -1px 0 var(--ring); }
 .flow figcaption { margin-bottom: 18px; }
 .flow-steps { display: grid; gap: 32px; }
@@ -371,16 +444,9 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   box-shadow: var(--shadow);
 }
 .flow-step.is-highlight { box-shadow: inset 0 0 0 1.5px var(--chart-highlight), var(--shadow); }
-.flow-step + .flow-step::before {
-  content: "↓"; content: "↓" / "";
-  position: absolute; left: 50%; top: -28px; transform: translateX(-50%);
-  font: 500 var(--text-md)/1 var(--font-mono); color: var(--chart-context);
-}
+.flow-step + .flow-step::before { left: 50%; top: -16px; transform: translate(-50%, -50%) rotate(90deg); }
 @media (min-width: 720px) {
-  .flow-step + .flow-step::before {
-    content: "→"; content: "→" / "";
-    left: -30px; top: 50%; transform: translateY(-50%);
-  }
+  .flow-step + .flow-step::before { left: -20px; top: 50%; transform: translate(-50%, -50%); }
 }
 .flow-label { font-weight: 600; font-size: var(--text-sm); }
 .flow-detail { font-size: var(--text-sm); color: var(--text-muted); }
@@ -412,49 +478,7 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 
 .load-error { margin-top: 24px; color: var(--text-muted); }
 
-/* ---------- 8. Quest Log ---------- */
-.quest-progress { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 24px; }
-.quest-meter { display: grid; grid-auto-flow: column; grid-auto-columns: 40px; gap: 6px; }
-.quest-meter .seg { height: 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--ring); }
-.quest-meter .seg.is-done { background: var(--chart-highlight); box-shadow: none; }
-.quest-meter .seg.is-in-progress { box-shadow: inset 0 0 0 1.5px var(--chart-highlight); }
-
-.quest {
-  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 6px 16px;
-  align-items: baseline;
-  padding-block: 22px;
-  box-shadow: 0 1px 0 var(--ring);
-}
-.quest:first-child { box-shadow: 0 -1px 0 var(--ring), 0 1px 0 var(--ring); }
-@media (min-width: 640px) { .quest { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 6px 20px; } }
-.quest-num {
-  font: 600 var(--text-lg)/1.2 var(--font-mono);
-  font-variant-numeric: tabular-nums; color: var(--text-muted);
-}
-.quest.is-in-progress .quest-num,
-.quest.is-done .quest-num { color: var(--chart-highlight); }
-.quest-title { font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
-.quest.is-locked .quest-title { color: var(--text-muted); }
-.quest-meta { margin-top: 4px; font-size: var(--text-sm); color: var(--text-muted); }
-.quest-boss { margin-top: 10px; font-size: var(--text-sm); }
-.quest-boss .label { margin-right: 8px; }
-.quest-status {
-  grid-column: 2;
-  justify-self: start;
-  display: inline-flex; align-items: center; gap: 8px;
-  font: 500 var(--text-xs)/1 var(--font-mono);
-  letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 6px 10px; border-radius: 999px;
-  color: var(--text-muted); box-shadow: inset 0 0 0 1px var(--ring);
-  white-space: nowrap;
-}
-@media (min-width: 640px) { .quest-status { grid-column: 3; grid-row: 1; justify-self: end; } }
-.quest-status svg { width: 12px; height: 12px; flex: none; }
-.quest.is-in-progress .quest-status { color: var(--text); }
-.quest.is-done .quest-status { color: var(--chart-highlight); }
-.quest-next { margin-top: 28px; font-size: var(--text-sm); color: var(--text-muted); }
-
-/* ---------- 9. 404 ---------- */
+/* ---------- 11. 404: keeps its llama moment (BRAND.md) ---------- */
 .not-found { padding-block: clamp(40px, 8vw, 96px); }
 .not-found .wrap { display: grid; gap: 32px; justify-items: start; }
 @media (min-width: 720px) {
@@ -482,13 +506,16 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   to   { transform: rotate(-4deg); }
 }
 
-/* ---------- 10. Night footer ---------- */
-.site-footer { margin-top: var(--section); padding-block: clamp(48px, 7vw, 80px) 28px; }
-.footer-grid { display: grid; gap: 40px; }
-@media (min-width: 760px) { .footer-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
+/* ---------- 12. Footer: black, ivory text and links, no neon ---------- */
+.site-footer {
+  --accent: var(--chullo-ivory);
+  --accent-hover: var(--chullo-ivory);
+  margin-top: var(--section);
+  padding-block: clamp(48px, 7vw, 80px) 28px;
+}
 .footer-title {
   font-size: var(--text-xl); font-weight: 600; letter-spacing: var(--tracking-tight);
-  line-height: 1.2; margin-block: 12px 28px; max-width: 26ch;
+  line-height: 1.2; margin-block: 12px 28px; max-width: 30ch;
 }
 .contact-list > div {
   display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 16px;
@@ -511,11 +538,6 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .copy-btn:active { transform: scale(0.97); }
 @media (hover: hover) and (pointer: fine) { .copy-btn:hover { box-shadow: inset 0 0 0 1px currentColor; } }
 
-.footer-steps { margin-top: 36px; }
-.sign-off { display: flex; align-items: center; gap: 14px; }
-.sign-off img { width: 96px; height: auto; flex: none; }
-.sign-off span { font: var(--text-xs)/1.5 var(--font-mono); color: var(--text-muted); }
-@media (min-width: 760px) { .sign-off span { text-align: right; } }
 .footer-base {
   margin-top: 48px; padding-top: 20px;
   box-shadow: 0 -1px 0 var(--ring);
@@ -523,14 +545,14 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   font: var(--text-xs)/1.6 var(--font-mono); color: var(--text-muted);
 }
 
-/* ---------- 11. Toast ("Email copied", BRAND §6 delight budget) ----------
-   Transitions, not keyframes, so a second copy retargets smoothly.
-   Enter 250ms, exit faster (200ms), both on the brand ease-out curve. */
+/* ---------- 13. Toast ("Email copied") ----------
+   Sonner's patterns: one toast updated in place, 32px from the bottom edge
+   (16px on phones), enters and leaves through that edge. Transitions, not
+   keyframes, so a second copy retargets smoothly. Enter 250ms, exit 200ms. */
 .toast {
   position: fixed; z-index: 20;
-  left: 0; right: 0; bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  left: 0; right: 0; bottom: max(32px, env(safe-area-inset-bottom, 0px));
   width: max-content; max-width: calc(100% - 32px); margin-inline: auto;
-  display: flex; align-items: center; gap: 10px;
   padding: 10px 16px; border-radius: 999px;
   background: var(--chicha-black); color: var(--chullo-ivory);
   font-size: var(--text-sm);
@@ -539,15 +561,18 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
   pointer-events: none;
 }
+@media (max-width: 599px) { .toast { bottom: max(16px, env(safe-area-inset-bottom, 0px)); } }
 .toast[data-visible] {
   opacity: 1; transform: translateY(0);
+  pointer-events: auto;
   transition-duration: 250ms;
 }
 
-/* ---------- 12. Reduced motion: keep color/opacity, drop movement ---------- */
+/* ---------- 14. Reduced motion: keep color/opacity, drop movement ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .project-card, .copy-btn { transition: box-shadow 150ms ease; }
-  .project-card:hover { transform: none; }
+  .entry-thumb { transition: box-shadow 150ms ease; }
+  .entry:hover .entry-thumb { transform: none; }
+  .copy-btn { transition: box-shadow 150ms ease; }
   .copy-btn:active { transform: none; }
   .toast, .toast[data-visible] { transform: none; transition: opacity 200ms ease; }
 }

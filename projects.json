@@ -1,125 +1,227 @@
 {
-  "_readme": "Project and Quest Log data for the site. Facts come only from CONTENT.md. Anything that contains [FILL is hidden on the public site and listed in TODO.md; replace the whole [FILL ...] text with the real value to make it appear. `backticks` render as code. Flow steps may have a short label (\"short\"), used by the small diagram on the featured card.",
+  "_readme": "Data for the site. Facts come only from CONTENT.md. Anything that contains [FILL is hidden on the public site and listed in TODO.md; replace the whole [FILL ...] text with the real value to make it appear. `backticks` render as code. Flow steps may have a short label (\"short\"), used by the small diagram in the thumbnail. When a planned project ships, move it from \"planned\" to \"projects\" and give it a case-study page.",
 
   "projects": [
     {
-      "slug": "teams-chatbot",
-      "title": "Teams chatbot",
-      "tagline": "Innovation contest winner",
+      "slug": "collections-analytics",
+      "title": "Collections analytics & automation",
+      "type": "Work at Sura",
       "context": "Sura Peru",
-      "when": "During my Analyst III role, April 2023 – September 2025",
+      "roles": ["Data analyst", "Business analyst"],
+      "when": "December 2016 to September 2025. Analyst I to Analyst III, Collection Intelligence/Contribution Recovery.",
       "home": true,
       "featured": true,
-      "summary": "A rule-based Microsoft Teams chatbot that answered employee process questions, built with Power Virtual Agents and Power Automate.",
-      "problem": "[FILL — the pain point behind employee process questions, e.g., how people got answers before the bot (the résumé doesn't say)]",
-      "built": "A rule-based Microsoft Teams chatbot that answered employee process questions, built and deployed with Power Virtual Agents + Power Automate.",
-      "tools": ["Microsoft Teams", "Power Virtual Agents", "Power Automate"],
+      "summary": "Power BI reporting, SQL pipelines and automations for the collections team at Sura Peru.",
+      "problem": "Each debt report took ~30 minutes to produce. The late-payment rate was 27%. Some of the 5 external collection providers I supervised were redundant.",
+      "built": "I built Power BI dashboards, SQL data pipelines (DB2, BigQuery), and Excel/VBA and Power Automate workflows.",
+      "tools": ["Power BI", "SQL (DB2, BigQuery)", "Python/pandas", "Excel/VBA", "Power Automate"],
       "results": [
-        { "metric": "First place", "label": "company innovation contest", "text": "Won first place in the company's innovation contest." },
-        { "text": "[FILL — time saved / users / requests per month, rounded]" }
+        { "metric": "27% → 24%", "label": "late-payment rate", "text": "I lowered the late-payment rate from 27% to 24% by pairing the scoring model with targeted campaigns." },
+        { "metric": "~40%", "label": "lower operating costs", "text": "I cut operating costs ~40% by using scoring and performance data to consolidate the redundant external providers I supervised (from a panel of 5)." },
+        { "metric": "~30 min → ~2 min", "label": "per report", "text": "I cut debt-report generation from ~30 minutes to ~2 minutes per report with Excel VBA and Access macros. That also made batch generation possible." },
+        { "metric": "~45%", "label": "less manual processing", "text": "I reduced manual processing ~45% across the team with automations and standardized, parameter-driven reports, including self-service report tools for the legal team." }
       ],
-      "linksNote": "No code: it's company property. The diagram shows the setup without any confidential data.",
+      "ai": {
+        "used": "I used generative AI to speed up writing complex BigQuery SQL.",
+        "checked": "[FILL: how you checked the AI-written SQL]"
+      },
+      "linksNote": "No code to share: it belongs to the company.",
       "links": [],
+      "thumb": { "kind": "metrics" },
+      "visual": {
+        "type": "image",
+        "src": "[FILL: anonymized dashboard mockup image, no real figures beyond the résumé]",
+        "alt": "Anonymized dashboard mockup"
+      }
+    },
+    {
+      "slug": "teams-chatbot",
+      "title": "Teams chatbot",
+      "tagline": "First place in the company's innovation contest",
+      "type": "Work at Sura",
+      "context": "Sura Peru",
+      "roles": ["Business systems analyst", "Automation analyst"],
+      "when": "During my Analyst III role, April 2023 to September 2025.",
+      "home": true,
+      "summary": "A rule-based Microsoft Teams chatbot that answered employee process questions.",
+      "problem": "[FILL: the pain point behind employee process questions, e.g., how people got answers before the bot (the résumé doesn't say)]",
+      "built": "I built and deployed a rule-based Microsoft Teams chatbot that answered employee process questions. I used Copilot Studio (formerly Power Virtual Agents) and Power Automate.",
+      "tools": ["Microsoft Teams", "Copilot Studio (formerly Power Virtual Agents)", "Power Automate"],
+      "results": [
+        { "metric": "First place", "label": "company innovation contest", "text": "It won first place in the company's innovation contest." },
+        { "text": "[FILL: time saved / users / requests per month, rounded]" }
+      ],
+      "ai": {
+        "used": "[FILL: the bot was rule-based; add a line only if AI was used]",
+        "checked": "[FILL: how it was checked]"
+      },
+      "linksNote": "No code to share: it belongs to the company. The diagram shows how it fit together, without any confidential data.",
+      "links": [],
+      "thumb": { "kind": "flow" },
       "visual": {
         "type": "flow",
         "title": "How it fits together",
         "steps": [
           { "label": "Microsoft Teams", "short": "Teams", "detail": "An employee asks a process question" },
-          { "label": "Rule-based chatbot", "short": "Chatbot", "detail": "Built with Power Virtual Agents", "highlight": true },
+          { "label": "Rule-based chatbot", "short": "Chatbot", "detail": "Built with Copilot Studio, formerly Power Virtual Agents", "highlight": true },
           { "label": "Power Automate" }
         ]
       }
     },
     {
-      "slug": "collections-analytics",
-      "title": "Collections analytics & automation",
-      "context": "Sura Peru",
-      "when": "December 2016 – September 2025 (Analyst I → Analyst III, Collection Intelligence/Contribution Recovery)",
-      "home": true,
-      "summary": "Power BI dashboards, SQL data pipelines (DB2, BigQuery), Excel/VBA and Power Automate workflows for collections analytics at Sura Peru.",
-      "problem": "Each debt report took ~30 minutes to produce, the late-payment rate was 27%, and the panel of 5 external collection providers I supervised included redundant ones.",
-      "built": "Power BI dashboards, SQL data pipelines (DB2, BigQuery), Excel/VBA and Power Automate workflows.",
-      "tools": ["Power BI", "SQL (DB2, BigQuery)", "Python/pandas", "Excel/VBA", "Power Automate"],
-      "results": [
-        { "metric": "27% → 24%", "label": "late-payment rate", "text": "Lowered the late-payment rate from 27% to 24% by pairing the scoring model with targeted campaigns." },
-        { "metric": "~40%", "label": "lower operating costs", "text": "Cut operating costs ~40% by using scoring and performance data to consolidate the redundant external providers I supervised (from a panel of 5)." },
-        { "metric": "~30 min → ~2 min", "label": "per debt report", "text": "Cut debt-report generation from ~30 minutes to ~2 minutes per report with Excel VBA and Access macros, enabling batch generation." },
-        { "metric": "~45%", "label": "less manual processing", "text": "Reduced manual processing ~45% across the team by building automations and standardized, parameter-driven reports (including self-service report tools for the legal team)." }
-      ],
-      "linksNote": "No code: it's company property.",
-      "links": [],
-      "visual": {
-        "type": "image",
-        "src": "[FILL — anonymized dashboard mockup image, no real figures beyond the résumé]",
-        "alt": "Anonymized dashboard mockup"
-      }
-    },
-    {
       "slug": "whatsapp-demand-signals",
       "title": "WhatsApp demand-signal pipeline",
-      "context": "Personal project",
+      "type": "Personal",
       "status": "In progress",
+      "roles": ["Data analyst"],
       "home": true,
-      "summary": "Turning Latin American community group chats into structured demand signals for small retailers in Ontario.",
-      "problem": "Small retailers serving Latin American communities in Ontario guess what to stock; demand is visible in community group chats but unstructured.",
-      "built": "A locale-aware parser (`wa_parse.py`) that handles Spanish-locale Android WhatsApp exports and their encoding quirks; now adding structured LLM extraction per message (product, category, brand, intent, urgency) with the Anthropic API.",
+      "summary": "Turns community WhatsApp chats into demand signals for small retailers in Ontario.",
+      "problem": "Small retailers that serve Latin American communities in Ontario have to guess what to stock. The demand shows up in community group chats, but it isn't structured.",
+      "built": "I wrote a locale-aware parser (`wa_parse.py`) for Spanish-locale Android WhatsApp exports and their encoding quirks. Now I'm adding LLM extraction with the Anthropic API. It pulls structured fields from each message: product, category, brand, intent and urgency.",
       "tools": ["Python", "Anthropic API", "Structured outputs"],
       "results": [
-        { "text": "Parser built and validated; extraction stage in progress." }
+        { "text": "The parser is built and validated. The extraction stage is in progress." }
       ],
+      "ai": {
+        "used": "The Anthropic API extracts structured fields from each message.",
+        "checked": "[FILL: how you check the extraction]"
+      },
       "links": [
-        { "label": "Code on GitHub", "href": "[FILL — repo link, with sample data anonymized]" }
+        { "kind": "code", "label": "Code", "href": "[FILL: repo link, with sample data anonymized]" }
       ],
+      "thumb": { "kind": "type", "text": "wa_parse.py", "mono": true },
       "visual": {
         "type": "flow",
         "title": "Pipeline",
         "steps": [
           { "label": "WhatsApp exports", "detail": "Spanish-locale Android chat exports" },
           { "label": "`wa_parse.py`", "detail": "Locale-aware parser that handles encoding quirks", "status": "Built and validated" },
-          { "label": "LLM extraction", "detail": "Anthropic API, structured outputs: product, category, brand, intent, urgency", "status": "In progress", "highlight": true }
+          { "label": "LLM extraction", "detail": "Anthropic API with structured outputs: product, category, brand, intent, urgency", "status": "In progress", "highlight": true }
         ]
       }
     },
     {
       "slug": "vanna-ai-security",
       "title": "Vanna AI security analysis",
-      "context": "Security write-up",
-      "summary": "A CVE-referenced write-up on known Vanna AI vulnerabilities: their impact and mitigations.",
+      "type": "Personal",
+      "roles": ["Business systems analyst"],
+      "summary": "A write-up on known Vanna AI vulnerabilities, with CVE references, their impact and mitigations.",
       "problem": "Text-to-SQL AI tools can expose databases to prompt-injection and code-execution risks.",
-      "built": "A security write-up analyzing known Vanna AI vulnerabilities (CVE-referenced), their impact and mitigations.",
+      "built": "I wrote a security analysis of known Vanna AI vulnerabilities, with CVE references. It covers their impact and how to mitigate them.",
       "tools": ["Security research", "CVE analysis", "Technical writing"],
       "results": [
-        { "text": "Portfolio document." }
+        { "text": "A portfolio document." }
       ],
+      "ai": {
+        "used": "[FILL: only if AI was used in the write-up]",
+        "checked": "[FILL: how it was checked]"
+      },
       "links": [
-        { "label": "Read the write-up", "href": "[FILL — PDF or page]" }
-      ]
+        { "kind": "writeup", "label": "Write-up", "href": "[FILL: PDF or page]" }
+      ],
+      "thumb": { "kind": "type", "text": "Prompt injection" }
     },
     {
       "slug": "nyc-airbnb-summary",
       "title": "NYC Airbnb Data Summary Tool",
-      "context": "Course team project · CPSC-620",
-      "summary": "A team project to summarize and clean the NYC Airbnb dataset with an Agile workflow. I owned the data-cleaning user story.",
-      "problem": "Course group project — summarize and clean the NYC Airbnb dataset using an Agile workflow.",
-      "role": "Owned the data-cleaning user story (US-02); worked through sprints, pull requests and peer code review on GitHub.",
+      "type": "Course team",
+      "context": "CPSC-620",
+      "roles": ["Data analyst"],
+      "summary": "A course team project to summarize and clean the NYC Airbnb dataset. I owned the data-cleaning user story.",
+      "problem": "A course group project (CPSC-620): summarize and clean the NYC Airbnb dataset, with an Agile workflow.",
+      "role": "I owned the data-cleaning user story (US-02). I worked through sprints, pull requests and peer code review on GitHub.",
       "tools": ["Python", "pandas", "GitHub (PRs, reviews)", "Agile/Scrum"],
       "results": [],
+      "ai": {
+        "used": "[FILL: only if AI was used]",
+        "checked": "[FILL: how it was checked]"
+      },
       "links": [
-        { "label": "Team repo on GitHub", "href": "[FILL — repo link, only if the team agrees]" }
-      ]
+        { "kind": "code", "label": "Code", "href": "[FILL: repo link, only if the team agrees]" }
+      ],
+      "thumb": { "kind": "type", "text": "US-02", "mono": true }
     }
   ],
 
-  "comingSoon": "New projects added as each learning stage of the AI Quest Log finishes (finance-style first, then retail / logistics / public-sector data).",
+  "planned": [
+    {
+      "id": "toronto-311-briefing",
+      "title": "Toronto 311 monthly operations briefing, automated",
+      "target": "Dec 2026",
+      "roles": ["Business analyst", "Data analyst"],
+      "summary": "Builds the monthly 311 operations briefing from Toronto open data.",
+      "details": "A SQL star schema feeds Power BI with DAX. A forecast is checked against a seasonal-naive baseline.",
+      "measure": "Briefing minutes, done by hand vs automated.",
+      "tools": ["SQL", "Power BI", "DAX", "Forecasting", "AI commentary"],
+      "ai": {
+        "used": "AI writes the commentary.",
+        "checked": "A validator blocks any number that isn't in the data."
+      },
+      "thumb": { "kind": "type", "text": "311" }
+    },
+    {
+      "id": "job-posting-triage-agent",
+      "title": "Job-posting triage and coding-QA agent, with evals",
+      "target": "Jan 2027",
+      "roles": ["Business systems analyst", "Automation analyst"],
+      "summary": "A Python agent that flags likely occupation mis-codes in Job Bank postings for review.",
+      "measure": "Triage time by hand vs with the agent.",
+      "tools": ["Python", "AI agent", "Evals"],
+      "ai": {
+        "used": "The agent flags likely mis-codes for a person to review.",
+        "checked": "I score it on about 150 hand-labelled postings, with a held-out test set."
+      },
+      "thumb": { "kind": "type", "text": "Job Bank" }
+    },
+    {
+      "id": "bike-share-rebalancing",
+      "title": "Bike Share Toronto rebalancing optimizer",
+      "target": "Feb 2027",
+      "roles": ["Data analyst", "Retail and logistics"],
+      "summary": "A station demand forecast plus a mixed-integer model for rebalancing bikes between stations.",
+      "details": "The model runs on Gurobi and can be rerun with an open solver. I compare it with no rebalancing and with a greedy heuristic. Results are labelled \"modelled\".",
+      "tools": ["Forecasting", "Gurobi", "Mixed-integer optimization"],
+      "ai": {
+        "used": "[FILL: only if AI is used]",
+        "checked": "[FILL: how it is checked]"
+      },
+      "thumb": { "kind": "type", "text": "Bike Share" }
+    },
+    {
+      "id": "ontario-retail-monitor",
+      "title": "Ontario retail demand and price monitor",
+      "target": "Spring 2027",
+      "roles": ["Data analyst", "BI analyst"],
+      "summary": "Statistics Canada retail, CPI and price tables, refreshed by API into Tableau Public and an Excel export.",
+      "tools": ["Statistics Canada API", "Tableau Public", "Excel", "AI commentary"],
+      "ai": {
+        "used": "AI writes the commentary.",
+        "checked": "The commentary is checked before it's published."
+      },
+      "thumb": { "kind": "type", "text": "CPI" }
+    },
+    {
+      "id": "ttc-delay-early-warning",
+      "title": "TTC delay early-warning report",
+      "target": "Spring 2027",
+      "roles": ["Data analyst", "BI analyst", "Public sector"],
+      "summary": "Shows which causes and stations drive lost minutes, from TTC delay open data.",
+      "details": "It sends an alert when a pattern breaks.",
+      "tools": [],
+      "ai": {
+        "used": "[FILL: only if AI is used]",
+        "checked": "[FILL: how it is checked]"
+      },
+      "thumb": { "kind": "type", "text": "TTC" }
+    }
+  ],
 
-  "questLog": {
-    "period": "Oct 2026 – Jun 2027",
-    "stages": [
-      { "stage": 1, "title": "Machine Learning Specialization, Course 1", "provider": "DeepLearning.AI / Stanford", "status": "in-progress", "boss": "[FILL]" },
-      { "stage": 2, "title": "Machine Learning Specialization, Course 2", "provider": "DeepLearning.AI / Stanford", "status": "locked", "boss": "[FILL]" },
-      { "stage": 3, "title": "Machine Learning Specialization, Course 3", "provider": "DeepLearning.AI / Stanford", "status": "locked", "boss": "[FILL]" },
-      { "stage": 4, "title": "PL-300 Power BI exam", "provider": "Microsoft", "when": "Feb–Mar 2027", "status": "locked", "boss": "[FILL]" },
-      { "stage": 5, "title": "Agentic AI course", "status": "locked", "boss": "[FILL]" }
+  "laIama": {
+    "channels": [
+      { "label": "Instagram", "icon": "instagram", "href": "https://www.instagram.com/la.iama.ai/" },
+      { "label": "TikTok", "icon": "tiktok", "href": "https://www.tiktok.com/@la.iama" },
+      { "label": "YouTube", "icon": "youtube", "href": "[FILL: YouTube channel URL]" },
+      { "label": "LinkedIn", "icon": "linkedin", "href": "[FILL: La IAma LinkedIn URL]" }
     ]
   }
 }
