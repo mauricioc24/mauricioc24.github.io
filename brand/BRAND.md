@@ -75,6 +75,8 @@ Official hex values are fixed. "Derived" shades are web additions chosen for con
 | **Sticker** `.sticker` | the die-cut white border on the logo | the llama, in the La IAma box and on the 404 page | one per view | recolored, stretched, cropped, or with paint added around it |
 | **Pixel llama** | the headphone cup | the favicon | — | not made yet; until it exists, use a simple "MC" favicon in Geist Mono |
 
+**Logos (decided Nov 5, 2026).** Schools, certificate issuers and tools may show a logo right before their name: small (14px), in one muted grey (`#83887F`, the chart-context grey), so the page stays calm. Use only official files from the organization's own site or press kit, or Simple Icons where its licence allows. Never redraw, stretch, crop or add effects. If an organization's guidelines forbid recolouring, use its original colours instead. If no clean official logo exists, show the name as text and list it in TODO.md. The files live in `assets/img/logos/`.
+
 **Where the llama itself appears:** the llama is not the site logo, because the site's identity is Mauricio's name. Since Nov 5, 2026 it is allowed in exactly two places:
 - the La IAma box on the home page, as a sticker next to two or three plain sentences and the channel links;
 - the 404 page.
@@ -140,6 +142,7 @@ This mirrors the LinkedIn templates, which use black bands with color steps and 
 - [ ] Text contrast is at least 4.5:1, and at least 3:1 for large text and for chart marks. Chullo reds only on Day; neon only inside the La IAma box.
 - [ ] Spray, stripe tags and the llama appear only in the La IAma box (and the llama on the 404 page). One llama per screen. The art never sits behind body text.
 - [ ] Every transition names its exact properties, uses Emil's easing, and stays under 300ms.
+- [ ] Logos are small, one grey, official or from Simple Icons, and never redrawn or stretched.
 - [ ] Hover effects are gated behind `(hover: hover) and (pointer: fine)`, and reduced motion is respected.
 - [ ] The page reads well at 375px wide, and the llama is never squished.
 - [ ] The page scores 90+ in a Lighthouse accessibility audit.

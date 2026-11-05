@@ -44,6 +44,7 @@ Portfolio for **Mauricio Calderón Barrientos** (always this spelling, with the 
 - No solid 1px borders: use `--ring` and `--shadow`.
 - Transitions name exact properties, use the brand easing tokens and stay under 300ms. Hover effects go only inside `@media (hover: hover) and (pointer: fine)` and change colour only (nothing moves on hover). Every tappable control has a pressed (`:active`) state. Respect `prefers-reduced-motion`. No scroll fade-ins, staggers over 30ms, parallax or animated charts. Filters and navigation have no animation.
 - Charts stay on Day: grey context plus one inferno highlight, with direct labels.
+- Logos: small (14px), one grey, official files or Simple Icons only, never redrawn (BRAND.md, Logos). A missing logo means the name stays as text and goes in TODO.md. Microsoft's logos and product icons stay text (its guidelines and icon terms don't cover a portfolio).
 
 ## Before committing a visual change
 

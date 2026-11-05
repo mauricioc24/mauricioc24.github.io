@@ -32,12 +32,13 @@ Plain-English notes for Mauricio. No Git experience assumed.
 | `index.html` | Home page |
 | `projects/index.html` | All projects |
 | `projects/<name>.html` | One case-study page per project |
+| `experience/sura/index.html` | One page for your whole job at Sura Peru (AFP Integra): roles, results, BigQuery migration, self-service app |
 | `about/index.html` | About page |
 | `404.html` | The "page not found" page (the llama one) |
 | `projects.json` | **All project data:** the 7 entries on the Projects page (2 Sura projects, then 5 planned ones) and the La IAma channel links. Most content updates happen here. |
 | `assets/css/site.css` | Page styles, built on top of the brand tokens |
 | `assets/js/site.js` | Turns `projects.json` into the project showcase, filters, skills matrix, case studies and La IAma links; handles "Copy email" |
-| `assets/img/` | Favicon and the social preview image |
+| `assets/img/` | Favicon, the social preview image, and `logos/` (the small grey logos) |
 | `brand/` | Your brand kit: `BRAND.md` (the rules), `brand-tokens.css` (colors and type), style guide, llama images |
 | `Mauricio-Calderon-Barrientos-Resume.pdf` | The résumé every "Download résumé" button points to |
 | `CONTENT.md` | Source of truth for every fact on the site |
@@ -74,27 +75,31 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 **A small HTML page per case study.** Each project gets its own link with its own title and description. LinkedIn and Slack read those when someone shares the link, so the preview shows the right project.
 
-**Header and footer copied into every page.** Without a build step, the alternative was building them with JavaScript, which loads later and can fail. The trade-off: when the footer changes (say, a new link), all 6 pages need the same edit. Claude knows this rule (it's in `CLAUDE.md`).
+**Header and footer copied into every page.** Without a build step, the alternative was building them with JavaScript, which loads later and can fail. The trade-off: when the footer changes (say, a new link), all 7 pages need the same edit. Claude knows this rule (it's in `CLAUDE.md`).
 
 **Missing info is hidden, not shown as "TODO".** A recruiter should never see a placeholder. Anything with `[FILL` simply doesn't appear, and `TODO.md` remembers it for you.
 
 **Résumé numbers are copied exactly.** "~30 minutes to ~2 minutes" stays exactly that, never "93% faster". Numbers that match your résumé word for word are numbers you can defend in an interview.
 
-**A calm portfolio; the art lives in La IAma (Nov 5, 2026).** The llama, the neon colours and the paint belong to La IAma, your channel about AI. So the portfolio stays calm everywhere: no paint on "useful", no stripe tags or colour steps, no llama in the footer. All of that lives in one La IAma box on the home page, under "Now", with your Instagram and TikTok links. The 404 page keeps its llama. The footer stays black with ivory links. The rule is written down in BRAND.md and CLAUDE.md.
+**A calm portfolio; the art lives in La IAma (Nov 5, 2026).** The llama, the neon colours and the paint belong to La IAma, your channel about AI. So the portfolio stays calm everywhere: no paint on "useful", no stripe tags or colour steps, no llama in the footer. All of that lives in one La IAma box on the home page, under "Personal brand", with your Instagram and TikTok links. The 404 page keeps its llama. The footer stays black with ivory links. The rule is written down in BRAND.md and CLAUDE.md.
 
 **Plain writing.** Every page and `projects.json` use plain, first-person sentences. There are no em or en dashes (date ranges read "Apr 2023 to Sep 2025"), and arrows appear only inside numbers like 27% → 24%. The pull request lists every line that changed, before and after.
 
-**Lead with results.** The three strongest résumé numbers sit right under the hero, and the Collections project comes first, because a recruiter decides in seconds.
+**A recruiter should get it in 10 seconds (third pass, Nov 5, 2026).** Anything that didn't help with that was simplified or removed. Right under the hero there's now a short Experience list: Sura Peru (AFP Integra), Analyst I to III, Dec 2016 to Sep 2025, with a "See results" link, then your two internships. The results moved one click away, to the Sura page, which tells the whole job on one page: your promotions, the four results, the BigQuery migration, the self-service app and links to both case studies. "Now" became two sections: "Studying now" (recruiters care) and "Personal brand" (La IAma, last).
 
-**A project showcase studied from jwilber.me.** Its entries show a thumbnail, a title, a line of text and small links, and hovering lifts the picture a little. Here each entry adds what a recruiter scans for: the type (Work at Sura or Planned), the roles it supports, the main tools, and an "AI use" line when your résumé or CONTENT.md supports one. Thumbnails only use real content: your metrics, the chatbot diagram, or a big word like "311". Nothing is made up.
+**"Sura Peru (AFP Integra)", always.** So nobody wonders where the work happened. The filter chip says "Work at Sura Peru".
+
+**Open to remote.** The hero, the About facts and the footer say so. The footer heading is shorter now: "Open to analyst roles in Toronto, Hamilton or remote." 
+
+**A project showcase studied from jwilber.me.** Its entries show a thumbnail, a title, a line of text and small links. Here, hovering darkens the thumbnail's outline. Here each entry adds what a recruiter scans for: the type (Work at Sura Peru or Planned), the roles it supports, the main tools, and an "AI use" line when your résumé or CONTENT.md supports one. Thumbnails only use real content: your metrics, the chatbot diagram, or a big word like "311". Nothing is made up.
 
 **Filters and a skills matrix on Projects.** The chips filter by type, with no animation (BRAND.md says filters stay instant). The matrix shows which tools each project uses, so keywords like Power BI or Python are tied to real work. A tool appears there only if a project lists it, which keeps it honest.
 
-**Seven entries, no separate plan page.** The Quest Log is gone, and so are the WhatsApp pipeline, the Vanna AI analysis and the NYC Airbnb tool. The Projects page now holds exactly seven entries: your two Sura projects (Collections first), then the five planned ones in order (Toronto 311, the job-posting agent, Bike Share, the retail monitor and the TTC report). Each planned one shows "Planned", its target month and the roles it supports, with no case-study link until it ships. The filter chips follow the data, so today they're just "Work at Sura" and "Planned".
+**Seven entries, no separate plan page.** The Quest Log is gone, and so are the WhatsApp pipeline, the Vanna AI analysis and the NYC Airbnb tool. The Projects page now holds exactly seven entries: your two Sura projects (Collections first), then the five planned ones in order (Toronto 311, the job-posting agent, Bike Share, the retail monitor and the TTC report). Each planned one shows "Planned", its target month and the roles it supports, with no case-study link until it ships. The filter chips follow the data, so today they're just "Work at Sura Peru" and "Planned".
 
 **One llama per screen.** Now the llama appears only in the La IAma box and on the 404 page.
 
-**Very little motion, on purpose** (Emil Kowalski's rule: motion people see often should be fast or absent). Buttons press in slightly. Project thumbnails lift 2px on hover with a mouse. Copying the email shows a small toast that follows Sonner's habits: it stays 4 seconds, waits while you hover it or switch tabs, and a click closes it. The 404 llama nods once. No fade-ins on scroll, because they make people wait to read. Anyone whose system asks for reduced motion gets no movement at all.
+**Very little motion, on purpose** (Emil Kowalski's rule: motion people see often should be fast or absent). Buttons press in slightly. With a mouse, a project's thumbnail outline gets darker on hover. Nothing moves on hover anymore (see "The Emil audit" below). Copying the email shows a small toast that follows Sonner's habits: it stays 4 seconds, waits while you hover it or switch tabs, and a click closes it. The 404 llama nods once. No fade-ins on scroll, because they make people wait to read. Anyone whose system asks for reduced motion gets no movement at all.
 
 **Accessible by default.** Text contrast is at least 4.5:1 everywhere (checked with real numbers). There's a "Skip to content" link for keyboard users, every meaningful image has a description (purely decorative ones are marked so screen readers skip them), and all pages pass an automated accessibility scan (axe) with zero problems.
 
@@ -104,7 +109,11 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 **The chatbot thumbnail is a mini diagram.** It's drawn from the same steps as the chatbot case study (the `"visual"` steps in `projects.json`), so the two can never disagree. The chatbot tool now reads "Copilot Studio (formerly Power Virtual Agents)", Microsoft's current name for it. A step can have a short label, like `"short": "Teams"`, so the small version stays compact. Change the steps once and both diagrams update.
 
-**Experience rows can carry one highlight line.** The customer self-service app sits under your Analyst III role, word for word from the résumé.
+**The self-service app lives on the Sura page,** word for word from the résumé, next to the BigQuery migration.
+
+**The Emil audit (Nov 5, 2026).** Six of Emil's skills were run over every page at phone and desktop width: design polish, animation review, animation removal, mobile feel, Apple's design rules and "break the UI" (feeding the pages long names and big text). The biggest catch was real: the "Copilot Studio (formerly Power Virtual Agents)" tag was wider than its card on small phones and tablets, so the whole page scrolled sideways. Tags wrap now. Motion that had no job is gone (thumbnails don't lift, the llama doesn't tilt), every button and chip shows when it's pressed, and tap areas got a bit bigger. The pull request lists every finding with its rule and fix.
+
+**Logos, small and grey (Nov 5, 2026).** Schools, certificate issuers and tools get a small logo in one muted grey, so the page stays calm. Only official files or Simple Icons (a free, open library) are allowed, and logos are never redrawn or stretched. Today only five could be sourced: Python, Google BigQuery, Google Cloud, Udemy and Anthropic. The network blocked the schools' and institutes' sites, and Microsoft's guidelines don't allow its logos without a licence, so those stay as text. TODO.md lists each one and where to get it.
 
 **The `MC` favicon is drawn from the real Geist Mono letters**, as BRAND.md asks, until the pixel llama exists. The social preview image (`assets/img/og-image.png`) is what LinkedIn shows when someone shares the site.
 
@@ -112,8 +121,8 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 `.github/workflows/site-checks.yml` runs two jobs:
 
-1. **Lighthouse** grades all 6 pages from 0 to 100 on performance, accessibility, best practices and SEO (how well search engines can read the page). Accessibility, best practices and SEO must score 90+ or the check turns red. Performance only *warns*, because GitHub's shared computers vary in speed and would sometimes fail a perfectly good page. The full reports are attached to each run (open the run, then **Artifacts**).
-2. **Broken links** checks that every link and image on every page works, and that every shipped project in `projects.json` has its page (planned ones don't need one). It skips LinkedIn, Instagram and TikTok (they block all automated checkers, so click those links yourself once) and links to the live site (new pages only exist there after merging).
+1. **Lighthouse** grades all 7 pages from 0 to 100 on performance, accessibility, best practices and SEO (how well search engines can read the page). Accessibility, best practices and SEO must score 90+ or the check turns red. Performance only *warns*, because GitHub's shared computers vary in speed and would sometimes fail a perfectly good page. The full reports are attached to each run (open the run, then **Artifacts**).
+2. **Broken links** checks that every link and image on every page works, that the fixed pages exist (home, Projects, About, the Sura page, 404), and that every shipped project in `projects.json` has its page (planned ones don't need one). It skips LinkedIn, Instagram and TikTok (they block all automated checkers, so click those links yourself once) and links to the live site (new pages only exist there after merging).
 
 **If a check is red:** click **Details** next to it. The log says which page or link failed. Fix it on the same branch, push, and the checks run again.
 
@@ -127,3 +136,5 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 ## 9. Network access for research (Nov 5, 2026)
 
 This session's cloud environment couldn't reach jwilber.me, so a small personal environment named `mauricioc24.github.io` was created (you approved it) that adds only `www.jwilber.me` and `jwilber.me`. It changes nothing on the website itself. You can see or remove it in the environment menu of a Claude Code session.
+
+In the third pass, the same network blocked the official sites of your schools and certificate providers (unfc.ca, ulima.edu.pe, cibertec.edu.pe, dmc.pe, ue.edu.pe, deeplearning.ai, cloudskillsboost.google, udemy.com, python.org and others), so their logo files couldn't be downloaded. As you asked, nothing was worked around: those names stay as text, and TODO.md says where each logo can come from.
