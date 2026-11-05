@@ -10,8 +10,10 @@
 
 ## Identity
 - **Name:** Mauricio Calderón Barrientos (always this spelling, with the accent)
-- **Location:** Burlington, Ontario, Canada (open to remote roles, and to hybrid or on-site roles in the Toronto and Hamilton area)
-- **Availability line (hero and footer):** Open to roles in Toronto, Hamilton or remote
+- **Location:** Burlington, Ontario, Canada (open to on-site, hybrid or remote roles across Canada)
+- **Hero eyebrow:** Business and data analyst · Burlington, ON, Canada
+- **Footer line:** Open to analyst roles across Canada.
+- **Hero sentence:** I find the most efficient way to run a process, then use data and automation to cut manual work, time and cost.
 - **Hero big line:** Mauricio Calderón Barrientos makes data useful (plain text, no spray: brand art lives only in the La IAma box)
 - **Hero subtitle:** I'm a business and data analyst. For 8+ years I've turned business processes into automated, data-driven workflows.
 - **Sub-headline:** I build reports and automations that cut manual work.
