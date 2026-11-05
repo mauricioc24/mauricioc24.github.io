@@ -6,7 +6,7 @@
 - **This file decides how things look:** color, motifs, type, and where the art is allowed.
 - **When two rules conflict, follow this order:** accessibility → readable content → Emil's motion rules → brand expression.
 
-> **Decided Nov 5, 2026: brand art lives in one place.** The llama, the chicha neon and the paint style belong to **La IAma**, Mauricio's personal brand, where he shares what he learns about AI. On this portfolio they appear only in **the La IAma box on the home page** (under "Now"). The **404 page keeps its llama moment**. Everywhere else stays calm: no spray, no stripe tags, no colour steps, no llama and no neon. The footer stays black, with ivory text and links. Where older sections below disagree, this rule wins.
+> **Decided Nov 5, 2026: brand art lives in one place.** The llama, the chicha neon and the paint style belong to **La IAma**, Mauricio's personal brand, where he shares what he learns about AI. On this portfolio they appear only in **the La IAma box on the home page** (the "Personal brand" section). The **404 page keeps its llama moment**. Everywhere else stays calm: no spray, no stripe tags, no colour steps, no llama and no neon. The footer stays black, with ivory text and links. Where older sections below disagree, this rule wins.
 
 Everything sits in the `brand/` folder at the repo root: the tokens in `brand-tokens.css`, the web-sized logos in `assets/`, and a rendered style guide in `styleguide.html`. The palette comes from Mauricio's llama logo (`ME/brand/brand_tokens.json`, official master selected Oct 29 2026).
 
@@ -81,7 +81,7 @@ Official hex values are fixed. "Derived" shades are web additions chosen for con
 
 Show it no more than once per screen and at least 96px wide. Use `brand/assets/llama-320.webp` up to 160px wide and `brand/assets/llama-640.webp` above that. Keep the original proportions and transparency, and never recolor it or add paint.
 
-**Give the art a reason.** The La IAma box says it plainly: the llama and the bright colours belong to La IAma, so the box is the only place on the site where they appear.
+**Give the art a reason.** The box sits under a "Personal brand" heading, which tells visitors why the colours change there. The box itself only describes the channel.
 
 ## 5. Data visualization
 
@@ -123,7 +123,9 @@ This mirrors the LinkedIn templates, which use black bands with color steps and 
 
 **Decided (Nov 3, 2026): Day hero (Option B).** White/ivory dominates the whole page, Emil-style.
 
-**Decided (Nov 5, 2026): calm portfolio.** The page structure is now: Day hero (no spray) with a tools line, three result tiles under the hero, the project showcase, about and skills, a "Now" section that holds the La IAma box, then the black footer with ivory links. Neon, paint and the llama appear only in the La IAma box (and the 404 llama).
+**Decided (Nov 5, 2026): calm portfolio.** Neon, paint and the llama appear only in the La IAma box (and the 404 llama).
+
+**Decided (Nov 5, 2026, third pass): recruiter in 10 seconds.** The home page is: Day hero (no spray) with a tools line, a compact Experience list (Sura Peru (AFP Integra) with a "See results" link, then the two internships), the project showcase, about, skills, "Studying now", "Personal brand" (the La IAma box), then the black footer with ivory links. The result tiles moved to the Sura page (`/experience/sura/`). Anything that doesn't help a recruiter understand Mauricio in 10 seconds gets simplified or removed.
 
 **Hero copy (decided):**
 - Name: **Mauricio Calderón Barrientos** (always this exact spelling, with the accent).
