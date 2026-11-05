@@ -4,8 +4,8 @@
     {
       "slug": "collections-analytics",
       "title": "Collections analytics & automation",
-      "type": "Work at Sura",
-      "context": "Sura Peru",
+      "type": "Work at Sura Peru",
+      "context": "Sura Peru (AFP Integra)",
       "roles": [
         "Data analyst",
         "Business analyst"
@@ -13,7 +13,7 @@
       "when": "December 2016 to September 2025. Analyst I to Analyst III, Collection Intelligence/Contribution Recovery.",
       "home": true,
       "featured": true,
-      "summary": "Power BI reporting, SQL pipelines and automations for the collections team at Sura Peru.",
+      "summary": "Power BI reporting, SQL pipelines and automations for the collections team at Sura Peru (AFP Integra).",
       "problem": "Each debt report took ~30 minutes to produce. The late-payment rate was 27%. Some of the 5 external collection providers I supervised were redundant.",
       "built": "I built Power BI dashboards, SQL data pipelines (DB2, BigQuery) and workflows in Excel/VBA and Power Automate.",
       "tools": [
@@ -64,16 +64,15 @@
     {
       "slug": "teams-chatbot",
       "title": "Teams chatbot",
-      "tagline": "First place in the company's innovation contest",
-      "type": "Work at Sura",
-      "context": "Sura Peru",
+      "type": "Work at Sura Peru",
+      "context": "Sura Peru (AFP Integra)",
       "roles": [
         "Business systems analyst",
         "Automation analyst"
       ],
       "when": "During my Analyst III role, April 2023 to September 2025.",
       "home": true,
-      "summary": "A rule-based Microsoft Teams chatbot that answered employee process questions.",
+      "summary": "A rule-based Teams chatbot for employee process questions. It won first place in the company's innovation contest.",
       "problem": "[FILL: the pain point behind employee process questions, e.g., how people got answers before the bot (the résumé doesn't say)]",
       "built": "I built and deployed a rule-based Microsoft Teams chatbot that answered employee process questions. I used Copilot Studio (formerly Power Virtual Agents) and Power Automate.",
       "tools": [

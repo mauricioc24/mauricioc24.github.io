@@ -6,7 +6,7 @@
 - **This file decides how things look:** color, motifs, type, and where the art is allowed.
 - **When two rules conflict, follow this order:** accessibility → readable content → Emil's motion rules → brand expression.
 
-> **Decided Nov 5, 2026: brand art lives in one place.** The llama, the chicha neon and the paint style belong to **La IAma**, Mauricio's personal brand, where he shares what he learns about AI. On this portfolio they appear only in **the La IAma box on the home page** (under "Now"). The **404 page keeps its llama moment**. Everywhere else stays calm: no spray, no stripe tags, no colour steps, no llama and no neon. The footer stays black, with ivory text and links. Where older sections below disagree, this rule wins.
+> **Decided Nov 5, 2026: brand art lives in one place.** The llama, the chicha neon and the paint style belong to **La IAma**, Mauricio's personal brand, where he shares what he learns about AI. On this portfolio they appear only in **the La IAma box on the home page** (the "Personal brand" section). The **404 page keeps its llama moment**. Everywhere else stays calm: no spray, no stripe tags, no colour steps, no llama and no neon. The footer stays black, with ivory text and links. Where older sections below disagree, this rule wins.
 
 Everything sits in the `brand/` folder at the repo root: the tokens in `brand-tokens.css`, the web-sized logos in `assets/`, and a rendered style guide in `styleguide.html`. The palette comes from Mauricio's llama logo (`ME/brand/brand_tokens.json`, official master selected Oct 29 2026).
 
@@ -75,13 +75,15 @@ Official hex values are fixed. "Derived" shades are web additions chosen for con
 | **Sticker** `.sticker` | the die-cut white border on the logo | the llama, in the La IAma box and on the 404 page | one per view | recolored, stretched, cropped, or with paint added around it |
 | **Pixel llama** | the headphone cup | the favicon | — | not made yet; until it exists, use a simple "MC" favicon in Geist Mono |
 
+**Logos (decided Nov 5, 2026).** Schools, certificate issuers and tools may show a logo right before their name: small (14px), in one muted grey (`#83887F`, the chart-context grey), so the page stays calm. Use only official files from the organization's own site or press kit, or Simple Icons where its licence allows. Never redraw, stretch, crop or add effects. If an organization's guidelines forbid recolouring, use its original colours instead. If no clean official logo exists, show the name as text and list it in TODO.md. The files live in `assets/img/logos/`.
+
 **Where the llama itself appears:** the llama is not the site logo, because the site's identity is Mauricio's name. Since Nov 5, 2026 it is allowed in exactly two places:
 - the La IAma box on the home page, as a sticker next to two or three plain sentences and the channel links;
 - the 404 page.
 
 Show it no more than once per screen and at least 96px wide. Use `brand/assets/llama-320.webp` up to 160px wide and `brand/assets/llama-640.webp` above that. Keep the original proportions and transparency, and never recolor it or add paint.
 
-**Give the art a reason.** The La IAma box says it plainly: the llama and the bright colours belong to La IAma, so the box is the only place on the site where they appear.
+**Give the art a reason.** The box sits under a "Personal brand" heading, which tells visitors why the colours change there. The box itself only describes the channel.
 
 ## 5. Data visualization
 
@@ -103,12 +105,13 @@ The hero spray reveal is retired (Nov 5, 2026). The paint in the La IAma box is 
 **Crisp everywhere else**, because these are the things visitors use repeatedly:
 - Buttons scale to 0.97 on `:active` (160ms ease-out).
 - Link color and underline change in 150ms with `ease`.
-- Card and sticker hover is a 2px lift at most, only inside `@media (hover: hover) and (pointer: fine)`.
+- Hover changes colour only, only inside `@media (hover: hover) and (pointer: fine)`: a card's ring darkens, a link's underline fills in. Nothing moves on hover, and the llama sticker stays still (Emil audit, Nov 5, 2026).
+- Pressed controls show a pressed state, because the tap highlight is off: pill links, chips and cards get a solid ring with no movement; real buttons scale to 0.97.
 - Navigation, filters and anything triggered from the keyboard have no animation.
 
 **Banned:** fade-in-on-scroll on every section; staggers over 30ms per item; `ease-in`; `transition: all`; `scale(0)`; animated charts; parallax; scroll-jacking.
 
-**`prefers-reduced-motion`:** movement is removed (no hover lift, no llama nod, no toast slide). Color and opacity changes stay.
+**`prefers-reduced-motion`:** movement is removed (no button press scale, no llama nod, no toast slide). Color and opacity changes stay.
 
 ## 7. Page structure (proposal — confirm with prototypes)
 
@@ -123,7 +126,9 @@ This mirrors the LinkedIn templates, which use black bands with color steps and 
 
 **Decided (Nov 3, 2026): Day hero (Option B).** White/ivory dominates the whole page, Emil-style.
 
-**Decided (Nov 5, 2026): calm portfolio.** The page structure is now: Day hero (no spray) with a tools line, three result tiles under the hero, the project showcase, about and skills, a "Now" section that holds the La IAma box, then the black footer with ivory links. Neon, paint and the llama appear only in the La IAma box (and the 404 llama).
+**Decided (Nov 5, 2026): calm portfolio.** Neon, paint and the llama appear only in the La IAma box (and the 404 llama).
+
+**Decided (Nov 5, 2026, third pass): recruiter in 10 seconds.** The home page is: Day hero (no spray) with a tools line, a compact Experience list (Sura Peru (AFP Integra) with a "See results" link, then the two internships), the project showcase, about, skills, "Studying now", "Personal brand" (the La IAma box), then the black footer with ivory links. The result tiles moved to the Sura page (`/experience/sura/`). Anything that doesn't help a recruiter understand Mauricio in 10 seconds gets simplified or removed.
 
 **Hero copy (decided):**
 - Name: **Mauricio Calderón Barrientos** (always this exact spelling, with the accent).
@@ -137,6 +142,7 @@ This mirrors the LinkedIn templates, which use black bands with color steps and 
 - [ ] Text contrast is at least 4.5:1, and at least 3:1 for large text and for chart marks. Chullo reds only on Day; neon only inside the La IAma box.
 - [ ] Spray, stripe tags and the llama appear only in the La IAma box (and the llama on the 404 page). One llama per screen. The art never sits behind body text.
 - [ ] Every transition names its exact properties, uses Emil's easing, and stays under 300ms.
+- [ ] Logos are small, one grey, official or from Simple Icons, and never redrawn or stretched.
 - [ ] Hover effects are gated behind `(hover: hover) and (pointer: fine)`, and reduced motion is respected.
 - [ ] The page reads well at 375px wide, and the llama is never squished.
 - [ ] The page scores 90+ in a Lighthouse accessibility audit.

@@ -6,6 +6,7 @@ Live at **https://mauricioc24.github.io**.
 - Plain HTML, CSS and JavaScript, served by GitHub Pages from `main`. No build step.
 - Project content (done, planned, and the La IAma links) lives in `projects.json`; every fact comes from `CONTENT.md`.
 - Look and feel follow `brand/BRAND.md`; motion and polish follow Emil Kowalski's skills in `.claude/skills`.
+- The small grey logos in `assets/img/logos/` come from [Simple Icons](https://simpleicons.org) (CC0). The logos are trademarks of their owners.
 
 **Preview locally:** run `python3 -m http.server 8000` in this folder, then open http://localhost:8000.
 

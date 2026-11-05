@@ -67,6 +67,8 @@
   // Each side stays on one line; the spaces around the arrow are the only
   // places a narrow tile may wrap.
   function metricValue(value) {
+    // A value without an arrow ("First place", "~40%") wraps like normal text.
+    if (!value.includes('→')) return document.createTextNode(value);
     const fragment = document.createDocumentFragment();
     value.split('→').forEach((part, index) => {
       if (index > 0) {
@@ -124,7 +126,8 @@
   function miniFlow(visual) {
     if (!visual || visual.type !== 'flow') return null;
     const steps = (visual.steps || []).filter((s) => present(s.label));
-    if (steps.length < 2 || steps.length > 4) return null;
+    // Two or three boxes fit a thumbnail at any width; more falls back to a typographic card.
+    if (steps.length < 2 || steps.length > 3) return null;
     return h('ol', { class: 'flow-mini', role: 'list', 'aria-label': visual.title || 'How it works' },
       steps.map((s) => h('li', { class: s.highlight ? 'is-highlight' : null }, rich(present(s.short) ? s.short : s.label)))
     );
@@ -322,7 +325,7 @@
     if (tools.length) meta.push(h('dt', null, 'Tools'), h('dd', null, chipList(tools)));
 
     const head = h('header', { class: 'case-head' },
-      // Where the work happened ("Sura Peru"); the type label is the fallback
+      // Where the work happened ("Sura Peru (AFP Integra)"); the type label is the fallback
       h('p', { class: 'eyebrow' }, present(project.context) ? project.context : project.type),
       h('h1', null, project.title),
       present(project.tagline) && h('p', { class: 'case-tagline' }, project.tagline),
@@ -433,6 +436,9 @@
         });
     }
     setUpCopy();
+    // Safari on iOS only shows :active (the pressed look of buttons and links)
+    // when a touchstart listener exists. An empty passive one is enough.
+    document.addEventListener('touchstart', () => {}, { passive: true });
   }
 
   /* ---------- copy email + "Email copied" toast ----------

@@ -5,10 +5,13 @@
 > Résumé-derived values (LinkedIn, chatbot details, Sura metrics, dates, bachelor's degree) were filled on Nov 3, 2026 from `Mauricio-Calderon-Barrientos-Resume.pdf`, with figures exactly as written there. Added from the same résumé on Nov 4, 2026: the BI skill keywords (Data modelling, DAX, Power Query, KPI development, SQL Server, Access), German, and the customer self-service app.
 >
 > Nov 5, 2026: one analyst pitch (Business Analyst, Data Analyst, Business Systems Analyst), La IAma channels, PL-300 moved to January 2027, the chatbot tool relabelled Copilot Studio (formerly Power Virtual Agents), and the AI Quest Log removed. Later the same day: the WhatsApp pipeline, the Vanna AI analysis and the NYC Airbnb tool were removed from the site, and the Projects page became one list of 7 entries (2 Sura projects, then 5 planned ones).
+>
+> Third pass, Nov 5, 2026: open to remote roles too; Sura is always written "Sura Peru (AFP Integra)" (filter label "Work at Sura Peru"); the home page shows a compact Experience list instead of the result tiles, and the results live on one Sura page (/experience/sura/); "Now" is split into "Studying now" and "Personal brand" (La IAma, new description); the certificates below were added from the résumé.
 
 ## Identity
 - **Name:** Mauricio Calderón Barrientos (always this spelling, with the accent)
-- **Location:** Burlington, Ontario, Canada (open to the Toronto and Hamilton area, hybrid or on-site)
+- **Location:** Burlington, Ontario, Canada (open to remote roles, and to hybrid or on-site roles in the Toronto and Hamilton area)
+- **Availability line (hero and footer):** Open to roles in Toronto, Hamilton or remote
 - **Hero big line:** Mauricio Calderón Barrientos makes data useful (plain text, no spray: brand art lives only in the La IAma box)
 - **Hero subtitle:** I'm a business and data analyst. For 8+ years I've turned business processes into automated, data-driven workflows.
 - **Sub-headline:** I build reports and automations that cut manual work.
@@ -21,6 +24,8 @@
 I'm a business and data analyst with 8+ years of experience in BI and process automation, most recently leading collections analytics at Sura Peru. There I built Power BI reporting, SQL pipelines (DB2, BigQuery) and Excel/VBA + Power Automate workflows, and created a Microsoft Teams chatbot that won first place in the company's innovation contest. I'm now completing a Master of Data Analytics at the University of Niagara Falls Canada (March 2027). I'm a generalist: I like sitting between the business problem and the technical solution.
 
 ## Experience (from résumé)
+On the site, always write the employer as **Sura Peru (AFP Integra)**, so it's clear the work was in Peru. The home page shows a compact list (Sura Peru (AFP Integra), Analyst I to III, Dec 2016 to Sep 2025, with a "See results" link to the Sura page; then the two internships). The Sura page (/experience/sura/) uses only the facts in this file: the role progression, the four results, the BigQuery migration, the self-service app and links to the two Sura case studies.
+
 - **Analyst III, Collection Intelligence/Contribution Recovery** — Sura Peru – AFP Integra · April 2023 – September 2025
   - Led the requirements, design, UAT, user-flow documentation, and vendor coordination for a customer self-service app, working with stakeholders and vendors from conception to delivery.
 - **Analyst II, Collection Intelligence/Contribution Recovery** — Sura Peru – AFP Integra · April 2019 – March 2023
@@ -29,10 +34,10 @@ I'm a business and data analyst with 8+ years of experience in BI and process au
 - **Post-Sale Operations Intern** — Banco de Crédito BCP, Peru · October 2014 – December 2015
 
 ## Projects page: exactly these 7 entries, in this order
-First my two Sura projects, then the five planned ones. Shipped projects use the format Problem, What I built, Tools, Result, Links, plus a type label (Work at Sura), the roles it supports, and an "AI use" line only where this file or the résumé supports it. Filter labels: Work at Sura, Planned.
+First my two Sura projects, then the five planned ones. Shipped projects use the format Problem, What I built, Tools, Result, Links, plus a type label (Work at Sura Peru), the roles it supports, and an "AI use" line only where this file or the résumé supports it. Filter labels: Work at Sura Peru, Planned.
 
 ### 1. Collections analytics & automation (Sura Peru) — featured first
-- **Type:** Work at Sura
+- **Type:** Work at Sura Peru
 - **Roles it supports:** Data analyst, Business analyst
 - **When:** December 2016 – September 2025 (Analyst I to Analyst III, Collection Intelligence/Contribution Recovery)
 - **Problem:** Each debt report took ~30 minutes to produce, the late-payment rate was 27%, and the panel of 5 external collection providers I supervised included redundant ones.
@@ -47,7 +52,7 @@ First my two Sura projects, then the five planned ones. Shipped projects use the
 - **Links:** No code — anonymized dashboard mockup only [FILL — mockup image not made yet]
 
 ### 2. Teams chatbot — innovation contest winner (Sura Peru)
-- **Type:** Work at Sura
+- **Type:** Work at Sura Peru
 - **Roles it supports:** Business systems analyst, Automation analyst
 - **When:** Analyst III role, April 2023 – September 2025
 - **Problem:** [FILL — the pain point behind employee process questions, e.g., how people got answers before the bot (the résumé doesn't say)]
@@ -83,7 +88,7 @@ Each is labelled "Planned", with its target month and the roles it supports. No 
 - Roles: Data analyst, BI analyst, public sector.
 
 ## La IAma (my personal brand)
-La IAma is my channel where I share what I learn about AI and how I use it to save time. The llama logo, the chicha colours and the paint style belong to La IAma only, so on this site they appear only in the La IAma box on the home page (and the 404 llama).
+On the site: "La IAma is my AI channel in Spanish. I explain AI in simple words and share the latest AI news, for anyone in the Hispanic community who wants to learn and keep up." It sits in the home page's "Personal brand" section. The llama logo, the chicha colours and the paint style belong to La IAma only, so on this site they appear only in the La IAma box (and the 404 llama).
 - **Instagram:** https://www.instagram.com/la.iama.ai/
 - **TikTok:** https://www.tiktok.com/@la.iama
 - **YouTube:** [FILL — channel URL]
@@ -102,6 +107,14 @@ La IAma is my channel where I share what I learn about AI and how I use it to sa
 - Completed (2026): AI for Everyone, Generative AI for Everyone, AI Prompting for Everyone, ChatGPT Prompt Engineering for Developers (DeepLearning.AI); Complete SQL and Database Fundamentals (Udemy)
 - In progress: Machine Learning Specialization (DeepLearning.AI / Stanford)
 - Planned: Microsoft PL-300 Power BI Data Analyst (January 2027)
+- On the home page, "Studying now" lists the master's, the ML Specialization and PL-300.
+
+### Certificates (from the résumé, added Nov 5, 2026)
+- Cibertec Technology Institute: Advanced Excel (48 hours), my Excel specialist certificate
+- Data Management Corp. Peru: Power BI & Dashboards (24 hours)
+- ESAN University: Executive Program in BI (24 hours)
+- Cambridge Innovation Center Peru: Negotiation Techniques (12 hours)
+- Google Cloud Skills Boost: Generative AI learning paths (Intro to Generative AI; Build and Modernize Applications with GenAI; Gemini for Google Cloud), hands-on labs, 2026
 
 ## Contact
 - **Email:** mauriciocalderon24@gmail.com
@@ -111,6 +124,7 @@ La IAma is my channel where I share what I learn about AI and how I use it to sa
 
 ## Rules for the site
 - Visual design follows brand/BRAND.md (Day hero, white/ivory dominant, Emil Kowalski polish). Brand art (llama, neon, paint) only in the La IAma box and the 404 llama.
+- Always "Sura Peru (AFP Integra)", never just "Sura". Recruiter-first: anything that doesn't help a recruiter understand me in 10 seconds gets simplified or removed.
 - Writing: plain, direct, first person, short sentences. No em or en dashes as punctuation on the site; "→" only inside metrics like 27% → 24%. No buzzwords or AI writing patterns.
 - English only (for now). Recruiter-first: who I am, what I do, and proof within 10 seconds.
 - No confidential employer data or client names. Sura figures: only the ones already published in my résumé, exactly as written there (no new or re-rounded numbers).

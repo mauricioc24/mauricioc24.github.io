@@ -1,11 +1,12 @@
 # Site checks: runs on every pull request (and by hand from the Actions tab).
 #
-#  1. Lighthouse on all 6 pages. Accessibility, best practices and SEO must
+#  1. Lighthouse on all 7 pages. Accessibility, best practices and SEO must
 #     score 90+ or the check fails. Performance below 90 only warns, because
 #     shared CI machines vary in speed. Full reports are attached to the run.
-#  2. Broken links: every link and image in the HTML must resolve, and every
-#     shipped project in projects.json must have its case-study page. Planned
-#     projects ("status": "planned") have no page until they ship.
+#  2. Broken links: every link and image in the HTML must resolve, every
+#     shipped project in projects.json must have its case-study page, and the
+#     fixed pages (home, Projects, About, the Sura experience page, 404) must
+#     exist. Planned projects ("status": "planned") have no page until they ship.
 #
 # Settings: .github/lighthouserc.json. Plain-English notes: LEARNINGS.md.
 
@@ -53,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Check that shipped projects and case-study pages match
+      - name: Check the pages (fixed pages, and shipped projects vs case studies)
         run: |
           node --input-type=module -e "
             import fs from 'node:fs';
@@ -63,6 +64,10 @@ jobs:
             const slugs = shipped.map((p) => p.slug);
             const pages = fs.readdirSync('projects').filter((f) => f.endsWith('.html') && f !== 'index.html');
             let problems = 0;
+            const fixedPages = ['index.html', 'projects/index.html', 'about/index.html', 'experience/sura/index.html', '404.html'];
+            for (const file of fixedPages) {
+              if (!fs.existsSync(file)) { console.log('Missing page: ' + file); problems++; }
+            }
             for (const slug of slugs) {
               const file = 'projects/' + slug + '.html';
               if (!slug || !fs.existsSync(file)) { console.log('Missing page for shipped project \"' + slug + '\": ' + file); problems++; continue; }
@@ -71,7 +76,7 @@ jobs:
             for (const page of pages) {
               if (!slugs.includes(page.replace(/\.html$/, ''))) { console.log('projects/' + page + ' has no shipped project in projects.json'); problems++; }
             }
-            console.log(problems ? problems + ' problem(s)' : 'ok: ' + shipped.length + ' shipped projects with pages, ' + planned.length + ' planned (no pages needed)');
+            console.log(problems ? problems + ' problem(s)' : 'ok: ' + fixedPages.length + ' fixed pages, ' + shipped.length + ' shipped projects with pages, ' + planned.length + ' planned (no pages needed)');
             process.exit(problems ? 1 : 0);
           "
 
