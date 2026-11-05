@@ -368,7 +368,13 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   font-variant-numeric: tabular-nums; white-space: nowrap;
 }
 
-.subhead-label { margin-block: 28px 10px; }
+.subhead-label { margin-block: 40px 12px; }
+h3.subhead-label { font-weight: 400; letter-spacing: 0.08em; }
+
+/* Logos (BRAND.md "Logos"): small, one muted grey, right before the name.
+   Official files or Simple Icons only; never redrawn, stretched or recoloured
+   beyond the single grey. */
+.logo { display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; }
 .plain-list { padding-left: 1.1em; font-size: var(--text-sm); }
 .plain-list li + li { margin-top: 6px; }
 
