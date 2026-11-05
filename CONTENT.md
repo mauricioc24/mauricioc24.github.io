@@ -21,7 +21,7 @@
 - **Languages:** Spanish (native), English (C1), German (intermediate)
 
 ## About (short)
-I'm a business and data analyst with 8+ years of experience in BI and process automation, most recently leading collections analytics at Sura Peru. There I built Power BI reporting, SQL pipelines (DB2, BigQuery) and Excel/VBA + Power Automate workflows, and created a Microsoft Teams chatbot that won first place in the company's innovation contest. I'm now completing a Master of Data Analytics at the University of Niagara Falls Canada (March 2027). I'm a generalist: I like sitting between the business problem and the technical solution.
+I'm a business and data analyst with 8+ years of experience in BI and process automation, most recently leading collections analytics at Sura Peru. There I built Power BI reporting, SQL pipelines (DB2, BigQuery) and Excel/VBA + Power Automate workflows, and created a Microsoft Teams chatbot that won first place in the company's innovation contest. I'm now completing a Master of Data Analytics at the University of Niagara Falls Canada (March 2027). I'm a generalist. I'm drawn to the messy middle, where business challenges meet technology, and ideas start becoming real solutions. Data doesn't replace judgment. It keeps judgment honest.
 
 ## Experience (from résumé)
 On the site, always write the employer as **Sura Peru (AFP Integra)**, so it's clear the work was in Peru. The home page shows a compact list (Sura Peru (AFP Integra), Analyst I to III, Dec 2016 to Sep 2025, with a "See results" link to the Sura page; then the two internships). The Sura page (/experience/sura/) uses only the facts in this file: the role progression, the four results, the BigQuery migration, the self-service app and links to the two Sura case studies.
