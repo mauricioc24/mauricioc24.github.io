@@ -143,3 +143,9 @@ In the third pass, the same network blocked the official sites of your schools a
 - Full logos (crest plus long name) turn into smudges at 14px, and auto-traced SVGs from online converters aren't official files. So schools and certificate issuers use their own **favicon**, the small icon each organization designed for tiny sizes. It's converted to the one grey: dark parts solid, light parts see-through, empty margins trimmed, shape unchanged. Sources are in `assets/img/logos/SOURCES.md`.
 - Wordmark-style icons (DMC) keep the 14px height at their natural width with `.logo-wide`.
 - The Cambridge Innovation Center Peru negotiation course was removed at Mauricio's request.
+
+## Nov 5, 2026: one home page
+- The About page repeated the home page, so it was retired. `about/index.html` now only redirects to `/#about`, so old links still work.
+- The home page's "Selected work" cards showed the same two Sura projects as the Sura results page, so a one-line Projects row replaced them.
+- Your name appeared twice at the top. The header now shows the MC monogram (the favicon file) linking home, and the full name lives only in the hero.
+- Location is "Burlington, ON, Canada"; the footer says "Open to analyst roles across Canada."

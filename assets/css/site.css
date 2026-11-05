@@ -118,11 +118,15 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   gap: 6px 28px; flex-wrap: wrap;
 }
 .site-name {
-  padding-block: 8px;
-  font-weight: 600; font-size: var(--text-sm); letter-spacing: -0.01em;
+  display: inline-flex; padding-block: 6px;
   color: var(--text); text-decoration: none;
   transition: none;
 }
+/* The MC monogram (same file as the favicon) links home; the full name lives in the hero. */
+.monogram { display: block; width: 32px; height: 32px; border-radius: 8px; }
+.site-name:active .monogram { opacity: 0.8; }
+.projects-line { max-width: 60ch; }
+.projects-line .text-link { white-space: nowrap; margin-left: 4px; }
 .site-nav ul { display: flex; flex-wrap: wrap; gap: 0 22px; }
 .site-nav a {
   display: inline-block; padding-block: 8px;
@@ -148,7 +152,6 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 }
 .hero-name { display: block; }
 .hero .subtitle { font-size: var(--text-lg); line-height: 1.45; max-width: 46ch; }
-.hero .subhead { color: var(--text-muted); margin-top: 10px; max-width: 52ch; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .btn-hint {
   font: 500 10px/1 var(--font-mono); letter-spacing: 0.06em;
