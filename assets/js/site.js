@@ -7,7 +7,7 @@
    missing, so it is hidden from the public site. TODO.md lists them.
 
    Pages ask for content with data attributes:
-     data-showcase="home|past|planned"  project entries (Home, Projects)
+     data-showcase="home|all"           project entries (Home, Projects)
      data-filters                       filter chips      (Projects)
      data-matrix                        skills by project (Projects)
      data-case-study="slug"             one case study    (projects/<slug>.html)
@@ -82,6 +82,8 @@
     return fragment;
   }
 
+  const isPlanned = (project) => project.status === 'planned';
+  const shippedProjects = (data) => data.projects.filter((p) => !isPlanned(p));
   const caseUrl = (project) => `/projects/${project.slug}.html`;
   const visibleResults = (project) => (project.results || []).filter((r) => present(r.text));
   const visibleMetrics = (project) => visibleResults(project).filter((r) => present(r.metric) && present(r.label));
@@ -90,7 +92,7 @@
 
   function typeLabel(project, planned) {
     if (planned) return ['Planned', project.target].filter(present).join(' · ');
-    return [project.type, project.status].filter(present).join(' · ');
+    return project.type;
   }
 
   function chipList(tools) {
@@ -152,7 +154,8 @@
 
   /* ---------- showcase entries (Home "Selected work", Projects) ---------- */
 
-  function entry(project, planned, headingTag) {
+  function entry(project, headingTag) {
+    const planned = isPlanned(project);
     const url = planned ? null : caseUrl(project);
     const links = [];
     if (url) {
@@ -188,23 +191,20 @@
     );
   }
 
+  // Home shows the shipped projects marked "home"; Projects shows the whole
+  // list in order: shipped work first, then the planned projects.
   function renderShowcase(root, data) {
-    const which = root.dataset.showcase;
     const headingTag = root.dataset.heading || 'h3';
-    let items;
-    if (which === 'planned') items = (data.planned || []).map((p) => entry(p, true, headingTag));
-    else {
-      const list = which === 'home' ? data.projects.filter((p) => p.home) : data.projects;
-      items = list.map((p) => entry(p, false, headingTag));
-    }
-    root.replaceChildren(...items);
+    const list = root.dataset.showcase === 'home'
+      ? shippedProjects(data).filter((p) => p.home)
+      : data.projects;
+    root.replaceChildren(...list.map((p) => entry(p, headingTag)));
   }
 
   /* ---------- filter chips (Projects). No animation: BRAND §6 ---------- */
 
   function renderFilters(root, data) {
-    const types = ['All', ...new Set(data.projects.map((p) => p.type))];
-    if ((data.planned || []).length) types.push('Planned');
+    const types = ['All', ...new Set(data.projects.map((p) => (isPlanned(p) ? 'Planned' : p.type)))];
     const status = document.querySelector('[data-filter-status]');
     const buttons = types.map((t) => h('button', { class: 'filter-chip', type: 'button', 'aria-pressed': t === 'All' ? 'true' : 'false', 'data-filter': t }, t));
     root.replaceChildren(h('span', { class: 'label', id: 'filter-label' }, 'Show'), ...buttons);
@@ -246,10 +246,9 @@
   ];
 
   function renderMatrix(root, data) {
-    const rows = [
-      ...data.projects.map((p) => ({ title: p.title, planned: false, tools: visibleTools(p) })),
-      ...(data.planned || []).map((p) => ({ title: p.title, planned: true, tools: visibleTools(p) })),
-    ].map((r) => ({ ...r, hits: SKILLS.map(([, re]) => r.tools.some((t) => re.test(t))) }))
+    const rows = data.projects
+      .map((p) => ({ title: p.title, planned: isPlanned(p), tools: visibleTools(p) }))
+      .map((r) => ({ ...r, hits: SKILLS.map(([, re]) => r.tools.some((t) => re.test(t))) }))
       .filter((r) => r.hits.some(Boolean));
     const used = SKILLS.map((_, i) => rows.some((r) => r.hits[i]));
     const cols = SKILLS.filter((_, i) => used[i]);
@@ -307,9 +306,10 @@
   }
 
   function renderCaseStudy(root, data) {
-    const index = data.projects.findIndex((p) => p.slug === root.dataset.caseStudy);
-    if (index === -1) throw new Error(`No project "${root.dataset.caseStudy}" in projects.json`);
-    const project = data.projects[index];
+    const shipped = shippedProjects(data);
+    const index = shipped.findIndex((p) => p.slug === root.dataset.caseStudy);
+    if (index === -1) throw new Error(`No shipped project "${root.dataset.caseStudy}" in projects.json`);
+    const project = shipped[index];
     const results = visibleResults(project);
     const metrics = visibleMetrics(project);
     const tools = visibleTools(project);
@@ -322,7 +322,8 @@
     if (tools.length) meta.push(h('dt', null, 'Tools'), h('dd', null, chipList(tools)));
 
     const head = h('header', { class: 'case-head' },
-      h('p', { class: 'eyebrow' }, [project.type, project.context, project.status].filter(present).join(' · ')),
+      // Where the work happened ("Sura Peru"); the type label is the fallback
+      h('p', { class: 'eyebrow' }, present(project.context) ? project.context : project.type),
       h('h1', null, project.title),
       present(project.tagline) && h('p', { class: 'case-tagline' }, project.tagline),
       meta.length > 0 && h('dl', { class: 'case-meta' }, meta)
@@ -347,11 +348,12 @@
       ));
     }
 
-    const count = data.projects.length;
-    const prev = data.projects[(index - 1 + count) % count];
-    const next = data.projects[(index + 1) % count];
-    const nav = h('nav', { class: 'case-nav', 'aria-label': 'More projects' },
-      h('a', { class: 'case-nav-prev', href: caseUrl(prev) }, h('span', { class: 'label' }, 'Previous project'), prev.title),
+    // Previous / next among shipped projects. With two, one link to the other is enough.
+    const count = shipped.length;
+    const prev = shipped[(index - 1 + count) % count];
+    const next = shipped[(index + 1) % count];
+    const nav = count < 2 ? null : h('nav', { class: `case-nav${count === 2 ? ' is-single' : ''}`, 'aria-label': 'More projects' },
+      count > 2 && h('a', { class: 'case-nav-prev', href: caseUrl(prev) }, h('span', { class: 'label' }, 'Previous project'), prev.title),
       h('a', { class: 'case-nav-next', href: caseUrl(next) }, h('span', { class: 'label' }, 'Next project'), next.title)
     );
 
