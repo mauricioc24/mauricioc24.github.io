@@ -34,7 +34,7 @@ Plain-English notes for Mauricio. No Git experience assumed.
 | `projects/<name>.html` | One case-study page per project |
 | `about/index.html` | About page |
 | `404.html` | The "page not found" page (the llama one) |
-| `projects.json` | **All project data:** the projects you've done, the ones you're building next, and the La IAma channel links. Most content updates happen here. |
+| `projects.json` | **All project data:** the 7 entries on the Projects page (2 Sura projects, then 5 planned ones) and the La IAma channel links. Most content updates happen here. |
 | `assets/css/site.css` | Page styles, built on top of the brand tokens |
 | `assets/js/site.js` | Turns `projects.json` into the project showcase, filters, skills matrix, case studies and La IAma links; handles "Copy email" |
 | `assets/img/` | Favicon and the social preview image |
@@ -61,7 +61,7 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 ## 5. Updating content
 
 - **A project:** edit `projects.json`. Keep the quotes, commas and brackets intact. If the file breaks, the projects won't load, and the automatic checks will flag it on the PR.
-- **A planned project that shipped:** move it from `"planned"` to `"projects"` and give it a case-study page (`TODO.md` has the steps).
+- **A planned project that shipped:** change its `"status"` from `"planned"` to `"shipped"` and give it a case-study page (`TODO.md` has the steps).
 - **Something marked `[FILL: …]`:** replace the whole marker, brackets included, with the real value. It appears on the site automatically. `TODO.md` lists every one.
 - **A new résumé:** upload it with the **same file name**, `Mauricio-Calderon-Barrientos-Resume.pdf`, and every button keeps working.
 - **Always update `CONTENT.md` too.** It's the master list of facts.
@@ -74,7 +74,7 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 **A small HTML page per case study.** Each project gets its own link with its own title and description. LinkedIn and Slack read those when someone shares the link, so the preview shows the right project.
 
-**Header and footer copied into every page.** Without a build step, the alternative was building them with JavaScript, which loads later and can fail. The trade-off: when the footer changes (say, a new link), all 9 pages need the same edit. Claude knows this rule (it's in `CLAUDE.md`).
+**Header and footer copied into every page.** Without a build step, the alternative was building them with JavaScript, which loads later and can fail. The trade-off: when the footer changes (say, a new link), all 6 pages need the same edit. Claude knows this rule (it's in `CLAUDE.md`).
 
 **Missing info is hidden, not shown as "TODO".** A recruiter should never see a placeholder. Anything with `[FILL` simply doesn't appear, and `TODO.md` remembers it for you.
 
@@ -86,11 +86,11 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 **Lead with results.** The three strongest résumé numbers sit right under the hero, and the Collections project comes first, because a recruiter decides in seconds.
 
-**A project showcase studied from jwilber.me.** Its entries show a thumbnail, a title, a line of text and small links, and hovering lifts the picture a little. Here each entry adds what a recruiter scans for: the type (Work at Sura, Personal, Course team, Planned), the roles it supports, the main tools, and an "AI use" line when your résumé or CONTENT.md supports one. Thumbnails only use real content: your metrics, the chatbot diagram, or a big word like "US-02". Nothing is made up.
+**A project showcase studied from jwilber.me.** Its entries show a thumbnail, a title, a line of text and small links, and hovering lifts the picture a little. Here each entry adds what a recruiter scans for: the type (Work at Sura or Planned), the roles it supports, the main tools, and an "AI use" line when your résumé or CONTENT.md supports one. Thumbnails only use real content: your metrics, the chatbot diagram, or a big word like "311". Nothing is made up.
 
 **Filters and a skills matrix on Projects.** The chips filter by type, with no animation (BRAND.md says filters stay instant). The matrix shows which tools each project uses, so keywords like Power BI or Python are tied to real work. A tool appears there only if a project lists it, which keeps it honest.
 
-**"Building next" instead of the Quest Log.** The Quest Log is gone. The five planned projects (Toronto 311, the job-posting agent, Bike Share, the retail monitor and the TTC report) show as "Planned", with a target month and the roles each supports. When one ships, it moves into your projects with a case study.
+**Seven entries, no separate plan page.** The Quest Log is gone, and so are the WhatsApp pipeline, the Vanna AI analysis and the NYC Airbnb tool. The Projects page now holds exactly seven entries: your two Sura projects (Collections first), then the five planned ones in order (Toronto 311, the job-posting agent, Bike Share, the retail monitor and the TTC report). Each planned one shows "Planned", its target month and the roles it supports, with no case-study link until it ships. The filter chips follow the data, so today they're just "Work at Sura" and "Planned".
 
 **One llama per screen.** Now the llama appears only in the La IAma box and on the 404 page.
 
@@ -112,8 +112,8 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 `.github/workflows/site-checks.yml` runs two jobs:
 
-1. **Lighthouse** grades all 9 pages from 0 to 100 on performance, accessibility, best practices and SEO (how well search engines can read the page). Accessibility, best practices and SEO must score 90+ or the check turns red. Performance only *warns*, because GitHub's shared computers vary in speed and would sometimes fail a perfectly good page. The full reports are attached to each run (open the run, then **Artifacts**).
-2. **Broken links** checks that every link and image on every page works, and that every project in `projects.json` has its page. It skips LinkedIn, Instagram and TikTok (they block all automated checkers, so click those links yourself once) and links to the live site (new pages only exist there after merging).
+1. **Lighthouse** grades all 6 pages from 0 to 100 on performance, accessibility, best practices and SEO (how well search engines can read the page). Accessibility, best practices and SEO must score 90+ or the check turns red. Performance only *warns*, because GitHub's shared computers vary in speed and would sometimes fail a perfectly good page. The full reports are attached to each run (open the run, then **Artifacts**).
+2. **Broken links** checks that every link and image on every page works, and that every shipped project in `projects.json` has its page (planned ones don't need one). It skips LinkedIn, Instagram and TikTok (they block all automated checkers, so click those links yourself once) and links to the live site (new pages only exist there after merging).
 
 **If a check is red:** click **Details** next to it. The log says which page or link failed. Fix it on the same branch, push, and the checks run again.
 

@@ -18,23 +18,23 @@ Portfolio for **Mauricio Calderón Barrientos** (always this spelling, with the 
 
 - Plain HTML, CSS and JS. No build step and no npm in the site itself. `.nojekyll` makes GitHub Pages serve files exactly as they are.
 - `brand/brand-tokens.css` is the base stylesheet; don't edit it for page work. Page styles go in `assets/css/site.css` and use its tokens (`var(--accent)`, `var(--ring)` and so on).
-- `projects.json` holds the projects (`"projects"`), the planned ones (`"planned"`, shown as "Building next") and the La IAma channel links (`"laIama"`). `assets/js/site.js` renders them. Any value that contains `[FILL` is skipped automatically.
+- `projects.json` holds the Projects list (`"projects"`) and the La IAma channel links (`"laIama"`). The list has exactly 7 entries, in order: the two Sura projects (Collections first, featured), then five planned ones (`"status": "planned"`, a `"target"` month, no case-study page or link). `assets/js/site.js` renders them. Any value that contains `[FILL` is skipped automatically.
 - The project showcase (home "Selected work" and the Projects page) was studied from jwilber.me: each entry has a thumbnail, type, title, one line, roles, tools, an "AI use" line when supported, and text links only when they exist. Thumbnails come only from real content: metrics, the chatbot flow diagram, or a typographic card (`"thumb"` in `projects.json`). Never draw fake dashboards or invent data.
-- The Projects page also has filter chips (by type) and a skills-by-project matrix, both built from `projects.json`. A tool shows up in the matrix only if it is listed in a project's `"tools"`.
+- The Projects page also has filter chips (built from the types in the data, so today just "Work at Sura" and "Planned") and a skills-by-project matrix. A tool shows up in the matrix only if it is listed in a project's `"tools"`.
 - Each case study is `projects/<slug>.html`: a small page with its own `<title>` and description (for link previews), whose content comes from the `projects.json` entry with the same `slug`.
 - The three result tiles under the home hero are static HTML in `index.html`. They repeat the first three Collections metrics; if those ever change, update both.
-- The header and footer are copied into all 9 HTML pages. Change all of them together. The footer is black with ivory text and links, with no neon or llama.
+- The header and footer are copied into all 6 HTML pages. Change all of them together. The footer is black with ivory text and links, with no neon or llama.
 - Use root-absolute paths (`/assets/…`, `/projects/…`), because `404.html` can be served at any URL depth.
 - The chatbot's thumbnail is a small version of its `"visual"` flow (each step's `"short"` label if it has one). Edit the steps in `projects.json` and both diagrams update.
 
 ## Adding a project
 
 1. Add the facts to `CONTENT.md`.
-2. Add an entry to `"projects"` in `projects.json` (copy an existing one and give it a new `slug`). Give it a `"type"` (Work at Sura, Personal or Course team), `"roles"`, `"tools"`, a `"thumb"` and, only if supported, an `"ai"` line. Set `"home": true` to show it on the home page.
-3. Copy `projects/vanna-ai-security.html` to `projects/<slug>.html`, then update the `<title>`, description, canonical and `og:` URLs, `data-case-study="<slug>"` and the `<noscript>` title.
-4. Run the checks below. The PR workflow also checks that every project has a page.
+2. Add an entry to `"projects"` in `projects.json` (copy an existing one and give it a new `slug`). Give it `"status": "shipped"`, a `"type"` (Work at Sura, or a new label such as Personal when one is needed), `"roles"`, `"tools"`, a `"thumb"` and, only if supported, an `"ai"` line. Set `"home": true` to show it on the home page.
+3. Copy `projects/teams-chatbot.html` to `projects/<slug>.html`, then update the `<title>`, description, canonical and `og:` URLs, `data-case-study="<slug>"` and the `<noscript>` title.
+4. Run the checks below. The PR workflow checks that every shipped project has a page (planned ones don't need one).
 
-**When a planned project ships:** move its entry from `"planned"` to `"projects"` (with a `slug`, `type` and case-study fields) and add its page as above.
+**When a planned project ships:** change its `"status"` to `"shipped"`, add a `slug`, `type` and the case-study fields, and add its page as above.
 
 ## Brand rules that are easy to break (details in BRAND.md)
 

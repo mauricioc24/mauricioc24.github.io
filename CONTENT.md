@@ -4,7 +4,7 @@
 >
 > Résumé-derived values (LinkedIn, chatbot details, Sura metrics, dates, bachelor's degree) were filled on Nov 3, 2026 from `Mauricio-Calderon-Barrientos-Resume.pdf`, with figures exactly as written there. Added from the same résumé on Nov 4, 2026: the BI skill keywords (Data modelling, DAX, Power Query, KPI development, SQL Server, Access), German, and the customer self-service app.
 >
-> Nov 5, 2026: one analyst pitch (Business Analyst, Data Analyst, Business Systems Analyst), the "Building next" project plan, La IAma channels, PL-300 moved to January 2027, the chatbot tool relabelled Copilot Studio (formerly Power Virtual Agents), and the AI Quest Log removed.
+> Nov 5, 2026: one analyst pitch (Business Analyst, Data Analyst, Business Systems Analyst), La IAma channels, PL-300 moved to January 2027, the chatbot tool relabelled Copilot Studio (formerly Power Virtual Agents), and the AI Quest Log removed. Later the same day: the WhatsApp pipeline, the Vanna AI analysis and the NYC Airbnb tool were removed from the site, and the Projects page became one list of 7 entries (2 Sura projects, then 5 planned ones).
 
 ## Identity
 - **Name:** Mauricio Calderón Barrientos (always this spelling, with the accent)
@@ -28,8 +28,8 @@ I'm a business and data analyst with 8+ years of experience in BI and process au
 - **IT Intern** — CCR Cuore Research & Consulting, Peru · January 2016 – July 2016
 - **Post-Sale Operations Intern** — Banco de Crédito BCP, Peru · October 2014 – December 2015
 
-## Projects I've done
-Format for each: Problem, What I built, Tools, Result, Links. Each also has a type label (Work at Sura, Personal, Course team), the roles it supports, and an "AI use" line only where this file or the résumé supports it.
+## Projects page: exactly these 7 entries, in this order
+First my two Sura projects, then the five planned ones. Shipped projects use the format Problem, What I built, Tools, Result, Links, plus a type label (Work at Sura), the roles it supports, and an "AI use" line only where this file or the résumé supports it. Filter labels: Work at Sura, Planned.
 
 ### 1. Collections analytics & automation (Sura Peru) — featured first
 - **Type:** Work at Sura
@@ -57,57 +57,28 @@ Format for each: Problem, What I built, Tools, Result, Links. Each also has a ty
 - **AI use:** [FILL — the bot was rule-based; add a line only if AI was used, and how it was checked]
 - **Links:** No code (company property) — show a diagram or screenshot mock with no confidential data
 
-### 3. WhatsApp demand-signal pipeline (personal project, in progress)
-- **Type:** Personal
-- **Roles it supports:** Data analyst
-- **Problem:** Small retailers serving Latin American communities in Ontario guess what to stock; demand is visible in community group chats but unstructured.
-- **What I built:** A locale-aware parser (`wa_parse.py`) that handles Spanish-locale Android WhatsApp exports and their encoding quirks; now adding structured LLM extraction per message (product, category, brand, intent, urgency) with the Anthropic API.
-- **Tools:** Python, Anthropic API, structured outputs
-- **Result:** Parser built and validated; extraction stage in progress
-- **AI use:** LLM extraction per message with the Anthropic API (structured outputs). How it is checked: [FILL]
-- **Links:** [FILL — repo link, with sample data anonymized]
+### Planned projects (entries 3 to 7, no separate list)
+Each is labelled "Planned", with its target month and the roles it supports. No case-study page or "Case study" link until it ships; then it gets one.
 
-### 4. Vanna AI security analysis
-- **Type:** Personal [confirm]
-- **Roles it supports:** Business systems analyst
-- **Problem:** Text-to-SQL AI tools can expose databases to prompt-injection and code-execution risks.
-- **What I built:** A security write-up analyzing known Vanna AI vulnerabilities (CVE-referenced), their impact and mitigations.
-- **Tools:** Security research, CVE analysis, technical writing
-- **Result:** Portfolio document
-- **AI use:** [FILL — only if AI was used in the write-up, and how it was checked]
-- **Links:** [FILL — PDF or page]
-
-### 5. NYC Airbnb Data Summary Tool (CPSC-620, team project)
-- **Type:** Course team
-- **Roles it supports:** Data analyst
-- **Problem:** Course group project — summarize and clean the NYC Airbnb dataset using an Agile workflow.
-- **My role:** Owned the data-cleaning user story (US-02); worked through sprints, pull requests and peer code review on GitHub.
-- **Tools:** Python, pandas, GitHub (PRs, reviews), Agile/Scrum
-- **AI use:** [FILL — only if AI was used, and how it was checked]
-- **Links:** [FILL — repo link, only if the team agrees]
-
-## Building next (planned projects)
-Each is labelled "Planned", with a target month and the roles it supports. Each one moves into the projects above, with a case study, when it ships.
-
-### Toronto 311 monthly operations briefing, automated — Dec 2026
+#### 3. Toronto 311 monthly operations briefing, automated — Dec 2026
 - Builds the monthly briefing from Toronto open data: SQL star schema, Power BI with DAX, a forecast checked against a seasonal-naive baseline, and AI-written commentary with a validator that blocks any number not in the data.
 - Measured: briefing minutes, manual vs automated.
 - Roles: Business analyst, data analyst.
 
-### Job-posting triage and coding-QA agent, with evals — Jan 2027
+#### 4. Job-posting triage and coding-QA agent, with evals — Jan 2027
 - A Python agent that flags likely occupation mis-codes in Job Bank postings for review, scored on about 150 hand-labelled postings with a held-out test set.
 - Measured: triage time by hand vs with the agent.
 - Roles: Business systems analyst, automation analyst.
 
-### Bike Share Toronto rebalancing optimizer — Feb 2027
+#### 5. Bike Share Toronto rebalancing optimizer — Feb 2027
 - A station demand forecast and a mixed-integer model (Gurobi, rerunnable with an open solver), compared with no rebalancing and a greedy heuristic. Results labelled "modelled".
 - Roles: Data analyst, retail and logistics.
 
-### Ontario retail demand and price monitor — spring 2027
+#### 6. Ontario retail demand and price monitor — spring 2027
 - Statistics Canada retail, CPI and price tables refreshed by API into Tableau Public and an Excel export, with checked AI commentary.
 - Roles: Data analyst, BI analyst.
 
-### TTC delay early-warning report — spring 2027
+#### 7. TTC delay early-warning report — spring 2027
 - Which causes and stations drive lost minutes, with alerts when a pattern breaks, from TTC delay open data.
 - Roles: Data analyst, BI analyst, public sector.
 
