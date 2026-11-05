@@ -42,7 +42,7 @@ Portfolio for **Mauricio Calderón Barrientos** (always this spelling, with the 
 - Neon (fuchsia, lime, tangerine, lemon), the paint (`.spray`), stripe tags and the llama only inside the La IAma box; the llama also on the 404 page. Chullo reds only on Day.
 - One spray per page, on one word, in the La IAma box heading. One llama per screen, never recolored, cropped or squished, and at least 96px wide.
 - No solid 1px borders: use `--ring` and `--shadow`.
-- Transitions name exact properties, use the brand easing tokens and stay under 300ms. Hover effects go only inside `@media (hover: hover) and (pointer: fine)`. Respect `prefers-reduced-motion`. No scroll fade-ins, staggers over 30ms, parallax or animated charts. Filters and navigation have no animation.
+- Transitions name exact properties, use the brand easing tokens and stay under 300ms. Hover effects go only inside `@media (hover: hover) and (pointer: fine)` and change colour only (nothing moves on hover). Every tappable control has a pressed (`:active`) state. Respect `prefers-reduced-motion`. No scroll fade-ins, staggers over 30ms, parallax or animated charts. Filters and navigation have no animation.
 - Charts stay on Day: grey context plus one inferno highlight, with direct labels.
 
 ## Before committing a visual change

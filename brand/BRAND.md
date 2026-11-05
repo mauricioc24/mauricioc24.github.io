@@ -103,12 +103,13 @@ The hero spray reveal is retired (Nov 5, 2026). The paint in the La IAma box is 
 **Crisp everywhere else**, because these are the things visitors use repeatedly:
 - Buttons scale to 0.97 on `:active` (160ms ease-out).
 - Link color and underline change in 150ms with `ease`.
-- Card and sticker hover is a 2px lift at most, only inside `@media (hover: hover) and (pointer: fine)`.
+- Hover changes colour only, only inside `@media (hover: hover) and (pointer: fine)`: a card's ring darkens, a link's underline fills in. Nothing moves on hover, and the llama sticker stays still (Emil audit, Nov 5, 2026).
+- Pressed controls show a pressed state, because the tap highlight is off: pill links, chips and cards get a solid ring with no movement; real buttons scale to 0.97.
 - Navigation, filters and anything triggered from the keyboard have no animation.
 
 **Banned:** fade-in-on-scroll on every section; staggers over 30ms per item; `ease-in`; `transition: all`; `scale(0)`; animated charts; parallax; scroll-jacking.
 
-**`prefers-reduced-motion`:** movement is removed (no hover lift, no llama nod, no toast slide). Color and opacity changes stay.
+**`prefers-reduced-motion`:** movement is removed (no button press scale, no llama nod, no toast slide). Color and opacity changes stay.
 
 ## 7. Page structure (proposal — confirm with prototypes)
 
