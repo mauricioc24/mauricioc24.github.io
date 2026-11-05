@@ -1,6 +1,6 @@
 # Site checks: runs on every pull request (and by hand from the Actions tab).
 #
-#  1. Lighthouse on all 10 pages. Accessibility, best practices and SEO must
+#  1. Lighthouse on all 9 pages. Accessibility, best practices and SEO must
 #     score 90+ or the check fails. Performance below 90 only warns, because
 #     shared CI machines vary in speed. Full reports are attached to the run.
 #  2. Broken links: every link and image in the HTML must resolve, and every
@@ -78,7 +78,7 @@ jobs:
           fail: true
           # Skipped on purpose:
           #  - mauricioc24.github.io: the live site, which won't have new pages until this PR is merged
-          #  - linkedin.com: blocks automated checkers, so it always looks broken
+          #  - linkedin.com, instagram.com, tiktok.com: they block automated checkers, so they always look broken
           #  - fonts.googleapis.com / fonts.gstatic.com: <link> hints, not pages
           args: >-
             --no-progress
@@ -86,5 +86,7 @@ jobs:
             --accept "100..=103,200..=299,429"
             --exclude "^https?://mauricioc24\.github\.io"
             --exclude "linkedin\.com"
+            --exclude "instagram\.com"
+            --exclude "tiktok\.com"
             --exclude "fonts\.(googleapis|gstatic)\.com"
             "./**/*.html"
