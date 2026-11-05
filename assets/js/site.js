@@ -322,7 +322,7 @@
     if (tools.length) meta.push(h('dt', null, 'Tools'), h('dd', null, chipList(tools)));
 
     const head = h('header', { class: 'case-head' },
-      // Where the work happened ("Sura Peru"); the type label is the fallback
+      // Where the work happened ("Sura Peru (AFP Integra)"); the type label is the fallback
       h('p', { class: 'eyebrow' }, present(project.context) ? project.context : project.type),
       h('h1', null, project.title),
       present(project.tagline) && h('p', { class: 'case-tagline' }, project.tagline),

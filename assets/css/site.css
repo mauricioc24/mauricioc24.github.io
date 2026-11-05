@@ -6,7 +6,7 @@
    Read brand/BRAND.md before any visual change.
 
    Calm portfolio (BRAND.md, Nov 5 2026): the llama, neon and paint live only
-   inside the La IAma box on the home page (.la-iama) and on the 404 page.
+   inside the La IAma box (home, "Personal brand") and on the 404 page.
 
    Motion rules (Emil Kowalski skills in .claude/skills):
    - name exact properties, never `transition: all`
@@ -148,18 +148,9 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   font-family: var(--font-mono); font-size: var(--text-sm);
 }
 
-/* results right under the hero: lead with numbers (real résumé figures) */
-.results { padding-top: clamp(40px, 6vw, 64px); }
-.results-band { margin-top: 12px; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 720px) { .results-band { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.results-band .metric {
-  padding: 16px 18px;
-  background: var(--bg-raised);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow);
-}
-.results-band .metric .v { font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.625rem); }
-.results .text-link { display: inline-block; margin-top: 14px; }
+/* Experience right under the hero: where I worked, in one glance */
+.experience { padding-top: clamp(40px, 6vw, 64px); }
+.experience .rows { margin-top: 12px; }
 
 /* ---------- 5. Metrics: the "data voice" (Geist Mono, tabular numbers) ---------- */
 .metrics { display: grid; gap: 14px 20px; }
@@ -338,7 +329,7 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .skills dt { font: var(--text-xs)/1.9 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
 .skills dd { font-size: var(--text-sm); }
 
-/* rows with a date or status on the right (Now, Experience, Education) */
+/* rows with a date or status on the right (Experience, Education, Studying now) */
 .rows > li {
   display: flex; justify-content: space-between; align-items: baseline;
   gap: 4px 24px; flex-wrap: wrap;
@@ -352,6 +343,11 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .rows .what span { color: var(--text-muted); }
 .rows .what .org { display: block; }
 .rows .what .detail { display: block; margin-top: 6px; max-width: 72ch; }
+.rows .row-more { flex-basis: 100%; font-weight: 500; }
+.rows .row-title { font-weight: 600; }
+/* rows inside a case-study section: the section's own hairlines frame them */
+.case-content .rows > li:first-child { box-shadow: 0 1px 0 var(--ring); padding-top: 0; }
+.case-content .rows > li:last-child { box-shadow: none; padding-bottom: 0; }
 .rows .when {
   font: var(--text-xs)/1.6 var(--font-mono); color: var(--text-muted);
   font-variant-numeric: tabular-nums; white-space: nowrap;
@@ -363,7 +359,7 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 
 /* ---------- 9. The La IAma box: the ONLY place for the llama, neon and paint ----------
    (BRAND.md, Nov 5 2026). Styled like a Day card; the spray sits on one word. */
-.la-iama { display: grid; gap: 24px; align-items: center; margin-bottom: 32px; }
+.la-iama { display: grid; gap: 24px; align-items: center; }
 @media (min-width: 641px) { .la-iama { grid-template-columns: 160px minmax(0, 1fr); gap: 36px; } }
 .la-iama .sticker { width: 128px; }
 @media (min-width: 641px) { .la-iama .sticker { width: 160px; } }
