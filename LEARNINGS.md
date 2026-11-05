@@ -32,11 +32,11 @@ Plain-English notes for Mauricio. No Git experience assumed.
 | `index.html` | Home page |
 | `projects/index.html` | All projects |
 | `projects/<name>.html` | One case-study page per project |
-| `about/index.html`, `quest-log/index.html` | About and Quest Log pages |
+| `about/index.html` | About page |
 | `404.html` | The "page not found" page (the llama one) |
-| `projects.json` | **All project and Quest Log data.** Most content updates happen here. |
+| `projects.json` | **All project data:** the 7 entries on the Projects page (2 Sura projects, then 5 planned ones) and the La IAma channel links. Most content updates happen here. |
 | `assets/css/site.css` | Page styles, built on top of the brand tokens |
-| `assets/js/site.js` | Turns `projects.json` into project cards and case studies; handles "Copy email" |
+| `assets/js/site.js` | Turns `projects.json` into the project showcase, filters, skills matrix, case studies and La IAma links; handles "Copy email" |
 | `assets/img/` | Favicon and the social preview image |
 | `brand/` | Your brand kit: `BRAND.md` (the rules), `brand-tokens.css` (colors and type), style guide, llama images |
 | `Mauricio-Calderon-Barrientos-Resume.pdf` | The résumé every "Download résumé" button points to |
@@ -45,7 +45,7 @@ Plain-English notes for Mauricio. No Git experience assumed.
 | `CLAUDE.md` | Rules Claude follows when working on this repo |
 | `.claude/skills/` | Emil Kowalski's design skills, which Claude uses for motion and polish |
 | `.github/` | The automatic checks that run on pull requests |
-| `review-screenshots/` | Final screenshots of the home page (desktop and phone) |
+| `review-screenshots/` | Final screenshots of the home and Projects pages (desktop and phone) |
 | `.nojekyll` | An empty file that tells GitHub Pages "serve these files as they are" |
 
 ## 4. Preview the site on your computer
@@ -60,8 +60,9 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 ## 5. Updating content
 
-- **A project or Quest Log stage:** edit `projects.json`. Keep the quotes, commas and brackets intact. If the file breaks, the projects won't load, and the automatic checks will flag it on the PR.
-- **Something marked `[FILL — …]`:** replace the whole marker, brackets included, with the real value. It appears on the site automatically. `TODO.md` lists every one.
+- **A project:** edit `projects.json`. Keep the quotes, commas and brackets intact. If the file breaks, the projects won't load, and the automatic checks will flag it on the PR.
+- **A planned project that shipped:** change its `"status"` from `"planned"` to `"shipped"` and give it a case-study page (`TODO.md` has the steps).
+- **Something marked `[FILL: …]`:** replace the whole marker, brackets included, with the real value. It appears on the site automatically. `TODO.md` lists every one.
 - **A new résumé:** upload it with the **same file name**, `Mauricio-Calderon-Barrientos-Resume.pdf`, and every button keeps working.
 - **Always update `CONTENT.md` too.** It's the master list of facts.
 
@@ -73,25 +74,35 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 **A small HTML page per case study.** Each project gets its own link with its own title and description. LinkedIn and Slack read those when someone shares the link, so the preview shows the right project.
 
-**Header and footer copied into every page.** Without a build step, the alternative was building them with JavaScript, which loads later and can fail. The trade-off: when the footer changes (say, a new link), all 10 pages need the same edit. Claude knows this rule (it's in `CLAUDE.md`).
+**Header and footer copied into every page.** Without a build step, the alternative was building them with JavaScript, which loads later and can fail. The trade-off: when the footer changes (say, a new link), all 6 pages need the same edit. Claude knows this rule (it's in `CLAUDE.md`).
 
 **Missing info is hidden, not shown as "TODO".** A recruiter should never see a placeholder. Anything with `[FILL` simply doesn't appear, and `TODO.md` remembers it for you.
 
 **Résumé numbers are copied exactly.** "~30 minutes to ~2 minutes" stays exactly that, never "93% faster". Numbers that match your résumé word for word are numbers you can defend in an interview.
 
-**Day surface, a little color.** About 90% of every page is calm ivory and text, and about 10% is art (BRAND.md). Neon only appears on black (the footer, the stripe tags) or as the one spray on "useful", because neon text on ivory is unreadable. The chullo reds stay on ivory, because red on black is unreadable too.
+**A calm portfolio; the art lives in La IAma (Nov 5, 2026).** The llama, the neon colours and the paint belong to La IAma, your channel about AI. So the portfolio stays calm everywhere: no paint on "useful", no stripe tags or colour steps, no llama in the footer. All of that lives in one La IAma box on the home page, under "Now", with your Instagram and TikTok links. The 404 page keeps its llama. The footer stays black with ivory links. The rule is written down in BRAND.md and CLAUDE.md.
 
-**One llama per screen.** The llama is a sticker on About, a small sign-off in the footer, and the star of the 404 page. The footer skips it on About and 404 so two llamas never meet on one screen.
+**Plain writing.** Every page and `projects.json` use plain, first-person sentences. There are no em or en dashes (date ranges read "Apr 2023 to Sep 2025"), and arrows appear only inside numbers like 27% → 24%. The pull request lists every line that changed, before and after.
 
-**Very little motion, on purpose** (Emil Kowalski's rule: motion people see often should be fast or absent). The spray paints in once per visit. Buttons press in slightly. Cards lift 2px on hover with a mouse. Copying the email shows a small toast. The 404 llama nods once. No fade-ins on scroll, because they make people wait to read. Anyone whose system asks for reduced motion gets the painted spray and no movement.
+**Lead with results.** The three strongest résumé numbers sit right under the hero, and the Collections project comes first, because a recruiter decides in seconds.
+
+**A project showcase studied from jwilber.me.** Its entries show a thumbnail, a title, a line of text and small links, and hovering lifts the picture a little. Here each entry adds what a recruiter scans for: the type (Work at Sura or Planned), the roles it supports, the main tools, and an "AI use" line when your résumé or CONTENT.md supports one. Thumbnails only use real content: your metrics, the chatbot diagram, or a big word like "311". Nothing is made up.
+
+**Filters and a skills matrix on Projects.** The chips filter by type, with no animation (BRAND.md says filters stay instant). The matrix shows which tools each project uses, so keywords like Power BI or Python are tied to real work. A tool appears there only if a project lists it, which keeps it honest.
+
+**Seven entries, no separate plan page.** The Quest Log is gone, and so are the WhatsApp pipeline, the Vanna AI analysis and the NYC Airbnb tool. The Projects page now holds exactly seven entries: your two Sura projects (Collections first), then the five planned ones in order (Toronto 311, the job-posting agent, Bike Share, the retail monitor and the TTC report). Each planned one shows "Planned", its target month and the roles it supports, with no case-study link until it ships. The filter chips follow the data, so today they're just "Work at Sura" and "Planned".
+
+**One llama per screen.** Now the llama appears only in the La IAma box and on the 404 page.
+
+**Very little motion, on purpose** (Emil Kowalski's rule: motion people see often should be fast or absent). Buttons press in slightly. Project thumbnails lift 2px on hover with a mouse. Copying the email shows a small toast that follows Sonner's habits: it stays 4 seconds, waits while you hover it or switch tabs, and a click closes it. The 404 llama nods once. No fade-ins on scroll, because they make people wait to read. Anyone whose system asks for reduced motion gets no movement at all.
 
 **Accessible by default.** Text contrast is at least 4.5:1 everywhere (checked with real numbers). There's a "Skip to content" link for keyboard users, every meaningful image has a description (purely decorative ones are marked so screen readers skip them), and all pages pass an automated accessibility scan (axe) with zero problems.
 
-**Why three of Emil's skills were left out.** `write-swift`, `animate-expo` and `ask-sonner` are for iPhone apps, React Native and a React toast library. This site uses none of those, so they'd only add noise.
+**All 16 of Emil's skills are in.** `write-swift`, `animate-expo` and `ask-sonner` were added on Nov 5, 2026. They target iPhone apps, React Native and a React toast library, so only their web ideas apply here, like Sonner's toast habits above.
 
 **Skills use the résumé's exact tool names.** Recruiters search for words like DAX, Power Query or SQL Server, so the Skills list repeats them exactly as your résumé writes them ("Data modelling" keeps its Canadian spelling).
 
-**The featured card has a mini diagram.** It's drawn from the same steps as the chatbot case study (the `"visual"` steps in `projects.json`), so the two can never disagree. A step can have a short label, like `"short": "Teams"`, so the small version stays compact. Change the steps once and both diagrams update.
+**The chatbot thumbnail is a mini diagram.** It's drawn from the same steps as the chatbot case study (the `"visual"` steps in `projects.json`), so the two can never disagree. The chatbot tool now reads "Copilot Studio (formerly Power Virtual Agents)", Microsoft's current name for it. A step can have a short label, like `"short": "Teams"`, so the small version stays compact. Change the steps once and both diagrams update.
 
 **Experience rows can carry one highlight line.** The customer self-service app sits under your Analyst III role, word for word from the résumé.
 
@@ -101,14 +112,18 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 `.github/workflows/site-checks.yml` runs two jobs:
 
-1. **Lighthouse** grades all 10 pages from 0 to 100 on performance, accessibility, best practices and SEO (how well search engines can read the page). Accessibility, best practices and SEO must score 90+ or the check turns red. Performance only *warns*, because GitHub's shared computers vary in speed and would sometimes fail a perfectly good page. The full reports are attached to each run (open the run, then **Artifacts**).
-2. **Broken links** checks that every link and image on every page works, and that every project in `projects.json` has its page. It skips LinkedIn (which blocks all automated checkers, so click that link yourself once) and links to the live site (new pages only exist there after merging).
+1. **Lighthouse** grades all 6 pages from 0 to 100 on performance, accessibility, best practices and SEO (how well search engines can read the page). Accessibility, best practices and SEO must score 90+ or the check turns red. Performance only *warns*, because GitHub's shared computers vary in speed and would sometimes fail a perfectly good page. The full reports are attached to each run (open the run, then **Artifacts**).
+2. **Broken links** checks that every link and image on every page works, and that every shipped project in `projects.json` has its page (planned ones don't need one). It skips LinkedIn, Instagram and TikTok (they block all automated checkers, so click those links yourself once) and links to the live site (new pages only exist there after merging).
 
 **If a check is red:** click **Details** next to it. The log says which page or link failed. Fix it on the same branch, push, and the checks run again.
 
 ## 8. What was checked before this PR
 
 - Every page screenshotted at phone (375px) and desktop (1280px) width, reviewed against the checklist at the end of BRAND.md, and fixed until clean.
-- **Lighthouse: 95–100** in all four categories on all 10 pages, on both mobile and desktop.
+- **Lighthouse: 90+** in all four categories on every page, on both mobile and desktop (the exact scores are in each pull request).
 - **axe accessibility scan: 0 violations** on every page at both widths.
 - Every figure on the site compared word for word against the résumé and CONTENT.md.
+
+## 9. Network access for research (Nov 5, 2026)
+
+This session's cloud environment couldn't reach jwilber.me, so a small personal environment named `mauricioc24.github.io` was created (you approved it) that adds only `www.jwilber.me` and `jwilber.me`. It changes nothing on the website itself. You can see or remove it in the environment menu of a Claude Code session.
