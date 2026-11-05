@@ -15,7 +15,7 @@
       "featured": true,
       "summary": "Power BI reporting, SQL pipelines and automations for the collections team at Sura Peru.",
       "problem": "Each debt report took ~30 minutes to produce. The late-payment rate was 27%. Some of the 5 external collection providers I supervised were redundant.",
-      "built": "I built Power BI dashboards, SQL data pipelines (DB2, BigQuery), and Excel/VBA and Power Automate workflows.",
+      "built": "I built Power BI dashboards, SQL data pipelines (DB2, BigQuery) and workflows in Excel/VBA and Power Automate.",
       "tools": [
         "Power BI",
         "SQL (DB2, BigQuery)",
