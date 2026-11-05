@@ -1,5 +1,5 @@
 {
-  "_readme": "Project and Quest Log data for the site. Facts come only from CONTENT.md. Anything that contains [FILL is hidden on the public site and listed in TODO.md; replace the whole [FILL ...] text with the real value to make it appear. `backticks` render as code.",
+  "_readme": "Project and Quest Log data for the site. Facts come only from CONTENT.md. Anything that contains [FILL is hidden on the public site and listed in TODO.md; replace the whole [FILL ...] text with the real value to make it appear. `backticks` render as code. Flow steps may have a short label (\"short\"), used by the small diagram on the featured card.",
 
   "projects": [
     {
@@ -24,9 +24,9 @@
         "type": "flow",
         "title": "How it fits together",
         "steps": [
-          { "label": "Microsoft Teams", "detail": "An employee asks a process question" },
-          { "label": "Rule-based chatbot", "detail": "Power Virtual Agents + Power Automate", "highlight": true },
-          { "label": "Answer in Teams", "detail": "The bot replies in the same chat" }
+          { "label": "Microsoft Teams", "short": "Teams", "detail": "An employee asks a process question" },
+          { "label": "Rule-based chatbot", "short": "Chatbot", "detail": "Built with Power Virtual Agents", "highlight": true },
+          { "label": "Power Automate" }
         ]
       }
     },

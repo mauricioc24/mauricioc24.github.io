@@ -2,7 +2,7 @@
 
 > Claude: use only the facts in this file. Anything marked [FILL] is a placeholder I still need to confirm — never invent numbers. On the public site, anything still marked [FILL] is hidden (not shown as a TODO) and listed in TODO.md.
 >
-> Résumé-derived values (LinkedIn, chatbot details, Sura metrics, dates, bachelor's degree) were filled on Nov 3, 2026 from `Mauricio-Calderon-Barrientos-Resume.pdf`, with figures exactly as written there.
+> Résumé-derived values (LinkedIn, chatbot details, Sura metrics, dates, bachelor's degree) were filled on Nov 3, 2026 from `Mauricio-Calderon-Barrientos-Resume.pdf`, with figures exactly as written there. Added from the same résumé on Nov 4, 2026: the BI skill keywords (Data modelling, DAX, Power Query, KPI development, SQL Server, Access), German, and the customer self-service app.
 
 ## Identity
 - **Name:** Mauricio Calderón Barrientos (always this spelling, with the accent)
@@ -12,13 +12,14 @@
 - **Sub-headline:** I build dashboards, pipelines and AI assistants that save teams hours and drive better decisions.
 - **Target roles:** Data / BI Analyst · AI & Automation Specialist · Junior AI/ML Engineer
 - **Industries I'm aiming at:** Retail & logistics · Public sector · Tech
-- **Languages:** Spanish (native), English (C1)
+- **Languages:** Spanish (native), English (C1), German (intermediate)
 
 ## About (short)
 I'm a data analyst with 8+ years of experience in BI and process automation, most recently leading collections analytics at Sura Peru. There I built Power BI reporting, SQL pipelines (DB2, BigQuery) and Excel/VBA + Power Automate workflows, and created a Microsoft Teams chatbot that won the company's innovation contest. I'm now completing a Master of Data Analytics at the University of Niagara Falls Canada (March 2027) and building toward AI/ML engineering, one portfolio project at a time. I'm a generalist: I like sitting between the business problem and the technical solution.
 
 ## Experience (from résumé)
 - **Analyst III, Collection Intelligence/Contribution Recovery** — Sura Peru – AFP Integra · April 2023 – September 2025
+  - Led the requirements, design, UAT, user-flow documentation, and vendor coordination for a customer self-service app, working with stakeholders and vendors from conception to delivery.
 - **Analyst II, Collection Intelligence/Contribution Recovery** — Sura Peru – AFP Integra · April 2019 – March 2023
 - **Analyst I, Collection Intelligence/Contribution Recovery** — Sura Peru – AFP Integra · December 2016 – March 2019
 - **IT Intern** — CCR Cuore Research & Consulting, Peru · January 2016 – July 2016
@@ -71,7 +72,7 @@ Format for each: Problem → What I built → Tools → Result → Links
 New projects added as each learning stage finishes (finance-style first, then retail / logistics / public-sector data).
 
 ## Skills
-- **Data & BI:** SQL (DB2, BigQuery), Power BI, Tableau, Excel
+- **Data & BI:** SQL (DB2, BigQuery, SQL Server), Power BI (DAX, Power Query), Data modelling, KPI development, Tableau, Excel & Access
 - **Programming:** Python (pandas)
 - **Automation:** Power Automate, Excel/VBA, Teams chatbots
 - **AI/ML:** LLM APIs (Anthropic), prompt engineering, ML fundamentals (DeepLearning.AI/Stanford ML Specialization, in progress)

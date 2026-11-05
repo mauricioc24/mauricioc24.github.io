@@ -100,6 +100,21 @@
 
   /* ---------- project cards (Home, Projects) ---------- */
 
+  // A small version of the case-study diagram for the featured card. It reads
+  // the same flow steps, using each step's short label when it has one.
+  // BRAND §5: grey context, one inferno highlight, every step labeled.
+  function miniFlow(v) {
+    if (!v || v.type !== 'flow') return null;
+    const steps = (v.steps || []).filter((s) => present(s.label));
+    if (steps.length < 2 || steps.length > 4) return null;
+    return h('figure', { class: 'flow-mini' },
+      h('figcaption', { class: 'label' }, v.title || 'How it works'),
+      h('ol', { role: 'list' },
+        steps.map((s) => h('li', { class: s.highlight ? 'is-highlight' : null }, rich(present(s.short) ? s.short : s.label)))
+      )
+    );
+  }
+
   function projectCard(project, headingTag) {
     const metrics = visibleMetrics(project);
     const results = visibleResults(project);
@@ -121,7 +136,7 @@
     if (project.featured) {
       card.append(
         h('div', { class: 'card-main' }, eyebrow(project), heading, summary, chips),
-        h('div', { class: 'card-side' }, result, more)
+        h('div', { class: 'card-side' }, result, miniFlow(project.visual), more)
       );
     } else {
       card.append(...[eyebrow(project), heading, summary, result, chips, more].filter(Boolean));

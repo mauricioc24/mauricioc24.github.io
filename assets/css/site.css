@@ -218,6 +218,28 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .metric .l { font: var(--text-xs)/1.4 var(--font-mono); color: var(--text-muted); }
 .metric-arrow { color: var(--text-muted); font-weight: 400; }
 
+/* featured card: a small version of the case-study diagram (BRAND §5:
+   grey context, one inferno highlight, every step labeled; static, no motion) */
+.flow-mini { margin-top: 4px; }
+.flow-mini figcaption { margin-bottom: 8px; }
+.flow-mini ol { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 20px; }
+.flow-mini li {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 40px; padding: 8px 6px;
+  text-align: center;
+  font-size: var(--text-xs); font-weight: 500; line-height: 1.3;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+.flow-mini li.is-highlight { box-shadow: inset 0 0 0 1.5px var(--chart-highlight); }
+.flow-mini li + li::before {
+  content: "→"; content: "→" / "";
+  position: absolute; left: -10px; top: 50%; transform: translate(-50%, -50%);
+  font: 500 var(--text-sm)/1 var(--font-mono); color: var(--chart-context);
+}
+
 .also { margin-top: 20px; font-size: var(--text-sm); color: var(--text-muted); }
 
 .coming-soon {
@@ -267,6 +289,7 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 .rows .what { flex: 1 1 36ch; }
 .rows .what strong { font-weight: 600; }
 .rows .what span { color: var(--text-muted); }
+.rows .what .detail { display: block; margin-top: 6px; max-width: 72ch; }
 .rows .when {
   font: var(--text-xs)/1.6 var(--font-mono); color: var(--text-muted);
   font-variant-numeric: tabular-nums; white-space: nowrap;

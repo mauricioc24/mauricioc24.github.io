@@ -89,6 +89,12 @@ Run it inside the repo folder, then open http://localhost:8000. Press Ctrl+C to 
 
 **Why three of Emil's skills were left out.** `write-swift`, `animate-expo` and `ask-sonner` are for iPhone apps, React Native and a React toast library. This site uses none of those, so they'd only add noise.
 
+**Skills use the résumé's exact tool names.** Recruiters search for words like DAX, Power Query or SQL Server, so the Skills list repeats them exactly as your résumé writes them ("Data modelling" keeps its Canadian spelling).
+
+**The featured card has a mini diagram.** It's drawn from the same steps as the chatbot case study (the `"visual"` steps in `projects.json`), so the two can never disagree. A step can have a short label, like `"short": "Teams"`, so the small version stays compact. Change the steps once and both diagrams update.
+
+**Experience rows can carry one highlight line.** The customer self-service app sits under your Analyst III role, word for word from the résumé.
+
 **The `MC` favicon is drawn from the real Geist Mono letters**, as BRAND.md asks, until the pixel llama exists. The social preview image (`assets/img/og-image.png`) is what LinkedIn shows when someone shares the site.
 
 ## 7. The automatic checks on every pull request
