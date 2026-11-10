@@ -136,3 +136,10 @@ On the site: "La IAma is my AI channel in Spanish. I explain AI in simple words 
 ## Added Nov 10, 2026 (stated by Mauricio)
 - Master's coursework tools: Python (mostly, with AI help), Tableau, Databricks, Power BI, Gurobi (optimization). Databricks and Gurobi now show in Skills; Excel shows in the hero tools line.
 - Industries: "Technology" instead of "Tech".
+
+## Volunteering (from the résumé, added Nov 10, 2026)
+- University of Niagara Falls Canada (UNF): student events volunteer. Check-in and registration, attendee questions, guiding students, keeping the event flow organized. Santa Claus Parade, Fall Opportunity Fair, ISA International Education Week, New Student Orientation (Winter), Winter Festival. No dates on the résumé.
+- SURA School (Christel House Mexico): volunteer tutor, 2019. English-language and homework support, adapting explanations to the student's pace and building confidence.
+
+## Skills from the résumé added Nov 10, 2026
+BI dashboards, process automation, applied generative AI and chatbot design, user-interface requirements, data integrity and documentation (Technical Skills); requirements, UAT, user-flow documentation and vendor coordination (self-service app bullet).
