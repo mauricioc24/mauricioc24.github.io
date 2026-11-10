@@ -381,6 +381,16 @@ p.eyebrow, h2.eyebrow { max-width: none; }
   .rows > li.has-logo .row-more { padding-left: 136px; } /* line up with the text, not the logo */
 }
 
+/* Certificate links in course rows: quiet underlines, so six links don't shout. */
+.rows .detail a, .rows .org a {
+  color: inherit; text-decoration: underline;
+  text-decoration-color: var(--text-muted); text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
+.rows .detail a:active, .rows .org a:active { color: var(--text); }
+@media (hover: hover) and (pointer: fine) {
+  .rows .detail a:hover, .rows .org a:hover { color: var(--text); }
+}
+
 /* rows with a date or status on the right (Experience, Education, Studying now) */
 .rows > li {
   display: flex; justify-content: space-between; align-items: baseline;
