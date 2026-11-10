@@ -58,6 +58,9 @@ They come from Simple Icons and are shown in one grey. I couldn't open the brand
 
 They come from each organization's own favicon and are shown in one grey. If any of these organizations says its logo can't be recoloured, use its original colours or remove it: University of Niagara Falls Canada, Universidad de Lima, Cibertec, DeepLearning.AI, DMC Institute, Universidad ESAN, Tableau. Sources are listed in `assets/img/logos/SOURCES.md`.
 
+### Check these three too (added Nov 10, 2026)
+Databricks, Gurobi and GitHub come from Simple Icons and are shown in one grey in the Skills grid. If a brand says no to a one-colour version, use its original colours or remove it.
+
 ## When a planned project ships
 
 1. In `projects.json`, change its `"status"` from `"planned"` to `"shipped"`, and give it a `"slug"`, a `"type"` (for example "Work at Sura" or a new label like "Personal") and the case-study fields (problem, what you built, results). A new type label adds a new filter chip by itself.
