@@ -46,14 +46,15 @@
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
+      <img class="hero-photo" src="/assets/img/mauricio-240.webp" srcset="/assets/img/mauricio-240.webp 240w, /assets/img/mauricio-480.webp 480w" sizes="(min-width: 900px) 200px, 96px" width="240" height="240" alt="Portrait of Mauricio Calderón Barrientos" fetchpriority="high">
       <p class="eyebrow">Business and data analyst · Burlington, ON, Canada</p>
-      <h1 id="hero-title"><span class="hero-name">Mauricio Calderón Barrientos</span> makes data useful</h1>
+      <h1 id="hero-title">Mauricio Calderón Barrientos</h1>
       <p class="subtitle">I find the most efficient way to run a process, then use data and automation to cut manual work, time and cost.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/projects/">View projects</a>
         <a class="btn btn-ghost" href="/Mauricio-Calderon-Barrientos-Resume.pdf" download>Download résumé <span class="btn-hint">PDF</span></a>
       </div>
-      <p class="tools-line"><span class="label">Tools</span><span>SQL · <img class="logo" src="/assets/img/logos/python.svg" alt="" width="14" height="14">Python · Power BI · DAX · Power Query · Power Automate · Copilot Studio · <img class="logo" src="/assets/img/logos/tableau.png" alt="" width="14" height="14">Tableau</span></p>
+      <p class="tools-line"><span class="label">Tools</span><span>SQL · <img class="logo" src="/assets/img/logos/python.svg" alt="" width="14" height="14">Python · Power BI (DAX, Power Query) · Excel · Power Automate · Copilot Studio · <img class="logo" src="/assets/img/logos/tableau.png" alt="" width="14" height="14">Tableau</span></p>
     </div>
   </section>
 
@@ -86,7 +87,7 @@
       </div>
       <dl class="facts">
         <dt>Target roles</dt><dd>Business&nbsp;Analyst · Data&nbsp;Analyst · Business&nbsp;Systems&nbsp;Analyst</dd>
-        <dt>Industries</dt><dd>Retail &amp; logistics · Public sector · Tech</dd>
+        <dt>Industries</dt><dd>Retail &amp; logistics · Public sector · Technology</dd>
         <dt>Based in</dt><dd>Burlington, Ontario, Canada. Open to on-site, hybrid or remote roles across Canada.</dd>
         <dt>Languages</dt><dd>Spanish&nbsp;(native) · English&nbsp;(C1) · German&nbsp;(intermediate)</dd>
       </dl>
@@ -96,13 +97,13 @@
   <section class="section" aria-labelledby="skills-title">
     <div class="wrap">
       <div class="section-head"><h2 id="skills-title">Skills</h2></div>
-      <dl class="skills">
-        <div><dt>Data &amp; BI</dt><dd>SQL (DB2, <img class="logo" src="/assets/img/logos/googlebigquery.svg" alt="" width="14" height="14">BigQuery, SQL Server) · Power BI (DAX, Power Query) · Data modelling · KPI development · <img class="logo" src="/assets/img/logos/tableau.png" alt="" width="14" height="14">Tableau · Excel &amp; Access</dd></div>
-        <div><dt>Programming</dt><dd><img class="logo" src="/assets/img/logos/python.svg" alt="" width="14" height="14">Python (pandas)</dd></div>
-        <div><dt>Automation</dt><dd>Power Automate · Copilot Studio (formerly Power Virtual Agents) · Excel/VBA · Teams chatbots</dd></div>
-        <div><dt>AI / ML</dt><dd>LLM APIs (<img class="logo" src="/assets/img/logos/anthropic.svg" alt="" width="14" height="14">Anthropic) · Prompt engineering · ML fundamentals (DeepLearning.AI / Stanford ML Specialization, in progress)</dd></div>
-        <div><dt>Ways of working</dt><dd>Git &amp; GitHub · Agile/Scrum · Working with business stakeholders</dd></div>
-      </dl>
+      <div class="tool-groups">
+        <div class="tool-group"><h3 class="label">Data &amp; BI</h3><ul class="tool-grid" role="list"><li class="tool">SQL</li><li class="tool">IBM DB2</li><li class="tool"><img class="logo" src="/assets/img/logos/googlebigquery.svg" alt="" width="14" height="14">BigQuery</li><li class="tool">SQL Server</li><li class="tool">Power BI (DAX, Power Query)</li><li class="tool"><img class="logo" src="/assets/img/logos/tableau.png" alt="" width="14" height="14">Tableau</li><li class="tool">Excel &amp; Access</li><li class="tool">Data modelling</li><li class="tool">KPI development</li></ul></div>
+        <div class="tool-group"><h3 class="label">Programming and platforms</h3><ul class="tool-grid" role="list"><li class="tool"><img class="logo" src="/assets/img/logos/python.svg" alt="" width="14" height="14">Python (pandas)</li><li class="tool"><img class="logo" src="/assets/img/logos/databricks.svg" alt="" width="14" height="14">Databricks</li><li class="tool"><img class="logo" src="/assets/img/logos/gurobi.svg" alt="" width="14" height="14">Gurobi (optimization)</li></ul></div>
+        <div class="tool-group"><h3 class="label">Automation</h3><ul class="tool-grid" role="list"><li class="tool">Power Automate</li><li class="tool">Copilot Studio</li><li class="tool">Excel/VBA</li><li class="tool">Teams chatbots</li></ul></div>
+        <div class="tool-group"><h3 class="label">AI and ML</h3><ul class="tool-grid" role="list"><li class="tool"><img class="logo" src="/assets/img/logos/anthropic.svg" alt="" width="14" height="14">LLM APIs (Anthropic)</li><li class="tool">Prompt engineering</li><li class="tool">ML fundamentals</li></ul></div>
+        <div class="tool-group"><h3 class="label">Ways of working</h3><ul class="tool-grid" role="list"><li class="tool"><img class="logo" src="/assets/img/logos/github.svg" alt="" width="14" height="14">Git &amp; GitHub</li><li class="tool">Agile/Scrum</li><li class="tool">Working with business stakeholders</li></ul></div>
+      </div>
     </div>
   </section>
 
@@ -112,17 +113,19 @@
       <ul class="rows" role="list">
         <li><span class="what"><strong>Master of Data Analytics</strong><span class="org"><img class="logo" src="/assets/img/logos/unfc.png" alt="" width="14" height="14">University of Niagara Falls Canada</span></span><span class="when">Expected Mar 2027</span></li>
         <li><span class="what"><strong>Bachelor’s in Information Systems Engineering</strong><span class="org"><img class="logo" src="/assets/img/logos/ulima.png" alt="" width="14" height="14">University of Lima, Peru</span></span><span class="when">Completed Jul 2016</span></li>
-        <li><span class="what"><strong>Machine Learning Specialization</strong><span class="org"><img class="logo" src="/assets/img/logos/deeplearningai.png" alt="" width="14" height="14">DeepLearning.AI / Stanford</span></span><span class="when">In progress</span></li>
         <li><span class="what"><strong>PL-300 Power BI Data Analyst</strong><span class="org">Microsoft</span></span><span class="when">Planned · January 2027</span></li>
       </ul>
-      <h3 class="label subhead-label">Certificates and courses</h3>
+      <h3 class="label subhead-label">Certificates</h3>
       <ul class="rows" role="list">
         <li><span class="what"><strong>Power BI &amp; Dashboards</strong><span class="org"><img class="logo logo-wide" src="/assets/img/logos/dmc.png" alt="" width="22" height="14">Data Management Corp. Peru</span></span><span class="when">24 hours</span></li>
         <li><span class="what"><strong>Executive Program in BI</strong><span class="org"><img class="logo" src="/assets/img/logos/esan.png" alt="" width="14" height="14">ESAN University</span></span><span class="when">24 hours</span></li>
         <li><span class="what"><strong>Advanced Excel, Excel specialist certificate</strong><span class="org"><img class="logo" src="/assets/img/logos/cibertec.png" alt="" width="14" height="14">Cibertec Technology Institute</span></span><span class="when">48 hours</span></li>
-        <li><span class="what"><strong>Complete SQL and Database Fundamentals</strong><span class="org"><img class="logo" src="/assets/img/logos/udemy.svg" alt="" width="14" height="14">Udemy</span></span><span class="when">2026</span></li>
-        <li><span class="what"><strong>Generative AI learning paths and hands-on labs</strong><span class="org"><img class="logo" src="/assets/img/logos/googlecloud.svg" alt="" width="14" height="14">Google Cloud Skills Boost</span><span class="detail">Intro to Generative AI · Build and Modernize Applications with GenAI · Gemini for Google Cloud</span></span><span class="when">2026</span></li>
-        <li><span class="what"><strong>AI and prompting courses</strong><span class="org"><img class="logo" src="/assets/img/logos/deeplearningai.png" alt="" width="14" height="14">DeepLearning.AI</span><span class="detail">AI for Everyone · Generative AI for Everyone · AI Prompting for Everyone · ChatGPT Prompt Engineering for Developers</span></span><span class="when">2026</span></li>
+      </ul>
+      <h3 class="label subhead-label">Online courses</h3>
+      <ul class="rows" role="list">
+        <li><span class="what"><strong><img class="logo" src="/assets/img/logos/deeplearningai.png" alt="" width="14" height="14">DeepLearning.AI</strong><span class="org">Machine Learning Specialization, with Stanford (in progress)</span><span class="detail">AI for Everyone · Generative AI for Everyone · AI Prompting for Everyone · ChatGPT Prompt Engineering for Developers</span></span><span class="when">2026</span></li>
+        <li><span class="what"><strong><img class="logo" src="/assets/img/logos/googlecloud.svg" alt="" width="14" height="14">Google Cloud Skills Boost</strong><span class="org">Generative AI learning paths and hands-on labs</span><span class="detail">Intro to Generative AI · Build and Modernize Applications with GenAI · Gemini for Google Cloud</span></span><span class="when">2026</span></li>
+        <li><span class="what"><strong><img class="logo" src="/assets/img/logos/udemy.svg" alt="" width="14" height="14">Udemy</strong><span class="org">Complete SQL and Database Fundamentals</span></span><span class="when">2026</span></li>
       </ul>
     </div>
   </section>

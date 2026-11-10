@@ -13,13 +13,14 @@
 - **Location:** Burlington, Ontario, Canada (open to on-site, hybrid or remote roles across Canada)
 - **Hero eyebrow:** Business and data analyst · Burlington, ON, Canada
 - **Footer line:** Open to analyst roles across Canada.
+- **Hero headline:** my name only (Nov 10, 2026; "makes data useful" was dropped)
 - **Hero sentence:** I find the most efficient way to run a process, then use data and automation to cut manual work, time and cost.
 - **Hero big line:** Mauricio Calderón Barrientos makes data useful (plain text, no spray: brand art lives only in the La IAma box)
 - **Hero subtitle:** I'm a business and data analyst. For 8+ years I've turned business processes into automated, data-driven workflows.
 - **Sub-headline:** I build reports and automations that cut manual work.
 - **Tools line (near the top):** SQL · Power BI · DAX · Power Query · Power Automate · Copilot Studio
 - **Target roles:** Business Analyst · Data Analyst · Business Systems Analyst
-- **Industries I'm aiming at:** Retail & logistics · Public sector · Tech
+- **Industries I'm aiming at:** Retail & logistics · Public sector · Technology
 - **Languages:** Spanish (native), English (C1), German (intermediate)
 
 ## About (short)
@@ -129,4 +130,9 @@ On the site: "La IAma is my AI channel in Spanish. I explain AI in simple words 
 - Writing: plain, direct, first person, short sentences. No em or en dashes as punctuation on the site; "→" only inside metrics like 27% → 24%. No buzzwords or AI writing patterns.
 - English only (for now). Recruiter-first: who I am, what I do, and proof within 10 seconds.
 - No confidential employer data or client names. Sura figures: only the ones already published in my résumé, exactly as written there (no new or re-rounded numbers).
-- No photo for now [or FILL: add headshot.jpg].
+- Photo: black-and-white headshot (assets/img/mauricio-240.webp and -480.webp), small circle in the hero (Nov 10, 2026).
+
+
+## Added Nov 10, 2026 (stated by Mauricio)
+- Master's coursework tools: Python (mostly, with AI help), Tableau, Databricks, Power BI, Gurobi (optimization). Databricks and Gurobi now show in Skills; Excel shows in the hero tools line.
+- Industries: "Technology" instead of "Tech".

@@ -149,3 +149,9 @@ In the third pass, the same network blocked the official sites of your schools a
 - The home page's "Selected work" cards showed the same two Sura projects as the Sura results page, so a one-line Projects row replaced them.
 - Your name appeared twice at the top. The header now shows the MC monogram (the favicon file) linking home, and the full name lives only in the hero.
 - Location is "Burlington, ON, Canada"; the footer says "Open to analyst roles across Canada."
+
+## Nov 10, 2026: name-only headline, photo, tool grid
+- "Makes data useful" sounded like a slogan, so the headline is now just the name. The role sits in the small line above it.
+- A small circular photo sits on the right of the hero (above the name on phones). Photos help on a portfolio; leave them off a Canadian résumé.
+- Skills became a grouped tool grid with logos, so it scans in seconds. Microsoft products stay text (their icon terms).
+- Online courses list the platform first; in-person certificates list the course first.
