@@ -12,3 +12,6 @@ Each logo is shown at 14px in one grey (#83887F), per BRAND.md "Logos". The shap
 | dmc.png | Data Management Corp. (DMC Institute) | Official favicon of dmc.pe (saved Nov 5, 2026) |
 | esan.png | Universidad ESAN | Official favicon of ue.edu.pe (saved Nov 5, 2026) |
 | tableau.png | Tableau | Official favicon of tableau.com (saved Nov 5, 2026) |
+| sura.png | Sura Peru (AFP Integra) | Official SURA logo SVG supplied by Mauricio (Nov 10, 2026), converted to one grey |
+| bcp.png | Banco de Crédito del Perú | Official BCP logo (vector, via Wikimedia) supplied by Mauricio (Nov 10, 2026), converted to one grey |
+| ccr.png | CCR Cuore Research & Consulting | Official logo image from the company, supplied by Mauricio (Nov 10, 2026), converted to one grey |

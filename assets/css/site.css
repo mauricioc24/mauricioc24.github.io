@@ -372,6 +372,25 @@ p.eyebrow, h2.eyebrow { max-width: none; }
 }
 .tool .logo { vertical-align: 0; }
 
+/* Company logos in Experience (Nov 10, 2026): grey wordmarks, 18px tall, in a fixed left column
+   on wide screens and above the company name on phones. */
+.rows > li.has-logo .company-logo { flex: 0 0 100%; display: flex; align-items: center; height: 18px; margin-bottom: 8px; }
+.company-logo img { height: 18px; width: auto; }
+@media (min-width: 640px) {
+  .rows > li.has-logo .company-logo { flex: 0 0 112px; margin: 2px 0 0; }
+  .rows > li.has-logo .row-more { padding-left: 136px; } /* line up with the text, not the logo */
+}
+
+/* Certificate links in course rows: quiet underlines, so six links don't shout. */
+.rows .detail a, .rows .org a {
+  color: inherit; text-decoration: underline;
+  text-decoration-color: var(--text-muted); text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
+.rows .detail a:active, .rows .org a:active { color: var(--text); }
+@media (hover: hover) and (pointer: fine) {
+  .rows .detail a:hover, .rows .org a:hover { color: var(--text); }
+}
+
 /* rows with a date or status on the right (Experience, Education, Studying now) */
 .rows > li {
   display: flex; justify-content: space-between; align-items: baseline;

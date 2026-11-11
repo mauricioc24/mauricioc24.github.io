@@ -143,3 +143,7 @@ On the site: "La IAma is my AI channel in Spanish. I explain AI in simple words 
 
 ## Skills from the résumé added Nov 10, 2026
 BI dashboards, process automation, applied generative AI and chatbot design, user-interface requirements, data integrity and documentation (Technical Skills); requirements, UAT, user-flow documentation and vendor coordination (self-service app bullet).
+
+## Verified certificates (links supplied by Mauricio, Nov 10, 2026)
+DeepLearning.AI: Jupyter AI: AI Coding in Notebooks (Oct 30, 2026), AI Python for Beginners (Sep 16, 2026), AI Prompting for Everyone (Aug 20, 2026), Generative AI for Everyone (Aug 15, 2026), ChatGPT Prompt Engineering for Developers (Aug 5, 2026), AI for Everyone (Aug 1, 2026). Each links to its certificate page on the home page.
+Udemy: certificate UC-04dab339-c292-40f8-b73b-4d0017e5da03, linked to Complete SQL and Database Fundamentals (the page couldn't be opened to confirm the course name).
