@@ -155,3 +155,9 @@ In the third pass, the same network blocked the official sites of your schools a
 - A small circular photo sits on the right of the hero (above the name on phones). Photos help on a portfolio; leave them off a Canadian résumé.
 - Skills became a grouped tool grid with logos, so it scans in seconds. Microsoft products stay text (their icon terms).
 - Online courses list the platform first; in-person certificates list the course first.
+
+## Nov 11, 2026: quiet links, certificate years, volunteering numbers
+- Organization names link to their official sites with `.quiet-link`: they look like plain text, and only on mouse-over do they darken and show a small ↗. Certificate and record links stay underlined, because those are things a recruiter should notice.
+- Certificates show "year · hours". Google Cloud Skills Boost was removed (it came from a bootcamp).
+- Volunteering uses the exact figures from the UNF involvement record (81.5 hours, 95 events, 9 groups) instead of rounded ones, so they match when a recruiter clicks through.
+- Experience logos sit in a grid: centred in their column and on the middle of each row.

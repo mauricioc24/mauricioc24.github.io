@@ -24,10 +24,14 @@ Portfolio for **Mauricio Calderón Barrientos** (always this spelling, with the 
 - The Projects page also has filter chips (built from the types in the data, so today just "Work at Sura Peru" and "Planned") and a skills-by-project matrix. A tool shows up in the matrix only if it is listed in a project's `"tools"`.
 - Each case study is `projects/<slug>.html`: a small page with its own `<title>` and description (for link previews), whose content comes from the `projects.json` entry with the same `slug`.
 - **One home page (Nov 5, 2026).** The About page was retired: `about/index.html` only redirects to `/#about`. The home page holds, in order: hero, Experience, a one-line Projects row linking to `/projects/`, About, Skills, Education & certificates, Volunteering, Personal brand. There is no "Selected work" grid on the home page. The hero headline is the name only. Skills is a grouped tool grid (`.tool-grid`, logo + name tiles); Microsoft products stay text. Education & certificates has three lists: degrees and PL-300, in-person Certificates (course first), and Online courses (platform first).
-- The home page has a compact Experience list under the hero (static HTML), with grey company wordmarks (`.company-logo`, 18px tall) in a left column. Its "See results" link goes to the Sura page, `experience/sura/index.html`: static HTML with the role progression, the four Collections results, the BigQuery migration, the self-service app and links to both case studies. Its numbers and sentences repeat the Collections `"results"` in `projects.json`; if those ever change, update both.
+- The home page has a compact Experience list under the hero (static HTML), with grey company wordmarks (`.company-logo`, 18px tall) centred in a left column and on the middle of each row. Its "See results" link goes to the Sura page, `experience/sura/index.html`: static HTML with the role progression, the four Collections results, the BigQuery migration, the self-service app and links to both case studies. Its numbers and sentences repeat the Collections `"results"` in `projects.json`; if those ever change, update both.
 - The header and footer are copied into all 6 HTML pages (not the about redirect). The header shows the MC monogram (`/assets/img/favicon.svg`) linking home, with the full name as its aria-label; the nav is Projects · Résumé · Contact. Change all of them together. The footer is black with ivory text and links, with no neon or llama.
 - Use root-absolute paths (`/assets/…`, `/projects/…`), because `404.html` can be served at any URL depth.
 - The chatbot's thumbnail is a small version of its `"visual"` flow (each step's `"short"` label if it has one). Edit the steps in `projects.json` and both diagrams update.
+
+## Quiet links
+
+Organization names (schools, certificate issuers, platforms, employers) link to their official site with `.quiet-link`: no underline, the name darkens and a small ↗ appears on mouse-over only, focus ring for keyboards, opens in a new tab. Use it only for names of organizations; normal links (certificates, records, case studies) stay underlined.
 
 ## Adding a project
 

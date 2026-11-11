@@ -147,3 +147,10 @@ BI dashboards, process automation, applied generative AI and chatbot design, use
 ## Verified certificates (links supplied by Mauricio, Nov 10, 2026)
 DeepLearning.AI: Jupyter AI: AI Coding in Notebooks (Oct 30, 2026), AI Python for Beginners (Sep 16, 2026), AI Prompting for Everyone (Aug 20, 2026), Generative AI for Everyone (Aug 15, 2026), ChatGPT Prompt Engineering for Developers (Aug 5, 2026), AI for Everyone (Aug 1, 2026). Each links to its certificate page on the home page.
 Udemy: certificate UC-04dab339-c292-40f8-b73b-4d0017e5da03, linked to Complete SQL and Database Fundamentals (the page couldn't be opened to confirm the course name).
+
+## Updates Nov 11, 2026 (stated by Mauricio)
+- Removed Google Cloud Skills Boost (it was part of a bootcamp; Mauricio doesn't want it listed).
+- Certificate years: DMC Power BI & Dashboards 2018; ESAN Executive Program in BI 2019; Cibertec "Advanced Excel & Excel specialist certificate" 2015.
+- UNF volunteering (CampusGroups involvement record): 81.5 service hours, 95 events, 9 groups, Sep 2025 to present. Public record link on the home page.
+- SURA School (Christel House Mexico): one year of volunteer involvement (2019).
+- Official websites (linked quietly): unfc.ca, ulima.edu.pe/en, cibertec.edu.pe, esan.edu.pe, dmc.pe, deeplearning.ai, udemy.com, integra.com.pe (Sura Peru, AFP Integra), ccrlatam.com.pe, viabcp.com.
