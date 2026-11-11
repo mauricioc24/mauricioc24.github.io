@@ -376,10 +376,34 @@ p.eyebrow, h2.eyebrow { max-width: none; }
    on wide screens and above the company name on phones. */
 .rows > li.has-logo .company-logo { flex: 0 0 100%; display: flex; align-items: center; height: 18px; margin-bottom: 8px; }
 .company-logo img { height: 18px; width: auto; }
+.company-logo a { display: flex; }
 @media (min-width: 640px) {
-  .rows > li.has-logo .company-logo { flex: 0 0 112px; margin: 2px 0 0; }
-  .rows > li.has-logo .row-more { padding-left: 136px; } /* line up with the text, not the logo */
+  /* Logo centred in its column and on the middle of the whole row (Nov 11, 2026) */
+  .rows > li.has-logo { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; column-gap: 24px; row-gap: 4px; }
+  .rows > li.has-logo .company-logo { grid-column: 1; grid-row: 1 / span 2; align-self: center; justify-self: center; margin: 0; }
+  .rows > li.has-logo .what { grid-column: 2; }
+  .rows > li.has-logo .when { grid-column: 3; grid-row: 1; }
+  .rows > li.has-logo .row-more { grid-column: 2; grid-row: 2; }
 }
+
+/* Quiet links (Nov 11, 2026): organization names link to their official site without looking
+   like links. No underline; on mouse-over the name darkens and a small arrow appears.
+   Phones show nothing extra; keyboard users get the focus ring. */
+.quiet-link { color: inherit; text-decoration: none; }
+.rows .org a.quiet-link, .rows .detail a.quiet-link { text-decoration: none; } /* beat the certificate-link underline */
+.quiet-link::after {
+  content: "\2197"; display: inline-block; margin-left: 3px; font-size: 0.85em;
+  opacity: 0; transition: opacity 150ms var(--ease-out);
+}
+.quiet-link:active { color: var(--text); }
+.quiet-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.quiet-link:focus-visible::after { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .quiet-link:hover { color: var(--text); }
+  .quiet-link:hover::after { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .quiet-link::after { transition: none; } }
+.logo.logo-sura { width: 40px; }
 
 /* Certificate links in course rows: quiet underlines, so six links don't shout. */
 .rows .detail a, .rows .org a {
